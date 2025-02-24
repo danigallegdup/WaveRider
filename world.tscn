@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://capxrcwqae73l"]
+[gd_scene load_steps=6 format=3 uid="uid://capxrcwqae73l"]
 
 [ext_resource type="PackedScene" uid="uid://dyt8osotk8wxo" path="res://player.tscn" id="1_aplwd"]
 [ext_resource type="Texture2D" uid="uid://df8t37hsna3r2" path="res://sprites/world/floor.png" id="2_eslt0"]
@@ -13,6 +13,8 @@ texture_filter = 0
 material = SubResource("StandardMaterial3D_1duof")
 size = Vector2(50, 50)
 
+[sub_resource type="Environment" id="Environment_8yum4"]
+
 [node name="World" type="Node3D"]
 
 [node name="Player" parent="." instance=ExtResource("1_aplwd")]
@@ -23,3 +25,9 @@ texture = ExtResource("2_eslt0")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("PlaneMesh_p040u")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_8yum4")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 4, 2)
