@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://capxrcwqae73l"]
+
+[ext_resource type="PackedScene" uid="uid://dyt8osotk8wxo" path="res://player.tscn" id="1_aplwd"]
+[ext_resource type="Texture2D" uid="uid://df8t37hsna3r2" path="res://sprites/world/floor.png" id="2_eslt0"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1duof"]
+albedo_texture = ExtResource("2_eslt0")
+uv1_scale = Vector3(0.5, 0.5, 0.5)
+uv1_triplanar = true
+texture_filter = 0
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_p040u"]
+material = SubResource("StandardMaterial3D_1duof")
+size = Vector2(50, 50)
+
+[node name="World" type="Node3D"]
+
+[node name="Player" parent="." instance=ExtResource("1_aplwd")]
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+axis = 1
+texture = ExtResource("2_eslt0")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_p040u")
