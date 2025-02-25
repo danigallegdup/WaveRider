@@ -1,25 +1,27 @@
-[gd_scene load_steps=5 format=3 uid="uid://dyt8osotk8wxo"]
+[gd_scene load_steps=5 format=2]
 
-[ext_resource type="Texture2D" uid="uid://cfmixykleq06n" path="res://sprites/player/biker_chopped_small.png" id="1_oj2dm"]
-[ext_resource type="Texture2D" uid="uid://vm24rgq0o2vi" path="res://sprites/player/biker_chopped_small_3.png" id="2_n7pt4"]
-[ext_resource type="Texture2D" uid="uid://vk7wtggo3qna" path="res://sprites/player/biker_chopped_small_2.png" id="3_30gpx"]
+[ext_resource path="res://sprites/player/biker_chopped_small.png" type="Texture" id=1]
+[ext_resource path="res://sprites/player/biker_chopped_small_2.png" type="Texture" id=2]
+[ext_resource path="res://sprites/player/biker_chopped_small_3.png" type="Texture" id=3]
 
-[sub_resource type="AnimatedTexture" id="AnimatedTexture_lgkgh"]
+[sub_resource type="AnimatedTexture" id=1]
+flags = 3
 frames = 4
-speed_scale = 5.0
-frame_0/texture = ExtResource("1_oj2dm")
-frame_1/texture = ExtResource("2_n7pt4")
-frame_1/duration = 1.0
-frame_2/texture = ExtResource("3_30gpx")
-frame_2/duration = 1.0
-frame_3/texture = ExtResource("2_n7pt4")
-frame_3/duration = 1.0
+fps = 5.0
+frame_0/texture = ExtResource( 3 )
+frame_1/texture = ExtResource( 1 )
+frame_1/delay_sec = 0.0
+frame_2/texture = ExtResource( 3 )
+frame_2/delay_sec = 0.0
+frame_3/texture = ExtResource( 2 )
+frame_3/delay_sec = 0.0
 
-[node name="Player" type="Node3D"]
+[node name="Player" type="Spatial"]
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.18877, 1.76573)
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 1.8 )
+fov = 75.0
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
-offset = Vector2(0, 54)
-texture = SubResource("AnimatedTexture_lgkgh")
+offset = Vector2( 0, 54 )
+texture = SubResource( 1 )

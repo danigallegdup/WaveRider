@@ -1,35 +1,37 @@
 [remap]
 
 importer="texture"
-type="CompressedTexture2D"
-uid="uid://vk7wtggo3qna"
-path.s3tc="res://.godot/imported/biker_chopped_small_2.png-2a0b934a05d8e240110c220ca09b3bc4.s3tc.ctex"
+type="StreamTexture"
+path.s3tc="res://.import/biker_chopped_small_2.png-2a0b934a05d8e240110c220ca09b3bc4.s3tc.stex"
+path.etc="res://.import/biker_chopped_small_2.png-2a0b934a05d8e240110c220ca09b3bc4.etc.stex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": [ "s3tc", "etc" ],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://sprites/player/biker_chopped_small_2.png"
-dest_files=["res://.godot/imported/biker_chopped_small_2.png-2a0b934a05d8e240110c220ca09b3bc4.s3tc.ctex"]
+dest_files=[ "res://.import/biker_chopped_small_2.png-2a0b934a05d8e240110c220ca09b3bc4.s3tc.stex", "res://.import/biker_chopped_small_2.png-2a0b934a05d8e240110c220ca09b3bc4.etc.stex" ]
 
 [params]
 
 compress/mode=2
-compress/high_quality=false
 compress/lossy_quality=0.7
-compress/hdr_compression=1
+compress/hdr_mode=0
+compress/bptc_ldr=0
 compress/normal_map=0
-compress/channel_pack=0
-mipmaps/generate=true
-mipmaps/limit=-1
-roughness/mode=0
-roughness/src_normal=""
+flags/repeat=true
+flags/filter=false
+flags/mipmaps=true
+flags/anisotropic=false
+flags/srgb=2
 process/fix_alpha_border=true
 process/premult_alpha=false
+process/HDR_as_SRGB=false
+process/invert_color=false
 process/normal_map_invert_y=false
-process/hdr_as_srgb=false
-process/hdr_clamp_exposure=false
-process/size_limit=0
-detect_3d/compress_to=0
+stream=false
+size_limit=0
+detect_3d=false
+svg/scale=1.0
