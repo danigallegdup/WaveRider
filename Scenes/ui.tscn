@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://cypespwkot0ak"]
+
+[node name="UI" type="Node2D"]
+
+[node name="ScoreLabel" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
+scale = Vector2(1.5, 1.5)
+text = "Score: 0"
+metadata/_edit_use_anchors_ = true
+
+[node name="HealthLabel" type="Label" parent="."]
+offset_left = 114.0
+offset_right = 174.0
+offset_bottom = 23.0
+scale = Vector2(1.5, 1.5)
+text = "Health: 5"
+metadata/_edit_use_anchors_ = true
