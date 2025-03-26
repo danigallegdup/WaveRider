@@ -2,7 +2,9 @@ extends Node3D
 
 const POLLING_TIMING = true
 
-const SPAWN_OFFSET = 10
+const COIN_POINTS = 10
+
+const SPAWN_OFFSET = 10 # Doesn't work as intended
 const TIME_POSITION_TRANSLATION = 10/3
 var fake_song_data = {
 	"lead-in": 3,
@@ -59,23 +61,27 @@ func is_spawned(time):
 			return true
 	return false
 
-func hit_coin(points):
-	score += points
-	score_label.text = "Score: " + str(score)
-
-func hit_obstacle(obj):
-	# Poll here
-	if POLLING_TIMING:
-		print("HIT: Spawned at " + str(obj.get_meta("spawn_time")) + ", collided at " + str(game_time))
-		return
-	health -= 1
-	health_label.text = "Health: " + str(health)
+func collision(obj):
+	# Ignore objects without a collision branch
+	if "OBJ_TYPE" not in obj: return
+	# Switch down branch based on object type
+	if obj.OBJ_TYPE == "coin":
+		score += COIN_POINTS
+		score_label.text = "Score: " + str(score)
+	elif obj.OBJ_TYPE == "obstacle":
+		# Enable for lining up spawn and hit times
+		if POLLING_TIMING:
+			print("HIT: Spawned at " + str(obj.get_meta("spawn_time")) + ", collided at " + str(game_time))
+			return
+		health -= 1
+		health_label.text = "Health: " + str(health)
 	
-	Engine.time_scale = 0.5  # Slow motion
-	await get_tree().create_timer(0.5).timeout
-	Engine.time_scale = 1.0
-	if health <= 0:
-		game_over()
+		Engine.time_scale = 0.5  # Slow motion
+		await get_tree().create_timer(0.5).timeout
+		Engine.time_scale = 1.0
+		if health <= 0:
+			game_over()
+	else: print("Unconfigured collision branch: " + obj.OBJ_TYPE)
 
 func game_over():
 	print("Game Over! Score: ", score)
