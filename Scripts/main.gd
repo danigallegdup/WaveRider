@@ -1,8 +1,14 @@
 extends Node3D
 
+const POLLING_TIMING = true
+
+const SPAWN_OFFSET = 10
+const TIME_POSITION_TRANSLATION = 10/3
 var fake_song_data = {
-	"obstacles": [1.0, 2.5, 3.0, 4.2],
-	"coins": [0.5, 1.5, 2.0, 3.5]
+	"lead-in": 3,
+	"travel-duration": 3,
+	"obstacles": [1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0],
+	"coins": []#[0.5, 1.5, 2.0, 3.5]
 }
 var lanes = [-1.0, 0.0, 1.0]
 var game_time = 0.0
@@ -16,14 +22,19 @@ var score = 0
 
 func _ready():
 	$UI/ScoreLabel.text = "Score: 0"
+	game_time = min(-fake_song_data["lead-in"], -fake_song_data["travel-duration"]) + 1
+	bicycle.speed = TIME_POSITION_TRANSLATION*SPAWN_OFFSET/fake_song_data["travel-duration"]
 
 func _process(delta):
 	game_time += delta
 	spawn_from_song_data()
+	$UI/TimingLabel.text = "Time: " + str(floor(game_time))
+	$UI/TimescaleLabel.text = "Timescale: " + str(Engine.time_scale)
 
 func spawn_from_song_data():
 	for time in fake_song_data["obstacles"]:
-		if abs(game_time - time) < 0.1 and not is_spawned(time):
+		var t = time - fake_song_data["travel-duration"]
+		if abs(game_time - t) < 0.1 and not is_spawned(time):
 			spawn_obstacle(time)
 	for time in fake_song_data["coins"]:
 		if abs(game_time - time) < 0.1 and not is_spawned(time):
@@ -31,13 +42,14 @@ func spawn_from_song_data():
 
 func spawn_obstacle(time):
 	var obs = load("res://Scenes/obstacle.tscn").instantiate()
-	obs.position = Vector3(lanes[randi() % 3], 0.5, -20 - time * 10)
-	obs.set_meta("spawn_time", time)
+	#obs.position = Vector3(lanes[randi() % 3], 0.5, -20 - time * SPAWN_OFFSET)
+	obs.position = Vector3(lanes[1], 0.5, -20 - time * SPAWN_OFFSET)
+	obs.set_meta("spawn_time", game_time)
 	add_child(obs)
 
 func spawn_coin(time):
 	var coin = load("res://Scenes/coin.tscn").instantiate()
-	coin.position = Vector3(lanes[randi() % 3], 0.5, -20 - time * 10)
+	coin.position = Vector3(lanes[randi() % 3], 0.5, -20 - time * SPAWN_OFFSET)
 	coin.set_meta("spawn_time", time)
 	add_child(coin)
 
@@ -51,7 +63,11 @@ func hit_coin(points):
 	score += points
 	score_label.text = "Score: " + str(score)
 
-func hit_obstacle():
+func hit_obstacle(obj):
+	# Poll here
+	if POLLING_TIMING:
+		print("HIT: Spawned at " + str(obj.get_meta("spawn_time")) + ", collided at " + str(game_time))
+		return
 	health -= 1
 	health_label.text = "Health: " + str(health)
 	
