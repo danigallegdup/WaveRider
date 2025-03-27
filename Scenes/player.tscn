@@ -4,13 +4,13 @@
 [ext_resource type="Texture2D" uid="uid://cu8tlt67gojsb" path="res://sprites/player/player_animated.tres" id="2_cvnsp"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_cvnsp"]
-size = Vector3(3.8, 2, 0.4)
+size = Vector3(2, 2, 0.4)
 
 [node name="Player" type="CharacterBody3D"]
 script = ExtResource("1_6t5aa")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(-1.31134e-08, 0, 0.3, 0, 0.3, 0, -0.3, 0, -1.31134e-08, 0, 0.3, 0)
+transform = Transform3D(-1.31134e-08, 0, 0.3, 0, 0.3, 0, -0.3, 0, -1.31134e-08, 0, 0.3, 0.3)
 shape = SubResource("BoxShape3D_cvnsp")
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
