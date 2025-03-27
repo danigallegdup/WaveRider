@@ -1,6 +1,9 @@
-[gd_scene format=3 uid="uid://cypespwkot0ak"]
+[gd_scene load_steps=2 format=3 uid="uid://cypespwkot0ak"]
+
+[ext_resource type="Script" uid="uid://bntxtn7xb5qks" path="res://Scripts/ui.gd" id="1_jxero"]
 
 [node name="UI" type="Node2D"]
+script = ExtResource("1_jxero")
 
 [node name="ScoreLabel" type="Label" parent="."]
 offset_right = 40.0
@@ -17,18 +20,10 @@ scale = Vector2(1.5, 1.5)
 text = "Health: 5"
 metadata/_edit_use_anchors_ = true
 
-[node name="TimingLabel" type="Label" parent="."]
+[node name="TimeLabel" type="Label" parent="."]
 offset_left = 243.615
 offset_right = 313.615
 offset_bottom = 23.0
 scale = Vector2(1.5, 1.5)
 text = "Time: 0"
-metadata/_edit_use_anchors_ = true
-
-[node name="TimescaleLabel" type="Label" parent="."]
-offset_left = 349.01
-offset_right = 435.01
-offset_bottom = 23.0
-scale = Vector2(1.5, 1.5)
-text = "Timescale: "
 metadata/_edit_use_anchors_ = true
