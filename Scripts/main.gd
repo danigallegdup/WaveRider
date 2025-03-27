@@ -1,13 +1,51 @@
 extends Node3D
 
+# These keys are used to avoid mis-spellings
+const OBSTACLES_KEY = "obstacles"
+const COINS_KEY = "coins"
+
+const COIN_POINTS = 10
+
 var fake_song_data = {
-	"obstacles": [1.0, 2.5, 3.0, 4.2],
-	"coins": [0.5, 1.5, 2.0, 3.5]
+	"lead-in": 3, # How many seconds before the first note collision?
+	"travel-duration": 2, # How many seconds between spawn time and collision?
+	# Below are spawn times of objects
+	OBSTACLES_KEY: [1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0],
+	COINS_KEY: [0.5, 1.5, 2.0, 3.5]
 }
-var lanes = [-1.0, 0.0, 1.0]
+var song_data = fake_song_data
+
+const SPAWN_OFFSET = 40 # z position of new spawns (relative to player)
+const LANES = [-1.0, 0.0, 1.0] # x position of lanes
+
 var game_time = 0.0
 var health = 5
 var score = 0
+
+# Running data for entity spawns
+var timings = {
+	OBSTACLES_KEY: {
+		"next_idx": 0,
+		"current_timing": 0.0,
+		"empty": false
+	},
+	COINS_KEY: {
+		"next_idx": 0,
+		"current_timing": 0.0,
+		"empty": false
+	}
+}
+
+# This saves the resource in memory on start to be instantiated repeatedly
+@onready var objs_resources = {
+	OBSTACLES_KEY: preload("res://Scenes/obstacle.tscn"),
+	COINS_KEY: preload("res://Scenes/coin.tscn")
+}
+# This holds the next spawn instance to be used
+@onready var next_objs = {
+	OBSTACLES_KEY: objs_resources[OBSTACLES_KEY].instantiate(),
+	COINS_KEY: objs_resources[COINS_KEY].instantiate()
+}
 
 # Add at top
 @onready var score_label = $UI/ScoreLabel
@@ -16,53 +54,77 @@ var score = 0
 
 func _ready():
 	$UI/ScoreLabel.text = "Score: 0"
+	game_time = min(-song_data["lead-in"], -song_data["travel-duration"]) + 1
+	bicycle.speed = SPAWN_OFFSET/song_data["travel-duration"]
+	
+	print("INITIALIZED:\n\tPlayer speed: " + str(bicycle.speed) + "\n\tGame time: " + str(game_time))
+	#Initialize object spawn timings
+	update_timings(COINS_KEY)
+	update_timings(OBSTACLES_KEY)
 
 func _process(delta):
 	game_time += delta
-	spawn_from_song_data()
-
-func spawn_from_song_data():
-	for time in fake_song_data["obstacles"]:
-		if abs(game_time - time) < 0.1 and not is_spawned(time):
-			spawn_obstacle(time)
-	for time in fake_song_data["coins"]:
-		if abs(game_time - time) < 0.1 and not is_spawned(time):
-			spawn_coin(time)
-
-func spawn_obstacle(time):
-	var obs = load("res://Scenes/obstacle.tscn").instantiate()
-	obs.position = Vector3(lanes[randi() % 3], 0.5, -20 - time * 10)
-	obs.set_meta("spawn_time", time)
-	add_child(obs)
-
-func spawn_coin(time):
-	var coin = load("res://Scenes/coin.tscn").instantiate()
-	coin.position = Vector3(lanes[randi() % 3], 0.5, -20 - time * 10)
-	coin.set_meta("spawn_time", time)
-	add_child(coin)
-
-func is_spawned(time):
-	for child in get_children():
-		if child is Area3D and abs(child.get_meta("spawn_time", -1) - time) < 0.1:
-			return true
-	return false
-
-func hit_coin(points):
-	score += points
-	score_label.text = "Score: " + str(score)
-
-func hit_obstacle():
-	health -= 1
-	health_label.text = "Health: " + str(health)
+	$UI/TimingLabel.text = "Time: " + str(floor(game_time))
+	$UI/TimescaleLabel.text = "Timescale: " + str(Engine.time_scale)
 	
-	Engine.time_scale = 0.5  # Slow motion
-	await get_tree().create_timer(0.5).timeout
-	Engine.time_scale = 1.0
-	if health <= 0:
-		game_over()
+	# Check if new spawns to do
+	for o in [OBSTACLES_KEY, COINS_KEY]:
+		# Ignore key if no more spawns
+		if timings[o]["empty"]: continue
+		# If the next timing has been passed, turn on pre-loaded spawn
+		if game_time - timings[o]["current_timing"] > 0:
+			print("SPAWN " + o + " AT " + str(game_time))
+			var obj = next_objs[o]
+			#obj.position = Vector3(LANES[1], 0.5, bicycle.position.z - SPAWN_OFFSET)
+			obj.position = Vector3(LANES[randi() % 3], 0.5, bicycle.position.z - SPAWN_OFFSET)
+			obj.set_meta("spawn_time", game_time)
+			add_child(obj)
+			# Identify the next spawn and pre-load an instance
+			call_deferred("update_timings", o)
+			call_deferred("reload_obj", o)
+
+# This is used to pre-emptively instantiate a new object.
+func reload_obj(obj_type):
+	next_objs[obj_type] = objs_resources[obj_type].instantiate()
+
+# This is used to expose the timing of the next spawnable to the _process() function to limit it's
+#	processing time
+func update_timings(obj_type):
+	# Get the index of the next timing element
+	var idx = timings[obj_type]["next_idx"]
+	# If out of data, indicate to stop tracking this index
+	if idx >= len(song_data[obj_type]):
+		timings[obj_type]["empty"] = true
+		return
+	# Retrieve the timing for the next object, subtract the running time
+	timings[obj_type]["current_timing"] = song_data[obj_type][idx] - song_data["travel-duration"]
+	# Prepare to retrieve the next element
+	timings[obj_type]["next_idx"] += 1
+
+
+func collision(obj):
+	# Ignore objects without a collision branch
+	if "OBJ_TYPE" not in obj: return
+	print("HIT " + obj.OBJ_TYPE + ": Spawned at " + str(obj.get_meta("spawn_time")) + ", collided at " + str(game_time))
+	# Switch down branch based on object type
+	if obj.OBJ_TYPE == "coin":
+		score += COIN_POINTS
+		score_label.text = "Score: " + str(score)
+	elif obj.OBJ_TYPE == "obstacle":
+		health -= 1
+		health_label.text = "Health: " + str(health)
+		
+		# TODO lerp this back and forth instead of set
+		Engine.time_scale = 0.5  # Slow motion
+		await get_tree().create_timer(0.5).timeout
+		Engine.time_scale = 1.0
+		if health <= 0:
+			game_over()
+	else: print("ERROR: Unconfigured collision branch: " + obj.OBJ_TYPE)
 
 func game_over():
 	print("Game Over! Score: ", score)
+	if true: return # TODO remove this for real game
 	get_tree().quit()  # Placeholder
 
 func set_color_palette(palette):
