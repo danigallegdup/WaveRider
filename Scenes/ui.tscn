@@ -1,34 +1,36 @@
-[gd_scene format=3 uid="uid://cypespwkot0ak"]
+[gd_scene load_steps=3 format=3 uid="uid://cypespwkot0ak"]
+
+[ext_resource type="Script" uid="uid://bntxtn7xb5qks" path="res://Scripts/ui.gd" id="1_jxero"]
+[ext_resource type="LabelSettings" uid="uid://ddb37lrg7l5bk" path="res://Resources/UI_Label_Settings.tres" id="2_qdvrb"]
 
 [node name="UI" type="Node2D"]
+script = ExtResource("1_jxero")
 
-[node name="ScoreLabel" type="Label" parent="."]
-offset_right = 40.0
-offset_bottom = 23.0
-scale = Vector2(1.5, 1.5)
+[node name="MarginContainer" type="MarginContainer" parent="."]
+offset_right = 379.0
+offset_bottom = 40.0
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 15
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme_override_constants/separation = 50
+
+[node name="ScoreLabel" type="Label" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
 text = "Score: 0"
-metadata/_edit_use_anchors_ = true
+label_settings = ExtResource("2_qdvrb")
 
-[node name="HealthLabel" type="Label" parent="."]
-offset_left = 114.0
-offset_right = 174.0
-offset_bottom = 23.0
-scale = Vector2(1.5, 1.5)
+[node name="HealthLabel" type="Label" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
 text = "Health: 5"
+label_settings = ExtResource("2_qdvrb")
 metadata/_edit_use_anchors_ = true
 
-[node name="TimingLabel" type="Label" parent="."]
-offset_left = 243.615
-offset_right = 313.615
-offset_bottom = 23.0
-scale = Vector2(1.5, 1.5)
+[node name="TimeLabel" type="Label" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
 text = "Time: 0"
-metadata/_edit_use_anchors_ = true
-
-[node name="TimescaleLabel" type="Label" parent="."]
-offset_left = 349.01
-offset_right = 435.01
-offset_bottom = 23.0
-scale = Vector2(1.5, 1.5)
-text = "Timescale: "
+label_settings = ExtResource("2_qdvrb")
 metadata/_edit_use_anchors_ = true

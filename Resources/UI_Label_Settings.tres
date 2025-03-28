@@ -1,0 +1,8 @@
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://ddb37lrg7l5bk"]
+
+[ext_resource type="FontFile" uid="uid://b615he0vnt4kc" path="res://Resources/Tektur/static/Tektur-Medium.ttf" id="1_vulka"]
+
+[resource]
+font = ExtResource("1_vulka")
+font_size = 26
+outline_color = Color(0, 0, 0, 1)

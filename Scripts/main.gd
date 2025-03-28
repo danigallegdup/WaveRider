@@ -47,13 +47,11 @@ var timings = {
 	COINS_KEY: objs_resources[COINS_KEY].instantiate()
 }
 
-# Add at top
-@onready var score_label = $UI/ScoreLabel
-@onready var health_label = $UI/HealthLabel
 @onready var bicycle = $Player
+@onready var UI = $UI
 
 func _ready():
-	$UI/ScoreLabel.text = "Score: 0"
+	UI.initialize()
 	game_time = min(-song_data["lead-in"], -song_data["travel-duration"]) + 1
 	bicycle.speed = SPAWN_OFFSET/song_data["travel-duration"]
 	
@@ -64,8 +62,7 @@ func _ready():
 
 func _process(delta):
 	game_time += delta
-	$UI/TimingLabel.text = "Time: " + str(floor(game_time))
-	$UI/TimescaleLabel.text = "Timescale: " + str(Engine.time_scale)
+	UI.set_time(floor(game_time))
 	
 	# Check if new spawns to do
 	for o in [OBSTACLES_KEY, COINS_KEY]:
@@ -109,10 +106,10 @@ func collision(obj):
 	# Switch down branch based on object type
 	if obj.OBJ_TYPE == "coin":
 		score += COIN_POINTS
-		score_label.text = "Score: " + str(score)
+		UI.add_score(score)
 	elif obj.OBJ_TYPE == "obstacle":
 		health -= 1
-		health_label.text = "Health: " + str(health)
+		UI.set_health(health)
 		
 		# TODO lerp this back and forth instead of set
 		Engine.time_scale = 0.5  # Slow motion
