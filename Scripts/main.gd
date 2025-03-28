@@ -49,9 +49,11 @@ var timings = {
 
 @onready var bicycle = $Player
 @onready var UI = $UI
+@onready var Music = $AudioStreamPlayer
 
 func _ready():
 	UI.initialize()
+	TimescaleUtil.audio_player = Music
 	game_time = min(-song_data["lead-in"], -song_data["travel-duration"]) + 1
 	bicycle.speed = SPAWN_OFFSET/song_data["travel-duration"]
 	
@@ -63,6 +65,10 @@ func _ready():
 func _process(delta):
 	game_time += delta
 	UI.set_time(floor(game_time))
+	UI.set_timescale(Engine.time_scale)
+	
+	if game_time > 0 and not Music.playing:
+		Music.playing = true
 	
 	# Check if new spawns to do
 	for o in [OBSTACLES_KEY, COINS_KEY]:
@@ -98,7 +104,6 @@ func update_timings(obj_type):
 	# Prepare to retrieve the next element
 	timings[obj_type]["next_idx"] += 1
 
-
 func collision(obj):
 	# Ignore objects without a collision branch
 	if "OBJ_TYPE" not in obj: return
@@ -110,11 +115,8 @@ func collision(obj):
 	elif obj.OBJ_TYPE == "obstacle":
 		health -= 1
 		UI.set_health(health)
-		
-		# TODO lerp this back and forth instead of set
-		Engine.time_scale = 0.5  # Slow motion
-		await get_tree().create_timer(0.5).timeout
-		Engine.time_scale = 1.0
+		#TimescaleUtil.quick_slowdown()
+		TimescaleUtil.slowdown()
 		if health <= 0:
 			game_over()
 	else: print("ERROR: Unconfigured collision branch: " + obj.OBJ_TYPE)

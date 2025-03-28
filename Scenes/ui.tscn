@@ -34,3 +34,9 @@ layout_mode = 2
 text = "Time: 0"
 label_settings = ExtResource("2_qdvrb")
 metadata/_edit_use_anchors_ = true
+
+[node name="TimescaleLabel" type="Label" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+text = "Time: 0"
+label_settings = ExtResource("2_qdvrb")
+metadata/_edit_use_anchors_ = true
