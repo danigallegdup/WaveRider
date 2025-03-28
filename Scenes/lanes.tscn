@@ -1,0 +1,37 @@
+[gd_scene load_steps=3 format=3 uid="uid://dbm67twkocpjw"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7v2ps"]
+size = Vector3(1, 0.1, 1000)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_87s0j"]
+size = Vector2(1, 1000)
+
+[node name="Lanes" type="Node3D"]
+
+[node name="LaneRight" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="LaneRight"]
+shape = SubResource("BoxShape3D_7v2ps")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="LaneRight"]
+mesh = SubResource("PlaneMesh_87s0j")
+
+[node name="LaneCenter" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="LaneCenter"]
+shape = SubResource("BoxShape3D_7v2ps")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="LaneCenter"]
+mesh = SubResource("PlaneMesh_87s0j")
+skeleton = NodePath("../../LaneRight")
+
+[node name="LaneLeft" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0)
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="LaneLeft"]
+shape = SubResource("BoxShape3D_7v2ps")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="LaneLeft"]
+mesh = SubResource("PlaneMesh_87s0j")
+skeleton = NodePath("../../LaneRight")

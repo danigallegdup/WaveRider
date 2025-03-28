@@ -1,0 +1,47 @@
+[gd_scene load_steps=10 format=3 uid="uid://b5plxv2mui2ar"]
+
+[ext_resource type="Script" uid="uid://bec08vlrdfn0d" path="res://Scripts/main.gd" id="1_8gbba"]
+[ext_resource type="PackedScene" uid="uid://dbm67twkocpjw" path="res://Scenes/lanes.tscn" id="2_jjvhh"]
+[ext_resource type="PackedScene" uid="uid://cypespwkot0ak" path="res://Scenes/ui.tscn" id="4_jjvhh"]
+[ext_resource type="PackedScene" uid="uid://cmp4gi548ck1n" path="res://Scenes/player.tscn" id="4_kry3j"]
+[ext_resource type="Script" uid="uid://bckig2h8mjeti" path="res://Scenes/background.gd" id="5_kry3j"]
+[ext_resource type="Shader" uid="uid://dy3n41dgv6ig7" path="res://Scripts/pixelize.gdshader" id="6_21xkr"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_kry3j"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6bp64"]
+render_priority = 0
+shader = ExtResource("6_21xkr")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_344ge"]
+material = SubResource("ShaderMaterial_6bp64")
+
+[node name="Main" type="Node3D"]
+script = ExtResource("1_8gbba")
+
+[node name="UI" parent="." instance=ExtResource("4_jjvhh")]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 10, 0)
+shadow_enabled = true
+
+[node name="Node3D" type="Node3D" parent="."]
+visible = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, -20)
+mesh = SubResource("BoxMesh_kry3j")
+script = ExtResource("5_kry3j")
+
+[node name="Lanes" parent="." instance=ExtResource("2_jjvhh")]
+
+[node name="Player" parent="." instance=ExtResource("4_kry3j")]
+
+[node name="Camera3D" type="Camera3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 0.919822, 0.392337, 0, -0.392337, 0.919822, 3.82038e-08, 1.44332, 1.18745)
+current = true
+
+[node name="PixelShader" type="MeshInstance3D" parent="Player/Camera3D"]
+transform = Transform3D(2, 0, 0, 0, 0.0034557, -2, 0, 2, 0.0034557, 0, 0.171015, -0.956479)
+visible = false
+mesh = SubResource("PlaneMesh_344ge")
