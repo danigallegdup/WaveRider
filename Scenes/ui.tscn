@@ -7,36 +7,56 @@
 script = ExtResource("1_jxero")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
-offset_right = 379.0
-offset_bottom = 40.0
+offset_right = 580.0
+offset_bottom = 101.0
+size_flags_horizontal = 3
+size_flags_vertical = 0
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 15
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+[node name="HBoxContainer2" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 25
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
 theme_override_constants/separation = 50
 
-[node name="ScoreLabel" type="Label" parent="MarginContainer/HBoxContainer"]
+[node name="ScoreLabel" type="Label" parent="MarginContainer/HBoxContainer2/HBoxContainer"]
 layout_mode = 2
 text = "Score: 0"
 label_settings = ExtResource("2_qdvrb")
 
-[node name="HealthLabel" type="Label" parent="MarginContainer/HBoxContainer"]
+[node name="HealthLabel" type="Label" parent="MarginContainer/HBoxContainer2/HBoxContainer"]
 layout_mode = 2
 text = "Health: 5"
 label_settings = ExtResource("2_qdvrb")
 metadata/_edit_use_anchors_ = true
 
-[node name="TimeLabel" type="Label" parent="MarginContainer/HBoxContainer"]
+[node name="TimeLabel" type="Label" parent="MarginContainer/HBoxContainer2/HBoxContainer"]
 layout_mode = 2
 text = "Time: 0"
 label_settings = ExtResource("2_qdvrb")
 metadata/_edit_use_anchors_ = true
 
-[node name="TimescaleLabel" type="Label" parent="MarginContainer/HBoxContainer"]
+[node name="TimescaleLabel" type="Label" parent="MarginContainer/HBoxContainer2/HBoxContainer"]
 layout_mode = 2
 text = "Time: 0"
 label_settings = ExtResource("2_qdvrb")
 metadata/_edit_use_anchors_ = true
+
+[node name="Container" type="MarginContainer" parent="MarginContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+
+[node name="ProgressBar" type="ProgressBar" parent="MarginContainer/HBoxContainer2/Container"]
+layout_direction = 2
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+show_percentage = false

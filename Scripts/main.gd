@@ -21,6 +21,7 @@ const LANES = [-1.0, 0.0, 1.0] # x position of lanes
 var game_time = 0.0
 var health = 5
 var score = 0
+var music_started: bool = false
 
 # Running data for entity spawns
 var timings = {
@@ -53,6 +54,7 @@ var timings = {
 
 func _ready():
 	UI.initialize()
+	UI.set_music_length(Music.stream.get_length())
 	TimescaleUtil.audio_player = Music
 	game_time = min(-song_data["lead-in"], -song_data["travel-duration"]) + 1
 	bicycle.speed = SPAWN_OFFSET/song_data["travel-duration"]
@@ -65,10 +67,12 @@ func _ready():
 func _process(delta):
 	game_time += delta
 	UI.set_time(floor(game_time))
-	UI.set_timescale(Engine.time_scale)
+	UI.set_timescale(Util.round_to_place(Engine.time_scale, 2))
+	UI.update_music_duration(game_time)
 	
-	if game_time > 0 and not Music.playing:
+	if game_time > 0 and not Music.playing and not music_started:
 		Music.playing = true
+		music_started = true
 	
 	# Check if new spawns to do
 	for o in [OBSTACLES_KEY, COINS_KEY]:
@@ -128,3 +132,10 @@ func game_over():
 
 func set_color_palette(palette):
 	$WorldEnvironment.environment.background_color = palette["sky_color"]
+	
+
+# This function will trigger when the audio track is finished playing; use this to transition to
+# 	score screen.
+func _on_audio_stream_player_finished() -> void:
+	print("Song complete! Well done!")
+	game_over()

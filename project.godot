@@ -17,6 +17,7 @@ config/features=PackedStringArray("4.4", "Forward Plus")
 [autoload]
 
 TimescaleUtil="*res://Scripts/timescale_util.gd"
+Util="*res://Scripts/util.gd"
 
 [display]
 

@@ -7,10 +7,14 @@ const TIMESCALE_PREFIX = "TS: " # TODO: Hide this label before full game
 
 var score = 0
 
-@onready var health_label = $MarginContainer/HBoxContainer/HealthLabel
-@onready var time_label = $MarginContainer/HBoxContainer/TimeLabel
-@onready var score_label = $MarginContainer/HBoxContainer/ScoreLabel
-@onready var timescale_label = $MarginContainer/HBoxContainer/TimescaleLabel
+var music_initialized: bool = false
+
+@onready var health_label = $MarginContainer/HBoxContainer2/HBoxContainer/HealthLabel
+@onready var time_label = $MarginContainer/HBoxContainer2/HBoxContainer/TimeLabel
+@onready var score_label = $MarginContainer/HBoxContainer2/HBoxContainer/ScoreLabel
+@onready var timescale_label = $MarginContainer/HBoxContainer2/HBoxContainer/TimescaleLabel
+
+@onready var progress_bar = $MarginContainer/HBoxContainer2/Container/ProgressBar
 
 func initialize():
 	set_score(0)
@@ -31,3 +35,10 @@ func add_score(new_score):
 
 func set_timescale(new_time):
 	timescale_label.text = TIMESCALE_PREFIX + str(new_time)
+
+func set_music_length(length):
+	music_initialized = true
+	progress_bar.max_value = length
+
+func update_music_duration(new_progress):
+	if music_initialized: progress_bar.value = new_progress

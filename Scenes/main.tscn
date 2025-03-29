@@ -49,3 +49,6 @@ mesh = SubResource("PlaneMesh_344ge")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7_6bp64")
+volume_db = -5.0
+
+[connection signal="finished" from="AudioStreamPlayer" to="." method="_on_audio_stream_player_finished"]
