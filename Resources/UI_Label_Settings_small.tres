@@ -1,0 +1,8 @@
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://dy6i685tlkbnn"]
+
+[ext_resource type="FontFile" uid="uid://b615he0vnt4kc" path="res://Resources/Tektur/static/Tektur-Medium.ttf" id="1_jfoa3"]
+
+[resource]
+font = ExtResource("1_jfoa3")
+font_size = 26
+outline_color = Color(0, 0, 0, 1)
