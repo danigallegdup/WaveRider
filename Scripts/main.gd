@@ -58,7 +58,7 @@ func _ready():
 	game_time = min(-song_data["lead-in"], -song_data["travel-duration"]) + 1
 	bicycle.speed = SPAWN_OFFSET / song_data["travel-duration"]
 	
-	# Set up lanes length
+	# Set up the terrain
 	var world_length = bicycle.speed * song_data["song-duration"]
 	terrain.scale.z = world_length
 	terrain.position.z = -world_length / 2

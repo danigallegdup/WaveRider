@@ -1,18 +1,23 @@
-[gd_scene load_steps=12 format=3 uid="uid://b5plxv2mui2ar"]
+[gd_scene load_steps=14 format=3 uid="uid://b5plxv2mui2ar"]
 
 [ext_resource type="Script" uid="uid://bec08vlrdfn0d" path="res://Scripts/main.gd" id="1_8gbba"]
 [ext_resource type="PackedScene" uid="uid://dt0dm6yt6brlf" path="res://Scenes/terrain.tscn" id="3_21xkr"]
 [ext_resource type="PackedScene" uid="uid://cypespwkot0ak" path="res://Scenes/ui.tscn" id="4_jjvhh"]
 [ext_resource type="PackedScene" uid="uid://cmp4gi548ck1n" path="res://Scenes/player.tscn" id="4_kry3j"]
-[ext_resource type="Shader" uid="uid://dy3n41dgv6ig7" path="res://Scripts/pixelize.gdshader" id="6_21xkr"]
+[ext_resource type="Texture2D" uid="uid://p2qsnkrj24yr" path="res://Textures/rocky_terrain_02_diff_2k.jpg" id="6_6bp64"]
+[ext_resource type="Shader" uid="uid://dy3n41dgv6ig7" path="res://Shaders/pixelize.gdshader" id="6_21xkr"]
 
-[sub_resource type="Sky" id="Sky_kry3j"]
+[sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_21xkr"]
+rayleigh_color = Color(0.027451, 0.0509804, 0.168627, 1)
+mie_color = Color(0.301936, 0.630359, 0.828401, 1)
+energy_multiplier = 10.0
 
-[sub_resource type="Environment" id="Environment_21xkr"]
-background_mode = 1
-background_color = Color(0.328615, 0.326484, 0.884939, 1)
-sky = SubResource("Sky_kry3j")
-ambient_light_source = 1
+[sub_resource type="Sky" id="Sky_6bp64"]
+sky_material = SubResource("PhysicalSkyMaterial_21xkr")
+
+[sub_resource type="Environment" id="Environment_344ge"]
+background_mode = 2
+sky = SubResource("Sky_6bp64")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6bp64"]
 render_priority = 0
@@ -23,6 +28,7 @@ material = SubResource("ShaderMaterial_6bp64")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kry3j"]
 albedo_color = Color(0.0633165, 0.30415, 0.126849, 1)
+albedo_texture = ExtResource("6_6bp64")
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_kry3j"]
 material = SubResource("StandardMaterial3D_kry3j")
@@ -31,7 +37,7 @@ material = SubResource("StandardMaterial3D_kry3j")
 script = ExtResource("1_8gbba")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_21xkr")
+environment = SubResource("Environment_344ge")
 
 [node name="UI" parent="." instance=ExtResource("4_jjvhh")]
 
@@ -40,6 +46,7 @@ transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 
 shadow_enabled = true
 
 [node name="Terrain" parent="." instance=ExtResource("3_21xkr")]
+transform = Transform3D(3, 0, 0, 0, 0.1, 0, 0, 0, 1, 0, -0.06, 0)
 
 [node name="Player" parent="." instance=ExtResource("4_kry3j")]
 
