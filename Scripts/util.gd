@@ -13,3 +13,6 @@ place.
 #	choose precision.
 func round_to_place(to_round, decimal_place):
 	return round(to_round * pow(10.0, decimal_place)) / pow(10.0, decimal_place)
+
+func sec_to_minutes(seconds: float):
+	return "%02d:%02d" % [int(floor(seconds/60)), int(seconds)%60]

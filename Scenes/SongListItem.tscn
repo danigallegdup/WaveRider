@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://ittjjf44l7aj"]
 
 [ext_resource type="Texture2D" uid="uid://865kotieobyc" path="res://sprites/menu_assets/song_list_item_frame.png" id="1_p656v"]
-[ext_resource type="LabelSettings" uid="uid://ddb37lrg7l5bk" path="res://Resources/UI_Label_Settings.tres" id="1_xde0g"]
+[ext_resource type="LabelSettings" uid="uid://dy6i685tlkbnn" path="res://Resources/UI_Label_Settings_small.tres" id="2_8f26q"]
 [ext_resource type="LabelSettings" uid="uid://v7ib6rv1vev0" path="res://Resources/UI_Label_Settings_tiny.tres" id="2_p656v"]
 
 [node name="SongListItem" type="TextureRect"]
@@ -36,33 +36,35 @@ theme_override_constants/separation = 25
 [node name="SongName" type="Label" parent="MarginContainer/VBoxContainer/MainDetails"]
 layout_mode = 2
 text = "Song Name"
-label_settings = ExtResource("1_xde0g")
-
-[node name="Artist" type="Label" parent="MarginContainer/VBoxContainer/MainDetails"]
-layout_mode = 2
-text = "Artist"
-label_settings = ExtResource("2_p656v")
-
-[node name="Duration" type="Label" parent="MarginContainer/VBoxContainer/MainDetails"]
-layout_mode = 2
-text = "Duration"
-label_settings = ExtResource("2_p656v")
+label_settings = ExtResource("2_8f26q")
 
 [node name="ExtraDetails" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 25
-
-[node name="SongName" type="Label" parent="MarginContainer/VBoxContainer/ExtraDetails"]
-layout_mode = 2
-text = "Song Name"
-label_settings = ExtResource("2_p656v")
 
 [node name="Artist" type="Label" parent="MarginContainer/VBoxContainer/ExtraDetails"]
 layout_mode = 2
 text = "Artist"
 label_settings = ExtResource("2_p656v")
 
-[node name="Label3" type="Label" parent="MarginContainer/VBoxContainer/ExtraDetails"]
+[node name="Genre" type="Label" parent="MarginContainer/VBoxContainer/ExtraDetails"]
+layout_mode = 2
+text = "Song Name"
+label_settings = ExtResource("2_p656v")
+
+[node name="Extra2" type="Label" parent="MarginContainer/VBoxContainer/ExtraDetails"]
+visible = false
+layout_mode = 2
+text = "Artist"
+label_settings = ExtResource("2_p656v")
+
+[node name="Extra3" type="Label" parent="MarginContainer/VBoxContainer/ExtraDetails"]
+visible = false
+layout_mode = 2
+text = "Duration"
+label_settings = ExtResource("2_p656v")
+
+[node name="Duration" type="Label" parent="MarginContainer/VBoxContainer/ExtraDetails"]
 layout_mode = 2
 text = "Duration"
 label_settings = ExtResource("2_p656v")

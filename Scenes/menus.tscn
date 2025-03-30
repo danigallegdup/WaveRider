@@ -1,11 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://bf1nsmy1w52yl"]
+[gd_scene load_steps=7 format=3 uid="uid://bf1nsmy1w52yl"]
 
 [ext_resource type="Texture2D" uid="uid://hn6htxhyi1qo" path="res://sprites/menu_assets/title_white_bg.png" id="1_goel8"]
 [ext_resource type="Script" uid="uid://cg3k4c7fcq4aw" path="res://Scripts/menus.gd" id="1_sqhkm"]
 [ext_resource type="Theme" uid="uid://dgm6ykjvw7b75" path="res://Resources/Menu_Theme.tres" id="3_0yfu1"]
 [ext_resource type="LabelSettings" uid="uid://v7ib6rv1vev0" path="res://Resources/UI_Label_Settings_tiny.tres" id="3_yciej"]
 [ext_resource type="LabelSettings" uid="uid://dy6i685tlkbnn" path="res://Resources/UI_Label_Settings_small.tres" id="4_0yfu1"]
-[ext_resource type="PackedScene" uid="uid://ittjjf44l7aj" path="res://Scenes/SongListItem.tscn" id="6_8ovod"]
 [ext_resource type="LabelSettings" uid="uid://ddb37lrg7l5bk" path="res://Resources/UI_Label_Settings.tres" id="6_qdaxd"]
 
 [node name="Menus" type="CenterContainer"]
@@ -137,15 +136,6 @@ size_flags_horizontal = 3
 size_flags_vertical = 2
 theme_override_constants/separation = 10
 alignment = 1
-
-[node name="SongListItem" parent="SongSelect/ScrollContainer/SongList" instance=ExtResource("6_8ovod")]
-layout_mode = 2
-
-[node name="SongListItem2" parent="SongSelect/ScrollContainer/SongList" instance=ExtResource("6_8ovod")]
-layout_mode = 2
-
-[node name="SongListItem3" parent="SongSelect/ScrollContainer/SongList" instance=ExtResource("6_8ovod")]
-layout_mode = 2
 
 [node name="Options" type="MarginContainer" parent="."]
 layout_mode = 2

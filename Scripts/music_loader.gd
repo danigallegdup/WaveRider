@@ -26,7 +26,7 @@ const DEFAULT_FILE_NAME = "<default>"
 const DEFAULT_FILE_CHECKSUM = "000000"
 const DEFAULT_SONGS = [
 	{
-		"name": "Electro Cabello",
+		"name": "Electro Cabello How about if there's a really long song name",
 		"artist": "Kevin MacLeod",
 		"genre": "Disco",
 		"data": {
@@ -41,12 +41,12 @@ const DEFAULT_SONGS = [
 	},
 	{
 		"name": "Electro Cabello2",
-		"artist": "Kevin MacLeod",
-		"genre": "Disco",
+		"artist": "Kevin MacLeoder",
+		"genre": "Also Disco",
 		"data": {
 			"file_name": DEFAULT_FILE_NAME,
 			"file_checksum": DEFAULT_FILE_CHECKSUM,
-			"duration": 190.82,
+			"duration": 290.82,
 			"tempo_beats": [],
 			"obstacles": [1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0],
 			"coins": [0.5, 1.5, 2.0, 3.5],
@@ -55,12 +55,12 @@ const DEFAULT_SONGS = [
 	},
 	{
 		"name": "Electro Cabello3",
-		"artist": "Kevin MacLeod",
-		"genre": "Disco",
+		"artist": "Kevin MacLeodest",
+		"genre": "Not Disco",
 		"data": {
 			"file_name": DEFAULT_FILE_NAME,
 			"file_checksum": DEFAULT_FILE_CHECKSUM,
-			"duration": 190.82,
+			"duration": 125.82,
 			"tempo_beats": [],
 			"obstacles": [1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0],
 			"coins": [0.5, 1.5, 2.0, 3.5],
@@ -69,7 +69,7 @@ const DEFAULT_SONGS = [
 	}
 ]
 
-var song_library = DEFAULT_SONGS
+var song_library = DEFAULT_SONGS + DEFAULT_SONGS + DEFAULT_SONGS + DEFAULT_SONGS + DEFAULT_SONGS
 
 func _ready():
 	load_custom_songs()
