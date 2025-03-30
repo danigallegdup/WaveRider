@@ -68,6 +68,7 @@ func slowdown(target_scale=SLOW_SCALE):
 	if is_paused: return
 	_begin_lerping(target_scale, LERP_DOWN_RATE)
 	await get_tree().create_timer(SLOW_DURATION).timeout
+	if is_paused: return
 	_begin_lerping(1.0, LERP_UP_RATE)
 
 # This private method directly modifies the game elements that require scaling
