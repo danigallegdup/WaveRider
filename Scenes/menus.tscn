@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://bf1nsmy1w52yl"]
+[gd_scene load_steps=7 format=3 uid="uid://bf1nsmy1w52yl"]
 
 [ext_resource type="Texture2D" uid="uid://hn6htxhyi1qo" path="res://sprites/menu_assets/title_white_bg.png" id="1_goel8"]
 [ext_resource type="Script" uid="uid://cg3k4c7fcq4aw" path="res://Scripts/menus.gd" id="1_sqhkm"]
 [ext_resource type="Theme" uid="uid://dgm6ykjvw7b75" path="res://Resources/Menu_Theme.tres" id="3_0yfu1"]
 [ext_resource type="LabelSettings" uid="uid://v7ib6rv1vev0" path="res://Resources/UI_Label_Settings_tiny.tres" id="3_yciej"]
 [ext_resource type="LabelSettings" uid="uid://dy6i685tlkbnn" path="res://Resources/UI_Label_Settings_small.tres" id="4_0yfu1"]
+[ext_resource type="LabelSettings" uid="uid://ddb37lrg7l5bk" path="res://Resources/UI_Label_Settings.tres" id="6_qdaxd"]
 
 [node name="Menus" type="CenterContainer"]
 anchors_preset = 15
@@ -15,6 +16,7 @@ grow_vertical = 2
 script = ExtResource("1_sqhkm")
 
 [node name="Main" type="MarginContainer" parent="."]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -126,6 +128,35 @@ layout_mode = 2
 
 [node name="Pause" type="MarginContainer" parent="."]
 layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Pause"]
+layout_mode = 2
+theme_override_constants/separation = 80
+
+[node name="Label" type="Label" parent="Pause/VBoxContainer"]
+layout_mode = 2
+text = "Paused"
+label_settings = ExtResource("6_qdaxd")
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Pause/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 90
+alignment = 1
+
+[node name="Continue" type="Button" parent="Pause/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme = ExtResource("3_0yfu1")
+theme_override_font_sizes/font_size = 32
+text = "Continue"
+
+[node name="Quit" type="Button" parent="Pause/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme = ExtResource("3_0yfu1")
+theme_override_font_sizes/font_size = 32
+text = "Quit"
 
 [node name="GameOver" type="MarginContainer" parent="."]
 layout_mode = 2

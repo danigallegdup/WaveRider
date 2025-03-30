@@ -69,7 +69,7 @@ const DEFAULT_SONGS = [
 	}
 ]
 
-var song_library: Array[Dictionary] = DEFAULT_SONGS
+var song_library = DEFAULT_SONGS
 
 func _ready():
 	load_custom_songs()
