@@ -3,5 +3,5 @@ extends CenterContainer
 '''
 Menus
 
-This script will be used to power menu transitions, song loading, game start, and pauses.
+This script will be used to power menu transitions, game start, and pauses.
 '''

@@ -18,6 +18,7 @@ config/features=PackedStringArray("4.4", "Forward Plus")
 
 TimescaleUtil="*res://Scripts/timescale_util.gd"
 Util="*res://Scripts/util.gd"
+MusicLoader="*res://Scripts/music_loader.gd"
 
 [display]
 
