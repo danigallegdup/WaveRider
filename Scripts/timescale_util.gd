@@ -65,6 +65,7 @@ func quick_slowdown(target_scale=SLOW_SCALE):
 
 # This method enables timescale lerp down, pause, and lerp up
 func slowdown(target_scale=SLOW_SCALE):
+	if is_paused: return
 	_begin_lerping(target_scale, LERP_DOWN_RATE)
 	await get_tree().create_timer(SLOW_DURATION).timeout
 	_begin_lerping(1.0, LERP_UP_RATE)
