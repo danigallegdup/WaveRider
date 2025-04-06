@@ -1,0 +1,79 @@
+[gd_scene load_steps=4 format=3 uid="uid://ittjjf44l7aj"]
+
+[ext_resource type="Texture2D" uid="uid://865kotieobyc" path="res://sprites/menu_assets/song_list_item_frame.png" id="1_p656v"]
+[ext_resource type="LabelSettings" uid="uid://dy6i685tlkbnn" path="res://Resources/UI_Label_Settings_small.tres" id="2_8f26q"]
+[ext_resource type="LabelSettings" uid="uid://v7ib6rv1vev0" path="res://Resources/UI_Label_Settings_tiny.tres" id="2_p656v"]
+
+[node name="SongListItem" type="TextureRect"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 6
+texture = ExtResource("1_p656v")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+offset_right = 350.0
+offset_bottom = 92.0
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_constants/separation = 0
+
+[node name="MainDetails" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 25
+
+[node name="SongName" type="Label" parent="MarginContainer/VBoxContainer/MainDetails"]
+layout_mode = 2
+text = "Song Name"
+label_settings = ExtResource("2_8f26q")
+
+[node name="ExtraDetails" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 25
+
+[node name="Artist" type="Label" parent="MarginContainer/VBoxContainer/ExtraDetails"]
+layout_mode = 2
+text = "Artist"
+label_settings = ExtResource("2_p656v")
+
+[node name="Genre" type="Label" parent="MarginContainer/VBoxContainer/ExtraDetails"]
+layout_mode = 2
+text = "Song Name"
+label_settings = ExtResource("2_p656v")
+
+[node name="Extra2" type="Label" parent="MarginContainer/VBoxContainer/ExtraDetails"]
+visible = false
+layout_mode = 2
+text = "Artist"
+label_settings = ExtResource("2_p656v")
+
+[node name="Extra3" type="Label" parent="MarginContainer/VBoxContainer/ExtraDetails"]
+visible = false
+layout_mode = 2
+text = "Duration"
+label_settings = ExtResource("2_p656v")
+
+[node name="Duration" type="Label" parent="MarginContainer/VBoxContainer/ExtraDetails"]
+layout_mode = 2
+text = "Duration"
+label_settings = ExtResource("2_p656v")
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+flat = true

@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://b5plxv2mui2ar"]
+[gd_scene load_steps=12 format=3 uid="uid://b5plxv2mui2ar"]
 
 [ext_resource type="Script" uid="uid://bec08vlrdfn0d" path="res://Scripts/main.gd" id="1_8gbba"]
 [ext_resource type="PackedScene" uid="uid://dbm67twkocpjw" path="res://Scenes/lanes.tscn" id="2_jjvhh"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://bckig2h8mjeti" path="res://Scenes/background.gd" id="5_kry3j"]
 [ext_resource type="Shader" uid="uid://dy3n41dgv6ig7" path="res://Scripts/pixelize.gdshader" id="6_21xkr"]
 [ext_resource type="AudioStream" uid="uid://c557gaas4kvgw" path="res://Resources/DefaultMusic/Electro_Cabello.wav" id="7_6bp64"]
+[ext_resource type="PackedScene" uid="uid://bf1nsmy1w52yl" path="res://Scenes/menus.tscn" id="8_344ge"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_kry3j"]
 
@@ -50,5 +51,7 @@ mesh = SubResource("PlaneMesh_344ge")
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7_6bp64")
 volume_db = -5.0
+
+[node name="Menus" parent="." instance=ExtResource("8_344ge")]
 
 [connection signal="finished" from="AudioStreamPlayer" to="." method="_on_audio_stream_player_finished"]

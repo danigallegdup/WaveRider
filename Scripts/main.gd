@@ -51,6 +51,7 @@ var timings = {
 @onready var bicycle = $Player
 @onready var UI = $UI
 @onready var Music = $AudioStreamPlayer
+@onready var Menus = $Menus
 
 func _ready():
 	UI.initialize()
@@ -73,6 +74,9 @@ func _process(delta):
 	if game_time > 0 and not Music.playing and not music_started:
 		Music.playing = true
 		music_started = true
+	
+	if Input.is_action_just_pressed("pause"):
+		Menus.toggle_pause()
 	
 	# Check if new spawns to do
 	for o in [OBSTACLES_KEY, COINS_KEY]:
