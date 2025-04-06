@@ -15,13 +15,13 @@ This script will be used to power menu transitions, game start, and pauses.
 	}
 @onready var cur_menu: Control = menus.main
 
-@onready var song_list = $SongSelect/ScrollContainer/SongList
+@onready var song_list = $SongSelect/HBoxContainer/ScrollContainer/SongList
 @onready var song_list_item = preload("res://Scenes/SongListItem.tscn")
 
 func _ready():
-	#switch_menu(menus.main)
-	switch_menu(menus.song_select)
-	#self.hide()
+	switch_menu(menus.main)
+	#switch_menu(menus.song_select)
+	self.hide()
 	# Set up SongSelect menu
 	MusicLoader.load_custom_songs()
 	for s in MusicLoader.song_library:
