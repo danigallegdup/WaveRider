@@ -1,8 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://b5plxv2mui2ar"]
+[gd_scene load_steps=15 format=3 uid="uid://b5plxv2mui2ar"]
 
 [ext_resource type="Script" uid="uid://bec08vlrdfn0d" path="res://Scripts/main.gd" id="1_8gbba"]
 [ext_resource type="PackedScene" uid="uid://dt0dm6yt6brlf" path="res://Scenes/terrain.tscn" id="3_21xkr"]
-[ext_resource type="PackedScene" uid="uid://cypespwkot0ak" path="res://Scenes/ui.tscn" id="4_jjvhh"]
+[ext_resource type="PackedScene" uid="uid://cypespwkot0ak" path="res://Scripts/ui.tscn" id="4_jjvhh"]
 [ext_resource type="PackedScene" uid="uid://cmp4gi548ck1n" path="res://Scenes/player.tscn" id="4_kry3j"]
 [ext_resource type="Texture2D" uid="uid://p2qsnkrj24yr" path="res://Textures/rocky_terrain_02_diff_2k.jpg" id="6_6bp64"]
 [ext_resource type="Shader" uid="uid://dy3n41dgv6ig7" path="res://Shaders/pixelize.gdshader" id="6_21xkr"]
