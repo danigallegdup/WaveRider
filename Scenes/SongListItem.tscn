@@ -5,11 +5,8 @@
 [ext_resource type="LabelSettings" uid="uid://v7ib6rv1vev0" path="res://Resources/UI_Label_Settings_tiny.tres" id="2_p656v"]
 
 [node name="SongListItem" type="TextureRect"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+offset_right = 320.0
+offset_bottom = 64.0
 size_flags_horizontal = 3
 size_flags_vertical = 6
 texture = ExtResource("1_p656v")

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://hn6htxhyi1qo"
-path="res://.godot/imported/title_white_bg.png-031b9c8949d7191b7e09d3dc8b951b31.ctex"
+uid="uid://bq3sjnswcsi6k"
+path="res://.godot/imported/play_circle_26dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.png-a40c7d68dfc0adf90661498df79f10cf.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/menu_assets/title_white_bg.png"
-dest_files=["res://.godot/imported/title_white_bg.png-031b9c8949d7191b7e09d3dc8b951b31.ctex"]
+source_file="res://sprites/menu_assets/play_circle_26dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.png"
+dest_files=["res://.godot/imported/play_circle_26dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.png-a40c7d68dfc0adf90661498df79f10cf.ctex"]
 
 [params]
 

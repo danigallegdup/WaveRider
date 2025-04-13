@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bf1nsmy1w52yl"]
+[gd_scene load_steps=10 format=3 uid="uid://bf1nsmy1w52yl"]
 
 [ext_resource type="Texture2D" uid="uid://hn6htxhyi1qo" path="res://sprites/menu_assets/title_white_bg.png" id="1_goel8"]
 [ext_resource type="Script" uid="uid://cg3k4c7fcq4aw" path="res://Scripts/menus.gd" id="1_sqhkm"]
@@ -7,6 +7,8 @@
 [ext_resource type="LabelSettings" uid="uid://dy6i685tlkbnn" path="res://Resources/UI_Label_Settings_small.tres" id="4_0yfu1"]
 [ext_resource type="Texture2D" uid="uid://8c5jue6eul3k" path="res://sprites/menu_assets/song_list_item_frame_9patch.png" id="6_8ovod"]
 [ext_resource type="LabelSettings" uid="uid://ddb37lrg7l5bk" path="res://Resources/UI_Label_Settings.tres" id="6_qdaxd"]
+[ext_resource type="Texture2D" uid="uid://c1ef7fxphum2g" path="res://sprites/menu_assets/play_circle_60dp_E3E3E3_FILL0_wght400_GRAD0_opsz48.png" id="8_ewi2v"]
+[ext_resource type="Texture2D" uid="uid://bklc2mf03yhwt" path="res://sprites/menu_assets/play_circle_60dp_666666_FILL0_wght400_GRAD0_opsz48.png" id="9_2b31k"]
 
 [node name="Menus" type="CenterContainer"]
 anchors_preset = 15
@@ -125,42 +127,139 @@ horizontal_alignment = 1
 visible = false
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="SongSelect"]
+[node name="VBoxContainer" type="VBoxContainer" parent="SongSelect"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="SongSelect/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 8
 theme_override_constants/separation = 20
 alignment = 2
 
-[node name="Empty" type="MarginContainer" parent="SongSelect/HBoxContainer"]
+[node name="Empty" type="MarginContainer" parent="SongSelect/VBoxContainer/HBoxContainer"]
+visible = false
 custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="ScrollContainer" type="ScrollContainer" parent="SongSelect/HBoxContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="SongSelect/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(400, 600)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 horizontal_scroll_mode = 0
 
-[node name="SongList" type="VBoxContainer" parent="SongSelect/HBoxContainer/ScrollContainer"]
+[node name="SongList" type="VBoxContainer" parent="SongSelect/VBoxContainer/HBoxContainer/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 2
 theme_override_constants/separation = 10
 alignment = 1
 
-[node name="SongDetails" type="MarginContainer" parent="SongSelect/HBoxContainer"]
+[node name="SongDetails" type="MarginContainer" parent="SongSelect/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="NinePatchRect" type="NinePatchRect" parent="SongSelect/VBoxContainer/HBoxContainer/SongDetails"]
+layout_mode = 2
+texture = ExtResource("6_8ovod")
+region_rect = Rect2(0, 0, 64, 64)
+patch_margin_left = 21
+patch_margin_top = 21
+patch_margin_right = 21
+patch_margin_bottom = 21
+
+[node name="SongDetailsDisplay" type="MarginContainer" parent="SongSelect/VBoxContainer/HBoxContainer/SongDetails"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 40
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 40
+
+[node name="VBoxContainer" type="VBoxContainer" parent="SongSelect/VBoxContainer/HBoxContainer/SongDetails/SongDetailsDisplay"]
+layout_mode = 2
+
+[node name="SongName" type="Label" parent="SongSelect/VBoxContainer/HBoxContainer/SongDetails/SongDetailsDisplay/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+text = "Song Name"
+label_settings = ExtResource("6_qdaxd")
+horizontal_alignment = 1
+clip_text = true
+text_overrun_behavior = 1
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="SongSelect/VBoxContainer/HBoxContainer/SongDetails/SongDetailsDisplay/VBoxContainer"]
+layout_mode = 2
+
+[node name="Artist" type="Label" parent="SongSelect/VBoxContainer/HBoxContainer/SongDetails/SongDetailsDisplay/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+text = "Artist"
+label_settings = ExtResource("4_0yfu1")
+
+[node name="Spacer" type="Control" parent="SongSelect/VBoxContainer/HBoxContainer/SongDetails/SongDetailsDisplay/VBoxContainer/HBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="NinePatchRect" type="NinePatchRect" parent="SongSelect/HBoxContainer/SongDetails"]
+[node name="Genre" type="Label" parent="SongSelect/VBoxContainer/HBoxContainer/SongDetails/SongDetailsDisplay/VBoxContainer/HBoxContainer2"]
 layout_mode = 2
-texture = ExtResource("6_8ovod")
-region_rect = Rect2(13, 13, 38, 38)
+size_flags_horizontal = 4
+size_flags_vertical = 0
+text = "Genre"
+label_settings = ExtResource("3_yciej")
+
+[node name="MarginContainer" type="MarginContainer" parent="SongSelect/VBoxContainer/HBoxContainer/SongDetails/SongDetailsDisplay/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="DemoButton" type="TextureButton" parent="SongSelect/VBoxContainer/HBoxContainer/SongDetails/SongDetailsDisplay/VBoxContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture_normal = ExtResource("8_ewi2v")
+texture_pressed = ExtResource("9_2b31k")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="SongSelect/VBoxContainer/HBoxContainer/SongDetails/SongDetailsDisplay/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Duration" type="Label" parent="SongSelect/VBoxContainer/HBoxContainer/SongDetails/SongDetailsDisplay/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "9:99"
+label_settings = ExtResource("3_yciej")
+
+[node name="Spacer" type="Control" parent="SongSelect/VBoxContainer/HBoxContainer/SongDetails/SongDetailsDisplay/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="BPM" type="Label" parent="SongSelect/VBoxContainer/HBoxContainer/SongDetails/SongDetailsDisplay/VBoxContainer/HBoxContainer"]
+visible = false
+layout_mode = 2
+text = "999 BPM"
+label_settings = ExtResource("3_yciej")
+
+[node name="Spacer" type="Control" parent="SongSelect/VBoxContainer/HBoxContainer/SongDetails/SongDetailsDisplay/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="PlaySong" type="Button" parent="SongSelect/VBoxContainer/HBoxContainer/SongDetails/SongDetailsDisplay/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("3_0yfu1")
+theme_override_font_sizes/font_size = 30
+text = "PLAY SONG"
+
+[node name="BackButton" type="Button" parent="SongSelect/VBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+theme = ExtResource("3_0yfu1")
+text = "BACK"
 
 [node name="Options" type="MarginContainer" parent="."]
+visible = false
 layout_mode = 2
 
 [node name="Pause" type="MarginContainer" parent="."]
@@ -197,6 +296,10 @@ theme_override_font_sizes/font_size = 32
 text = "Quit"
 
 [node name="GameOver" type="MarginContainer" parent="."]
+visible = false
 layout_mode = 2
 
+[connection signal="button_down" from="SongSelect/VBoxContainer/HBoxContainer/SongDetails/SongDetailsDisplay/VBoxContainer/MarginContainer/DemoButton" to="." method="_on_demo_button_button_down"]
+[connection signal="button_down" from="SongSelect/VBoxContainer/HBoxContainer/SongDetails/SongDetailsDisplay/VBoxContainer/PlaySong" to="." method="_on_play_song_button_down"]
+[connection signal="button_down" from="SongSelect/VBoxContainer/BackButton" to="." method="_on_back_button_button_down"]
 [connection signal="button_down" from="Pause/VBoxContainer/HBoxContainer/Continue" to="." method="_on_continue_button_down"]
