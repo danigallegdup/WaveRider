@@ -1,0 +1,202 @@
+[gd_scene load_steps=8 format=3 uid="uid://bf1nsmy1w52yl"]
+
+[ext_resource type="Texture2D" uid="uid://hn6htxhyi1qo" path="res://sprites/menu_assets/title_white_bg.png" id="1_goel8"]
+[ext_resource type="Script" uid="uid://cg3k4c7fcq4aw" path="res://Scripts/menus.gd" id="1_sqhkm"]
+[ext_resource type="Theme" uid="uid://dgm6ykjvw7b75" path="res://Resources/Menu_Theme.tres" id="3_0yfu1"]
+[ext_resource type="LabelSettings" uid="uid://v7ib6rv1vev0" path="res://Resources/UI_Label_Settings_tiny.tres" id="3_yciej"]
+[ext_resource type="LabelSettings" uid="uid://dy6i685tlkbnn" path="res://Resources/UI_Label_Settings_small.tres" id="4_0yfu1"]
+[ext_resource type="Texture2D" uid="uid://8c5jue6eul3k" path="res://sprites/menu_assets/song_list_item_frame_9patch.png" id="6_8ovod"]
+[ext_resource type="LabelSettings" uid="uid://ddb37lrg7l5bk" path="res://Resources/UI_Label_Settings.tres" id="6_qdaxd"]
+
+[node name="Menus" type="CenterContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_sqhkm")
+
+[node name="Main" type="MarginContainer" parent="."]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 120
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Main"]
+layout_mode = 2
+size_flags_vertical = 4
+alignment = 1
+
+[node name="TitleTexture" type="TextureRect" parent="Main/VBoxContainer"]
+layout_mode = 2
+texture = ExtResource("1_goel8")
+
+[node name="MarginContainer" type="MarginContainer" parent="Main/VBoxContainer"]
+custom_minimum_size = Vector2(225, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/margin_top = 40
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Main/VBoxContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Main/VBoxContainer/MarginContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 80
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Main/VBoxContainer/MarginContainer/VBoxContainer2/VBoxContainer"]
+custom_minimum_size = Vector2(225, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 20
+
+[node name="Play" type="Button" parent="Main/VBoxContainer/MarginContainer/VBoxContainer2/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("3_0yfu1")
+text = "PLAY"
+
+[node name="Options" type="Button" parent="Main/VBoxContainer/MarginContainer/VBoxContainer2/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("3_0yfu1")
+text = "Options"
+
+[node name="Quit" type="Button" parent="Main/VBoxContainer/MarginContainer/VBoxContainer2/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("3_0yfu1")
+text = "Quit"
+
+[node name="MarginContainer" type="MarginContainer" parent="Main/VBoxContainer/MarginContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 10
+theme_override_constants/margin_top = 80
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Main/VBoxContainer/MarginContainer/VBoxContainer2/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="CreditsTitle" type="Label" parent="Main/VBoxContainer/MarginContainer/VBoxContainer2/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Created by"
+label_settings = ExtResource("3_yciej")
+horizontal_alignment = 1
+
+[node name="Credits" type="HBoxContainer" parent="Main/VBoxContainer/MarginContainer/VBoxContainer2/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 30
+alignment = 1
+
+[node name="Label" type="Label" parent="Main/VBoxContainer/MarginContainer/VBoxContainer2/MarginContainer/VBoxContainer/Credits"]
+layout_mode = 2
+text = "Noah "
+label_settings = ExtResource("4_0yfu1")
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="Main/VBoxContainer/MarginContainer/VBoxContainer2/MarginContainer/VBoxContainer/Credits"]
+layout_mode = 2
+text = "Erfan"
+label_settings = ExtResource("4_0yfu1")
+horizontal_alignment = 1
+
+[node name="Label3" type="Label" parent="Main/VBoxContainer/MarginContainer/VBoxContainer2/MarginContainer/VBoxContainer/Credits"]
+layout_mode = 2
+text = "Daniela"
+label_settings = ExtResource("4_0yfu1")
+horizontal_alignment = 1
+
+[node name="Label4" type="Label" parent="Main/VBoxContainer/MarginContainer/VBoxContainer2/MarginContainer/VBoxContainer/Credits"]
+layout_mode = 2
+text = "Tony"
+label_settings = ExtResource("4_0yfu1")
+horizontal_alignment = 1
+
+[node name="SongSelect" type="MarginContainer" parent="."]
+visible = false
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="SongSelect"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_constants/separation = 20
+alignment = 2
+
+[node name="Empty" type="MarginContainer" parent="SongSelect/HBoxContainer"]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ScrollContainer" type="ScrollContainer" parent="SongSelect/HBoxContainer"]
+custom_minimum_size = Vector2(400, 600)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+horizontal_scroll_mode = 0
+
+[node name="SongList" type="VBoxContainer" parent="SongSelect/HBoxContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="SongDetails" type="MarginContainer" parent="SongSelect/HBoxContainer"]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="NinePatchRect" type="NinePatchRect" parent="SongSelect/HBoxContainer/SongDetails"]
+layout_mode = 2
+texture = ExtResource("6_8ovod")
+region_rect = Rect2(13, 13, 38, 38)
+
+[node name="Options" type="MarginContainer" parent="."]
+layout_mode = 2
+
+[node name="Pause" type="MarginContainer" parent="."]
+visible = false
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Pause"]
+layout_mode = 2
+theme_override_constants/separation = 80
+
+[node name="Label" type="Label" parent="Pause/VBoxContainer"]
+layout_mode = 2
+text = "Paused"
+label_settings = ExtResource("6_qdaxd")
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Pause/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 90
+alignment = 1
+
+[node name="Continue" type="Button" parent="Pause/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme = ExtResource("3_0yfu1")
+theme_override_font_sizes/font_size = 32
+text = "Continue"
+
+[node name="Quit" type="Button" parent="Pause/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme = ExtResource("3_0yfu1")
+theme_override_font_sizes/font_size = 32
+text = "Quit"
+
+[node name="GameOver" type="MarginContainer" parent="."]
+layout_mode = 2
+
+[connection signal="button_down" from="Pause/VBoxContainer/HBoxContainer/Continue" to="." method="_on_continue_button_down"]
