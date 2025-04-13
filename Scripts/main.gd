@@ -9,6 +9,7 @@ const COIN_POINTS = 10
 var fake_song_data = {
 	"lead-in": 3, # How many seconds before the first note collision?
 	"travel-duration": 2, # How many seconds between spawn time and collision?
+	"song-duration": 25, # 25 seconds
 	# Below are spawn times of objects
 	OBSTACLES_KEY: [1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0],
 	COINS_KEY: [0.5, 1.5, 2.0, 3.5]
@@ -50,6 +51,9 @@ var timings = {
 
 @onready var bicycle = $Player
 @onready var UI = $UI
+@onready var terrain: Node3D = $Terrain
+@onready var ground: Node3D = $Ground
+
 @onready var Music = $AudioStreamPlayer
 @onready var Menus = $Menus
 
@@ -58,7 +62,14 @@ func _ready():
 	UI.set_music_length(Music.stream.get_length())
 	TimescaleUtil.audio_player = Music
 	game_time = min(-song_data["lead-in"], -song_data["travel-duration"]) + 1
-	bicycle.speed = SPAWN_OFFSET/song_data["travel-duration"]
+	bicycle.speed = SPAWN_OFFSET / song_data["travel-duration"]
+	
+	# Set up the terrain
+	var world_length = bicycle.speed * song_data["song-duration"]
+	terrain.scale.z = world_length
+	terrain.position.z = -world_length / 2
+	ground.scale.z = world_length
+	ground.position.z = -world_length / 2
 	
 	print("INITIALIZED:\n\tPlayer speed: " + str(bicycle.speed) + "\n\tGame time: " + str(game_time))
 	#Initialize object spawn timings
