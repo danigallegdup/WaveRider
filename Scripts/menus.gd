@@ -20,9 +20,9 @@ This script will be used to power menu transitions, game start, and pauses.
 @onready var song_details_display = $SongSelect/VBoxContainer/HBoxContainer/SongDetails/SongDetailsDisplay
 
 func _ready():
-	#switch_menu(menus.main)
-	switch_menu(menus.song_select)
-	#self.hide()
+	switch_menu(menus.main)
+	#switch_menu(menus.song_select)
+	self.hide()
 	# Set up SongSelect menu
 	MusicLoader.load_custom_songs()
 	display_song_details(false)
