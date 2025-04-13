@@ -4,5 +4,5 @@
 
 [resource]
 font = ExtResource("1_jfoa3")
-font_size = 26
+font_size = 22
 outline_color = Color(0, 0, 0, 1)

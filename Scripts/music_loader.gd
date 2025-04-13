@@ -68,7 +68,6 @@ const DEFAULT_SONGS = [
 		}
 	}
 ]
-
 var song_library = DEFAULT_SONGS + DEFAULT_SONGS + DEFAULT_SONGS + DEFAULT_SONGS + DEFAULT_SONGS
 
 func _ready():
@@ -79,4 +78,10 @@ func _ready():
 func load_custom_songs():
 	# Read AppData
 	# Modify song_library list
+	pass
+	
+func play_song(song_data):
+	# TODO
+	# Load song file into the audio player
+	# Tell main to start game
 	pass
