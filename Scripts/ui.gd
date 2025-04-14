@@ -16,10 +16,14 @@ var music_initialized: bool = false
 
 @onready var progress_bar = $MarginContainer/HBoxContainer2/Container/ProgressBar
 
+func _ready():
+	self.hide()  # Hide on game launch
+
 func initialize():
 	set_score(0)
 	set_time(0.0)
 	set_health(5)
+	self.show()
 
 func set_health(new_health):
 	health_label.text = HEALTH_PREFIX + str(new_health)

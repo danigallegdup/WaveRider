@@ -13,7 +13,7 @@ This script will be used to power menu transitions, game start, and pauses.
 		"pause": $Pause,
 		"game_over": $GameOver,
 	}
-@onready var cur_menu: Control = menus.main
+var cur_menu: Control
 
 @onready var song_list = $SongSelect/VBoxContainer/HBoxContainer/ScrollContainer/SongList
 @onready var song_list_item = preload("res://Scenes/SongListItem.tscn")
@@ -22,7 +22,7 @@ This script will be used to power menu transitions, game start, and pauses.
 func _ready():
 	switch_menu(menus.main)
 	#switch_menu(menus.song_select)
-	self.hide()
+	#self.hide()
 	# Set up SongSelect menu
 	MusicLoader.load_custom_songs()
 	display_song_details(false)
@@ -30,9 +30,10 @@ func _ready():
 		create_list_item(s)
 	
 func switch_menu(target:Control):
-	if cur_menu.name == target.name: return
+	if cur_menu:
+		if cur_menu.name == target.name: return
 	print("MENUS: Switching to: " + target.name)
-	cur_menu.hide()
+	if cur_menu: cur_menu.hide()
 	target.show()
 	cur_menu = target
 	
@@ -68,8 +69,10 @@ func display_song_details(song_data):
 	else:
 		song_details_display.hide()
 	
-	
-	
+
+func song_complete(score):
+	switch_menu(menus.game_over)
+	self.show()
 	
 # Located in Pause menu
 func _on_continue_button_down() -> void:
@@ -101,3 +104,7 @@ func _on_play_song_button_down() -> void:
 
 func _on_back_button_button_down() -> void:
 	switch_menu(menus.main)
+
+# Located in Main menu
+func _on_play_button_down() -> void:
+	switch_menu(menus.song_select)

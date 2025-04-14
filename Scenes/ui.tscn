@@ -26,23 +26,27 @@ size_flags_vertical = 0
 theme_override_constants/separation = 50
 
 [node name="ScoreLabel" type="Label" parent="MarginContainer/HBoxContainer2/HBoxContainer"]
+custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
 text = "Score: 0"
 label_settings = ExtResource("2_qdvrb")
 
 [node name="HealthLabel" type="Label" parent="MarginContainer/HBoxContainer2/HBoxContainer"]
+custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
 text = "Health: 5"
 label_settings = ExtResource("2_qdvrb")
 metadata/_edit_use_anchors_ = true
 
 [node name="TimeLabel" type="Label" parent="MarginContainer/HBoxContainer2/HBoxContainer"]
+custom_minimum_size = Vector2(140, 0)
 layout_mode = 2
 text = "Time: 0"
 label_settings = ExtResource("2_qdvrb")
 metadata/_edit_use_anchors_ = true
 
 [node name="TimescaleLabel" type="Label" parent="MarginContainer/HBoxContainer2/HBoxContainer"]
+visible = false
 layout_mode = 2
 text = "Time: 0"
 label_settings = ExtResource("2_qdvrb")
