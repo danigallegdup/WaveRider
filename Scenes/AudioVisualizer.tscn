@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://blxo5bub2eamn"]
+
+[ext_resource type="Script" uid="uid://dnqkrppw1k5dr" path="res://Scripts/AudioVisualizer.gd" id="1_0jrdl"]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_0jrdl")

@@ -53,9 +53,12 @@ var timings = {
 @onready var UI = $UI
 @onready var terrain: Node3D = $Terrain
 @onready var ground: Node3D = $Ground
+@onready var audio_visualizer_viewport: Sprite3D = $AudioVisualizerViewport
 
 @onready var Music = $AudioStreamPlayer
 @onready var Menus = $Menus
+
+var world_length = 0
 
 func _ready():
 	UI.initialize()
@@ -65,11 +68,14 @@ func _ready():
 	bicycle.speed = SPAWN_OFFSET / song_data["travel-duration"]
 	
 	# Set up the terrain
-	var world_length = bicycle.speed * song_data["song-duration"]
+	world_length = bicycle.speed * song_data["song-duration"]
 	terrain.scale.z = world_length
 	terrain.position.z = -world_length / 2
 	ground.scale.z = world_length
 	ground.position.z = -world_length / 2
+	var scale_factor = world_length / 3
+	audio_visualizer_viewport.scale *= scale_factor
+	audio_visualizer_viewport.position.y = 1.20 * scale_factor
 	
 	print("INITIALIZED:\n\tPlayer speed: " + str(bicycle.speed) + "\n\tGame time: " + str(game_time))
 	#Initialize object spawn timings
@@ -81,6 +87,7 @@ func _process(delta):
 	UI.set_time(floor(game_time))
 	UI.set_timescale(Util.round_to_place(Engine.time_scale, 2))
 	UI.update_music_duration(game_time)
+	audio_visualizer_viewport.position.z = bicycle.position.z - world_length
 	
 	if game_time > 0 and not Music.playing and not music_started:
 		Music.playing = true
