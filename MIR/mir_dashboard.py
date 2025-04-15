@@ -6,17 +6,16 @@ import librosa
 import librosa.display
 
 # === Configuration ===
-# Change this base name to match your song's file names.
-song_base = "catchy-uplifting-inspiring-indie-pop-182349"  # Example: if your audio file is catchy-uplifting-inspiring-indie-pop-182349.wav
+song_base = "catchy-uplifting-inspiring-indie-pop-182349"  # Change to match your file naming
 report_dir = Path(__file__).parent
 
-# Construct expected file paths for the reports
+# Construct file paths for reports
 onset_report_file    = report_dir / f"{song_base}_onset_extraction_report.json"
 chroma_report_file   = report_dir / f"{song_base}_chroma_report.json"
 spectral_report_file = report_dir / f"{song_base}_spectral_report.json"
-beat_report_file     = report_dir / f"{song_base}_beat_extraction_report.json"  # Note the underscore for consistency
+beat_report_file     = report_dir / f"{song_base}_beat_extraction_report.json"
 
-# Attempt to load the JSON data from each report
+# Load the JSON data for each report
 try:
     with open(onset_report_file, "r") as f:
         onset_data = json.load(f)
@@ -45,41 +44,34 @@ except Exception as e:
     print(f"Error loading beat data: {e}")
     beat_data = {}
 
-# === Extract Data from JSON Reports ===
-
-# Onset data
+# === Extract Data from Reports ===
 onsets = onset_data.get("onsets", [])
 duration = onset_data.get("duration_sec", 0)
 
-# Chroma data: expect a 12-value vector
 avg_chroma = chroma_data.get("avg_chroma", [])
 pitch_classes = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B']
 
-# Spectral analysis data: average Mel dB values across mel bands
 avg_mel_db = spectral_data.get("avg_mel_db", [])
 mel_band_indices = np.arange(len(avg_mel_db))
 
-# Beat data: expect a list of beat times (in seconds)
+# Beat times (in seconds)
 beats = beat_data.get("beats", [])
+print("Onsets (from onset_data):", onsets)
+print("Beats (from beat_data):", beats)
 
-# === Load the Audio File for Waveform Analysis ===
-# Assuming the audio file is in ../Resources/DefaultMusic with the same base name and .wav extension
+
+# === Load the Audio for Waveform Analysis ===
 audio_path = Path(__file__).parent / "../Resources/DefaultMusic" / f"{song_base}.wav"
 try:
     y, sr = librosa.load(audio_path, sr=None)
     audio_duration = librosa.get_duration(y=y, sr=sr)
-    # Create a time axis for the waveform plot
     t = np.linspace(0, audio_duration, num=len(y))
 except Exception as e:
     print(f"Error loading audio file: {e}")
     y, sr, t = None, None, None
 
 # === Create Dashboard ===
-
-# Create a figure that fills the screen; adjust size as needed
 plt.figure(figsize=(16, 12))
-
-# Add an overall title with the song name at the top (centered)
 plt.suptitle(song_base, fontsize=20, y=0.98)
 
 # Subplot 1: Waveform Analysis
@@ -91,31 +83,41 @@ if y is not None and t is not None:
     plt.plot(t, y, color='C0')
     plt.xlim(0, audio_duration)
 else:
-    plt.text(0.5, 0.5, "No audio data available", horizontalalignment='center', transform=plt.gca().transAxes)
+    plt.text(0.5, 0.5, "No audio data available",
+             horizontalalignment='center',
+             transform=plt.gca().transAxes)
 plt.grid(True)
 
 # Subplot 2: Onset Detection Timeline
 plt.subplot(5, 1, 2)
 plt.title("Onset Detection Timeline")
 plt.xlabel("Time (s)")
-# Plot each onset time as a marker along a horizontal line
 if onsets:
-    plt.plot(onsets, np.ones_like(onsets), 'o', markersize=5, label="Detected Onsets")
+    plt.plot(onsets, np.ones_like(onsets), 'o', markersize=5,
+             label="Detected Onsets")
 plt.xlim(0, duration)
 plt.yticks([])  # Remove y-axis ticks for clarity
 plt.legend()
 plt.grid(True)
 
-# Subplot 3: Beat Extraction Timeline
+# Subplot 3: Beat Extraction Timeline (Modified Visualization)
 plt.subplot(5, 1, 3)
 plt.title("Beat Extraction Timeline")
 plt.xlabel("Time (s)")
-# Plot detected beats as vertical dashed lines
-if beats:
-    for i, beat in enumerate(beats):
-        plt.axvline(x=beat, color='green', linestyle='--', linewidth=1, label='Beat' if i==0 else "")
+if beats and duration > 0:
+    # Calculate BPM from beat count and duration
+    bpm = len(beats) / duration * 60
+    # Plot beats as scatter markers along y=1
+    plt.scatter(beats, np.full_like(beats, 1), color='green', s=100,
+                label="Beat")
+    # Add a dashed horizontal baseline for clarity
+    plt.hlines(1, 0, duration, colors='grey', linestyles='--', linewidth=1)
+    # Annotate BPM on the plot
+    plt.text(duration * 0.65, 1.15, f"BPM: {bpm:.1f}",
+             fontsize=12, color='red', weight='bold')
 plt.xlim(0, duration)
-plt.yticks([])  # Remove y-axis ticks for clarity
+plt.ylim(0.8, 1.3)
+plt.yticks([])  # Clean up y-axis
 if beats:
     plt.legend()
 plt.grid(True)
@@ -128,7 +130,9 @@ plt.ylabel("Amplitude")
 if avg_chroma and len(avg_chroma) == 12:
     plt.bar(pitch_classes, avg_chroma, color='skyblue')
 else:
-    plt.text(0.5, 0.5, "No chroma data available", horizontalalignment='center', transform=plt.gca().transAxes)
+    plt.text(0.5, 0.5, "No chroma data available",
+             horizontalalignment='center',
+             transform=plt.gca().transAxes)
 plt.grid(True)
 
 # Subplot 5: Spectral Analysis – Average Mel Spectral Energy
@@ -137,19 +141,19 @@ plt.title("Average Mel Spectral Energy (dB)")
 plt.xlabel("Mel Band Index")
 plt.ylabel("Average dB")
 if avg_mel_db:
-    plt.plot(mel_band_indices, avg_mel_db, marker='o', linestyle='-', color='magenta')
+    plt.plot(mel_band_indices, avg_mel_db, marker='o', linestyle='-',
+             color='magenta')
 else:
-    plt.text(0.5, 0.5, "No spectral energy data available", horizontalalignment='center', transform=plt.gca().transAxes)
+    plt.text(0.5, 0.5, "No spectral energy data available",
+             horizontalalignment='center',
+             transform=plt.gca().transAxes)
 plt.grid(True)
 
-plt.tight_layout(rect=[0, 0, 1, 0.96])  # Leave space for the suptitle
-
-# Maximize the figure window (works with some backends)
+plt.tight_layout(rect=[0, 0, 1, 0.96])
 manager = plt.get_current_fig_manager()
 try:
     manager.window.showMaximized()
 except AttributeError:
-    # If 'showMaximized' is not available, you may adjust the figure size manually.
     pass
 
 plt.show()
