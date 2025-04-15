@@ -14,7 +14,7 @@ report_dir = Path(__file__).parent
 onset_report_file    = report_dir / f"{song_base}_onset_extraction_report.json"
 chroma_report_file   = report_dir / f"{song_base}_chroma_report.json"
 spectral_report_file = report_dir / f"{song_base}_spectral_report.json"
-beat_report_file     = report_dir / f"{song_base}beat_extraction_report.json"  # Note the underscore for consistency
+beat_report_file     = report_dir / f"{song_base}_beat_extraction_report.json"  # Note the underscore for consistency
 
 # Attempt to load the JSON data from each report
 try:
