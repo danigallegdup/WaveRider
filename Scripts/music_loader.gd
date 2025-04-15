@@ -70,6 +70,8 @@ const DEFAULT_SONGS = [
 ]
 var song_library = DEFAULT_SONGS + DEFAULT_SONGS + DEFAULT_SONGS + DEFAULT_SONGS + DEFAULT_SONGS
 
+var main_link: Node3D
+
 func _ready():
 	load_custom_songs()
 	
@@ -81,7 +83,12 @@ func load_custom_songs():
 	pass
 	
 func play_song(song_data):
+	if not main_link:
+		print("ERROR: Main link was not initialized")
+		return
+	
 	# TODO
+	# Convert song data into data read by main
 	# Load song file into the audio player
 	# Tell main to start game
-	pass
+	main_link.start_game(song_data)

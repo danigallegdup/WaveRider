@@ -6,6 +6,8 @@ const COINS_KEY = "coins"
 
 const COIN_POINTS = 10
 
+const END_OF_SONG_OFFSET = 2
+
 var fake_song_data = {
 	"lead-in": 3, # How many seconds before the first note collision?
 	"travel-duration": 2, # How many seconds between spawn time and collision?
@@ -14,10 +16,12 @@ var fake_song_data = {
 	OBSTACLES_KEY: [1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0],
 	COINS_KEY: [0.5, 1.5, 2.0, 3.5]
 }
+
 var song_data = fake_song_data
 
 const SPAWN_OFFSET = 40 # z position of new spawns (relative to player)
 const LANES = [-1.0, 0.0, 1.0] # x position of lanes
+const DEFAULT_BIKE_SPEED = 5.0
 
 var game_time = 0.0
 var health = 5
@@ -59,17 +63,17 @@ var timings = {
 @onready var Menus = $Menus
 
 var world_length = 0
+var game_running = false
 
 func _ready():
-	UI.initialize()
-	UI.set_music_length(Music.stream.get_length())
 	TimescaleUtil.audio_player = Music
-	game_time = min(-song_data["lead-in"], -song_data["travel-duration"]) + 1
-	bicycle.speed = SPAWN_OFFSET / song_data["travel-duration"]
+	MusicLoader.main_link = self
+	Menus.quit_song_func = Callable(self, "quit_song")
 	
 	# Set up the terrain
+	bicycle.speed = DEFAULT_BIKE_SPEED
 	world_length = bicycle.speed * song_data["song-duration"]
-	terrain.scale.z = world_length
+	terrain.scale.z = world_length*100
 	terrain.position.z = -world_length / 2
 	ground.scale.z = world_length
 	ground.position.z = -world_length / 2
@@ -77,21 +81,63 @@ func _ready():
 	audio_visualizer_viewport.scale *= scale_factor
 	audio_visualizer_viewport.position.y = 1.20 * scale_factor
 	
+func start_game(new_song_data):
+	if game_running:
+		return
+	# Translate song data
+	song_data = {
+		"lead-in": 3, # How many seconds before the first note collision?
+		"travel-duration": 2, # How many seconds between spawn time and collision?
+		"song-duration": new_song_data.data.duration,
+		OBSTACLES_KEY: new_song_data.data.obstacles,
+		COINS_KEY: new_song_data.data.coins
+	}
+	# TODO Give tempo beats to the player sprite animator
+	
+	# Start running the game
+	Menus.hide()
+	# Music is loaded into AudioStreamPlayer before this point
+	UI.initialize()
+	UI.set_music_length(Music.stream.get_length())
+	game_time = min(-song_data["lead-in"], -song_data["travel-duration"]) + 1
+	bicycle.speed = SPAWN_OFFSET / song_data["travel-duration"]
 	print("INITIALIZED:\n\tPlayer speed: " + str(bicycle.speed) + "\n\tGame time: " + str(game_time))
 	#Initialize object spawn timings
 	update_timings(COINS_KEY)
 	update_timings(OBSTACLES_KEY)
+	game_running = true
+
+func end_game(quit=false):
+	# TODO Figure out why new object spawns aren't appearing on second run
+	game_running = false
+	music_started = false
+	bicycle.speed = DEFAULT_BIKE_SPEED
+	UI.hide()
+	if quit:
+		Menus.switch_menu(Menus.menus.song_select)
+	else:
+		Menus.song_complete(score)
 
 func _process(delta):
+	audio_visualizer_viewport.position.z = bicycle.position.z - world_length
+	
+	# Below are all game-process requirements
+	if not game_running:
+		return
 	game_time += delta
 	UI.set_time(floor(game_time))
 	UI.set_timescale(Util.round_to_place(Engine.time_scale, 2))
 	UI.update_music_duration(game_time)
-	audio_visualizer_viewport.position.z = bicycle.position.z - world_length
 	
+	# If unpausing game
 	if game_time > 0 and not Music.playing and not music_started:
 		Music.playing = true
 		music_started = true
+	
+	# If end of song
+	if game_time > song_data["song-duration"] + END_OF_SONG_OFFSET:
+		end_game()
+		return  # Do not execute the rest of the frame process
 	
 	if Input.is_action_just_pressed("pause"):
 		Menus.toggle_pause()
@@ -146,6 +192,12 @@ func collision(obj):
 		if health <= 0:
 			game_over()
 	else: print("ERROR: Unconfigured collision branch: " + obj.OBJ_TYPE)
+
+func quit_song():
+	Menus.toggle_pause()
+	Menus.show()
+	Music.stop()
+	end_game(true)
 
 func game_over():
 	print("Game Over! Score: ", score)
