@@ -73,7 +73,7 @@ func _ready():
 	# Set up the terrain
 	bicycle.speed = DEFAULT_BIKE_SPEED
 	world_length = bicycle.speed * song_data["song-duration"]
-	terrain.scale.z = world_length
+	terrain.scale.z = world_length*100
 	terrain.position.z = -world_length / 2
 	ground.scale.z = world_length
 	ground.position.z = -world_length / 2
