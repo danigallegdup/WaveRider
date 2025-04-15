@@ -494,6 +494,8 @@ size_flags_horizontal = 4
 theme = ExtResource("3_0yfu1")
 text = "Exit Song"
 
+[node name="DemoStreamPlayer" type="AudioStreamPlayer" parent="."]
+
 [connection signal="button_down" from="Main/VBoxContainer/MarginContainer/VBoxContainer2/VBoxContainer/VBoxContainer/Play" to="." method="_on_play_button_down"]
 [connection signal="button_down" from="Main/VBoxContainer/MarginContainer/VBoxContainer2/VBoxContainer/VBoxContainer/Options" to="." method="_on_options_button_down"]
 [connection signal="button_down" from="Main/VBoxContainer/MarginContainer/VBoxContainer2/VBoxContainer/Quit" to="." method="_on_quit_button_down"]

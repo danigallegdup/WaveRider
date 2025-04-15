@@ -8,6 +8,8 @@ This script is an autoload, meaning it can be accessed from any other script at 
 The methods in this script are miscellaneous helper functions that may be useful in more than one
 place.
 '''
+const DEFAULT_FILE_NAME = "<default>"
+const DEFAULT_FILE_CHECKSUM = "000000"
 
 # The default 'round(...)' function only rounds to the nearest decimal - this function allows you to
 #	choose precision.
@@ -16,3 +18,9 @@ func round_to_place(to_round, decimal_place):
 
 func sec_to_minutes(seconds: float):
 	return "%02d:%02d" % [int(floor(seconds/60)), int(seconds)%60]
+
+# This will return the file location of the song whose data has been passed in
+func locate_song(song_data):
+	if song_data.data.file_name == DEFAULT_FILE_NAME:
+		return song_data.data.default_resource_location
+	return song_data.data.file_name

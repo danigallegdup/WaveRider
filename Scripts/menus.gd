@@ -7,6 +7,8 @@ This script will be used to power menu transitions, game start, and pauses.
 '''
 
 const DEFAULT_VOLUME = 0.5
+const DEMO_START_TIME = 10  # Seconds
+const DEMO_DURATION = 5
 
 @onready var menus = {
 		"main": $Main,
@@ -24,6 +26,9 @@ var cur_menu: Control
 
 @onready var _audio_bus = AudioServer.get_bus_index("Master")
 
+@onready var demo_audio_player = $DemoStreamPlayer
+var demo_audio: AudioStream
+
 func _ready():
 	for menu in menus:
 		menus[menu].hide()
@@ -40,6 +45,7 @@ func switch_menu(target:Control):
 	if cur_menu:
 		if cur_menu.name == target.name: return
 	print("MENUS: Switching to: " + target.name)
+	demo_audio_player.stop()
 	if cur_menu: cur_menu.hide()
 	target.show()
 	cur_menu = target
@@ -97,13 +103,16 @@ func _on_song_list_item_button_down(song_name):
 	for song in MusicLoader.song_library:
 		if song.name == song_name:
 			display_song_details(song)
+			demo_audio = load(Util.locate_song(song))
 			return
 	print("ERROR: Could not find song '" + song_name + "' in song library")
 
 # Located in SongSelect menu
 func _on_demo_button_button_down() -> void:
-	# TODO Play a small portion (5 seconds?) of the selected song
-	pass # Replace with function body.
+	demo_audio_player.stream = demo_audio
+	demo_audio_player.play(DEMO_START_TIME)
+	await get_tree().create_timer(DEMO_DURATION).timeout
+	demo_audio_player.stop()
 
 
 # Located in SongSelect menu
@@ -111,6 +120,7 @@ func _on_play_song_button_down() -> void:
 	var current_selected = $SongSelect/VBoxContainer/HBoxContainer/SongDetails/SongDetailsDisplay/VBoxContainer/SongName.text
 	for song in MusicLoader.song_library:
 		if song.name == current_selected:
+			demo_audio_player.stop()
 			MusicLoader.play_song(song)  # This is where we begin playing selected song
 			return
 	print("ERROR: Could not find song '" + current_selected + "' in song library")
