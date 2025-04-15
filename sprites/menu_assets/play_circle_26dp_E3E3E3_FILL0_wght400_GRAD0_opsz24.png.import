@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bq3sjnswcsi6k"
-path="res://.godot/imported/play_circle_26dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.png-8c8d79ec6354a64988f6761080e0bc85.ctex"
+path="res://.godot/imported/play_circle_26dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.png-a40c7d68dfc0adf90661498df79f10cf.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/menu_assets/play_circle_26dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.png"
-dest_files=["res://.godot/imported/play_circle_26dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.png-8c8d79ec6354a64988f6761080e0bc85.ctex"]
+source_file="res://sprites/menu_assets/play_circle_26dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.png"
+dest_files=["res://.godot/imported/play_circle_26dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.png-a40c7d68dfc0adf90661498df79f10cf.ctex"]
 
 [params]
 

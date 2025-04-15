@@ -6,6 +6,10 @@ Menus
 This script will be used to power menu transitions, game start, and pauses.
 '''
 
+const DEFAULT_VOLUME = 0.5
+const DEMO_START_TIME = 10  # Seconds
+const DEMO_DURATION = 5
+
 @onready var menus = {
 		"main": $Main,
 		"song_select": $SongSelect,
@@ -13,16 +17,26 @@ This script will be used to power menu transitions, game start, and pauses.
 		"pause": $Pause,
 		"game_over": $GameOver,
 	}
-@onready var cur_menu: Control = menus.main
+var cur_menu: Control
 
 @onready var song_list = $SongSelect/VBoxContainer/HBoxContainer/ScrollContainer/SongList
 @onready var song_list_item = preload("res://Scenes/SongListItem.tscn")
 @onready var song_details_display = $SongSelect/VBoxContainer/HBoxContainer/SongDetails/SongDetailsDisplay
+@onready var volume_slider = $Options/VBoxContainer/Volume/VBoxContainer/HBoxContainer/VolumeSlider
+
+@onready var _audio_bus = AudioServer.get_bus_index("Master")
+
+@onready var demo_audio_player = $DemoStreamPlayer
+var demo_audio: AudioStream
+
+var quit_song_func:Callable
 
 func _ready():
+	for menu in menus:
+		menus[menu].hide()
 	switch_menu(menus.main)
-	#switch_menu(menus.song_select)
-	self.hide()
+	_on_reset_volume_button_down()
+	
 	# Set up SongSelect menu
 	MusicLoader.load_custom_songs()
 	display_song_details(false)
@@ -30,9 +44,11 @@ func _ready():
 		create_list_item(s)
 	
 func switch_menu(target:Control):
-	if cur_menu.name == target.name: return
+	if cur_menu:
+		if cur_menu.name == target.name: return
 	print("MENUS: Switching to: " + target.name)
-	cur_menu.hide()
+	demo_audio_player.stop()
+	if cur_menu: cur_menu.hide()
 	target.show()
 	cur_menu = target
 	
@@ -68,9 +84,18 @@ func display_song_details(song_data):
 	else:
 		song_details_display.hide()
 	
+
+func song_complete(score):
+	switch_menu(menus.game_over)
+	self.show()
 	
-	
-	
+
+'''
+BUTTON SIGNALS
+
+Be very concise when modifying the below functions; know exactly which buttons they are tied to
+'''	
+
 # Located in Pause menu
 func _on_continue_button_down() -> void:
 	toggle_pause()
@@ -80,13 +105,16 @@ func _on_song_list_item_button_down(song_name):
 	for song in MusicLoader.song_library:
 		if song.name == song_name:
 			display_song_details(song)
+			demo_audio = load(Util.locate_song(song))
 			return
 	print("ERROR: Could not find song '" + song_name + "' in song library")
 
 # Located in SongSelect menu
 func _on_demo_button_button_down() -> void:
-	# TODO Play a small portion (5 seconds?) of the selected song
-	pass # Replace with function body.
+	demo_audio_player.stream = demo_audio
+	demo_audio_player.play(DEMO_START_TIME)
+	await get_tree().create_timer(DEMO_DURATION).timeout
+	demo_audio_player.stop()
 
 
 # Located in SongSelect menu
@@ -94,6 +122,7 @@ func _on_play_song_button_down() -> void:
 	var current_selected = $SongSelect/VBoxContainer/HBoxContainer/SongDetails/SongDetailsDisplay/VBoxContainer/SongName.text
 	for song in MusicLoader.song_library:
 		if song.name == current_selected:
+			demo_audio_player.stop()
 			MusicLoader.play_song(song)  # This is where we begin playing selected song
 			return
 	print("ERROR: Could not find song '" + current_selected + "' in song library")
@@ -101,3 +130,40 @@ func _on_play_song_button_down() -> void:
 
 func _on_back_button_button_down() -> void:
 	switch_menu(menus.main)
+
+# Located in Main menu
+func _on_play_button_down() -> void:
+	switch_menu(menus.song_select)
+
+# Located in Main menu
+func _on_quit_button_down() -> void:
+	get_tree().quit()
+
+# Located in Options menu
+func _on_reset_volume_button_down() -> void:
+	volume_slider.value = DEFAULT_VOLUME
+	_on_volume_slider_value_changed(DEFAULT_VOLUME)
+
+# Located in Options menu	
+func _on_volume_slider_value_changed(value: float) -> void:
+	AudioServer.set_bus_volume_db(_audio_bus, linear_to_db(volume_slider.value))
+
+# Located in Main menu
+func _on_options_button_down() -> void:
+	options_previous_menu = menus.main
+	switch_menu(menus.options)
+
+# Use to return to correct menu (pause or main)
+@onready var options_previous_menu: MarginContainer = menus.main
+# Located in Options menu
+func _on_options_back_button_button_down() -> void:
+	switch_menu(options_previous_menu)
+
+# Located in Pause menu
+func _on_pause_options_button_down() -> void:
+	options_previous_menu = menus.pause
+	switch_menu(menus.options)
+
+# Located in Pause menu
+func _on_pause_quit_button_down() -> void:
+	quit_song_func.call()
