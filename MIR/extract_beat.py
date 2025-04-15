@@ -51,7 +51,7 @@ for wav_file in DEFAULT_MUSIC_DIR.glob("*.wav"):
             "num_onsets": len(onsets),
             "onsets": [round(t, 3) for t in onsets]
         }
-        out_path = Path(__file__).parent / (wav_file.stem + "_report.json")
+        out_path = Path(__file__).parent / (wav_file.stem + "beat_extraction_report.json")
         # ...existing code...
         with open(out_path, "w") as f:
             json.dump(output_data, f, indent=2)

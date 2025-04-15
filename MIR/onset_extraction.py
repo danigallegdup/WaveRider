@@ -59,7 +59,7 @@ for wav_file in DEFAULT_MUSIC_DIR.glob("*.wav"):
         }
         
         # Create output file in the same directory as this script with a unique report name.
-        out_path = Path(__file__).parent / (wav_file.stem + "_report.json")
+        out_path = Path(__file__).parent / (wav_file.stem + "_onset_extraction_report.json")
         with open(out_path, "w") as f:
             json.dump(output_data, f, indent=2)
 
