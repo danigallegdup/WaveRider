@@ -258,6 +258,7 @@ theme = ExtResource("3_0yfu1")
 text = "BACK"
 
 [node name="Options" type="MarginContainer" parent="."]
+visible = false
 layout_mode = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Options"]
@@ -507,4 +508,5 @@ text = "Exit Song"
 [connection signal="button_down" from="Options/VBoxContainer/BackButton" to="." method="_on_options_back_button_button_down"]
 [connection signal="button_down" from="Pause/VBoxContainer/HBoxContainer/Continue" to="." method="_on_continue_button_down"]
 [connection signal="button_down" from="Pause/VBoxContainer/HBoxContainer/Options" to="." method="_on_pause_options_button_down"]
+[connection signal="button_down" from="Pause/VBoxContainer/HBoxContainer/Quit" to="." method="_on_pause_quit_button_down"]
 [connection signal="button_down" from="GameOver/VBoxContainer/MarginContainer2/ReturnToSongList" to="." method="_on_play_button_down"]

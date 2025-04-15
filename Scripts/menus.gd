@@ -29,6 +29,8 @@ var cur_menu: Control
 @onready var demo_audio_player = $DemoStreamPlayer
 var demo_audio: AudioStream
 
+var quit_song_func:Callable
+
 func _ready():
 	for menu in menus:
 		menus[menu].hide()
@@ -161,3 +163,7 @@ func _on_options_back_button_button_down() -> void:
 func _on_pause_options_button_down() -> void:
 	options_previous_menu = menus.pause
 	switch_menu(menus.options)
+
+# Located in Pause menu
+func _on_pause_quit_button_down() -> void:
+	quit_song_func.call()

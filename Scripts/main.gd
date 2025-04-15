@@ -21,6 +21,7 @@ var song_data = fake_song_data
 
 const SPAWN_OFFSET = 40 # z position of new spawns (relative to player)
 const LANES = [-1.0, 0.0, 1.0] # x position of lanes
+const DEFAULT_BIKE_SPEED = 5.0
 
 var game_time = 0.0
 var health = 5
@@ -67,8 +68,10 @@ var game_running = false
 func _ready():
 	TimescaleUtil.audio_player = Music
 	MusicLoader.main_link = self
+	Menus.quit_song_func = Callable(self, "quit_song")
 	
 	# Set up the terrain
+	bicycle.speed = DEFAULT_BIKE_SPEED
 	world_length = bicycle.speed * song_data["song-duration"]
 	terrain.scale.z = world_length
 	terrain.position.z = -world_length / 2
@@ -104,12 +107,16 @@ func start_game(new_song_data):
 	update_timings(OBSTACLES_KEY)
 	game_running = true
 
-func end_game():
+func end_game(quit=false):
 	# TODO Figure out why new object spawns aren't appearing on second run
 	game_running = false
 	music_started = false
+	bicycle.speed = DEFAULT_BIKE_SPEED
 	UI.hide()
-	Menus.song_complete(score)
+	if quit:
+		Menus.switch_menu(Menus.menus.song_select)
+	else:
+		Menus.song_complete(score)
 
 func _process(delta):
 	audio_visualizer_viewport.position.z = bicycle.position.z - world_length
@@ -185,6 +192,12 @@ func collision(obj):
 		if health <= 0:
 			game_over()
 	else: print("ERROR: Unconfigured collision branch: " + obj.OBJ_TYPE)
+
+func quit_song():
+	Menus.toggle_pause()
+	Menus.show()
+	Music.stop()
+	end_game(true)
 
 func game_over():
 	print("Game Over! Score: ", score)
