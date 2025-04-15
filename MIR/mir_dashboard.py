@@ -6,7 +6,7 @@ import librosa
 import librosa.display
 
 # === Configuration ===
-song_base = "catchy-uplifting-inspiring-indie-pop-182349"  # Change to match your file naming
+song_base = "uplifting-and-energetic-indie-pop-305512"  # Change to match your file naming
 report_dir = Path(__file__).parent
 
 # Construct file paths for reports
