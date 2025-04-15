@@ -40,33 +40,51 @@ const DEFAULT_SONGS = [
 		}
 	},
 	{
-		"name": "Electro Cabello2",
-		"artist": "Kevin MacLeoder",
-		"genre": "Also Disco",
-		"data": {
-			"file_name": DEFAULT_FILE_NAME,
-			"file_checksum": DEFAULT_FILE_CHECKSUM,
-			"duration": 290.82,
-			"tempo_beats": [],
-			"obstacles": [1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0],
-			"coins": [0.5, 1.5, 2.0, 3.5],
-			"default_resource_location": "res://Resources/DefaultMusic/Electro_Cabello.wav"
-		}
-	},
-	{
-		"name": "Electro Cabello3",
-		"artist": "Kevin MacLeodest",
-		"genre": "Not Disco",
-		"data": {
-			"file_name": DEFAULT_FILE_NAME,
-			"file_checksum": DEFAULT_FILE_CHECKSUM,
-			"duration": 125.82,
-			"tempo_beats": [],
-			"obstacles": [1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0],
-			"coins": [0.5, 1.5, 2.0, 3.5],
-			"default_resource_location": "res://Resources/DefaultMusic/Electro_Cabello.wav"
-		}
-	}
+        "name": "Uplifting and Energetic Indie Pop",
+        "artist": "ddrummer",
+        "genre": "Indie Pop",
+        "data": {
+            "file_name": DEFAULT_FILE_NAME,
+            "file_checksum": DEFAULT_FILE_CHECKSUM,
+            "duration": 180.0,  # 2:16
+            "tempo_beats": [],
+            "obstacles": [],
+            "coins": [],
+            "url_ref": "https://pixabay.com/ru/music/uplifting-and-energetic-indie-pop-305512/",
+			"default_resource_location": "res://Resources/DefaultMusic/uplifting-and-energetic-indie-pop-305512.wav"
+        }
+    },
+    {
+        "name": "Indie Pop Catchy, Uplifting, Inspiring Indie Pop",
+        "artist": "MagpieMusic",
+        "genre": "Indie Pop",
+        "data": {
+            "file_name": DEFAULT_FILE_NAME,
+            "file_checksum": DEFAULT_FILE_CHECKSUM,
+            "duration": 200.0,  # 1:24
+            "tempo_beats": [],
+            "obstacles": [],
+            "coins": [],
+            "url_ref": "https://pixabay.com/music/indie-pop-catchy-uplifting-inspiring-indie-pop-182349/",
+			"default_resource_location": "res://Resources/DefaultMusic/catchy-uplifting-inspiring-indie-pop-182349.wav"
+
+        }
+    },
+    {
+        "name": "Immersing Into Electro Swing",
+        "artist": "Open-Music-for-Videos",
+        "genre": "Acid Jazz / Electro Swing",
+        "data": {
+            "file_name": DEFAULT_FILE_NAME,
+            "file_checksum": DEFAULT_FILE_CHECKSUM,
+            "duration": 100.0,  # 1:40 (100 seconds)
+            "tempo_beats": [],
+            "obstacles": [],
+            "coins": [],
+			"url_ref":"https://pixabay.com/music/acid-jazz-immersing-into-electro-swing-152574/",
+			"default_resource_location": "res://Resources/DefaultMusic/immersing-into-electro-swing-152574.wav",
+        }
+    }
 ]
 var song_library = DEFAULT_SONGS + DEFAULT_SONGS + DEFAULT_SONGS + DEFAULT_SONGS + DEFAULT_SONGS
 
