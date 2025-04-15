@@ -20,6 +20,7 @@ grow_vertical = 2
 script = ExtResource("1_sqhkm")
 
 [node name="Main" type="MarginContainer" parent="."]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -257,11 +258,50 @@ theme = ExtResource("3_0yfu1")
 text = "BACK"
 
 [node name="Options" type="MarginContainer" parent="."]
-visible = false
 layout_mode = 2
 
+[node name="VBoxContainer" type="VBoxContainer" parent="Options"]
+layout_mode = 2
+
+[node name="Volume" type="MarginContainer" parent="Options/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_bottom = 200
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Options/VBoxContainer/Volume"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Label" type="Label" parent="Options/VBoxContainer/Volume/VBoxContainer"]
+layout_mode = 2
+text = "Music Volume"
+label_settings = ExtResource("6_qdaxd")
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Options/VBoxContainer/Volume/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 40
+
+[node name="ResetVolume" type="Button" parent="Options/VBoxContainer/Volume/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme = ExtResource("3_0yfu1")
+text = "Reset"
+
+[node name="VolumeSlider" type="HSlider" parent="Options/VBoxContainer/Volume/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+size_flags_vertical = 4
+max_value = 1.0
+step = 0.05
+value = 0.5
+
+[node name="BackButton" type="Button" parent="Options/VBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("3_0yfu1")
+text = "Back"
+
 [node name="Pause" type="MarginContainer" parent="."]
-visible = false
 layout_mode = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Pause"]
@@ -285,6 +325,13 @@ layout_mode = 2
 theme = ExtResource("3_0yfu1")
 theme_override_font_sizes/font_size = 32
 text = "Continue"
+
+[node name="Options" type="Button" parent="Pause/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme = ExtResource("3_0yfu1")
+theme_override_font_sizes/font_size = 32
+text = "Options"
 
 [node name="Quit" type="Button" parent="Pause/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(200, 0)
@@ -448,8 +495,14 @@ theme = ExtResource("3_0yfu1")
 text = "Exit Song"
 
 [connection signal="button_down" from="Main/VBoxContainer/MarginContainer/VBoxContainer2/VBoxContainer/VBoxContainer/Play" to="." method="_on_play_button_down"]
+[connection signal="button_down" from="Main/VBoxContainer/MarginContainer/VBoxContainer2/VBoxContainer/VBoxContainer/Options" to="." method="_on_options_button_down"]
+[connection signal="button_down" from="Main/VBoxContainer/MarginContainer/VBoxContainer2/VBoxContainer/Quit" to="." method="_on_quit_button_down"]
 [connection signal="button_down" from="SongSelect/VBoxContainer/HBoxContainer/SongDetails/SongDetailsDisplay/VBoxContainer/MarginContainer/DemoButton" to="." method="_on_demo_button_button_down"]
 [connection signal="button_down" from="SongSelect/VBoxContainer/HBoxContainer/SongDetails/SongDetailsDisplay/VBoxContainer/PlaySong" to="." method="_on_play_song_button_down"]
 [connection signal="button_down" from="SongSelect/VBoxContainer/BackButton" to="." method="_on_back_button_button_down"]
+[connection signal="button_down" from="Options/VBoxContainer/Volume/VBoxContainer/HBoxContainer/ResetVolume" to="." method="_on_reset_volume_button_down"]
+[connection signal="value_changed" from="Options/VBoxContainer/Volume/VBoxContainer/HBoxContainer/VolumeSlider" to="." method="_on_volume_slider_value_changed"]
+[connection signal="button_down" from="Options/VBoxContainer/BackButton" to="." method="_on_options_back_button_button_down"]
 [connection signal="button_down" from="Pause/VBoxContainer/HBoxContainer/Continue" to="." method="_on_continue_button_down"]
+[connection signal="button_down" from="Pause/VBoxContainer/HBoxContainer/Options" to="." method="_on_pause_options_button_down"]
 [connection signal="button_down" from="GameOver/VBoxContainer/MarginContainer2/ReturnToSongList" to="." method="_on_play_button_down"]

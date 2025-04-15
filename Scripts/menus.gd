@@ -6,6 +6,8 @@ Menus
 This script will be used to power menu transitions, game start, and pauses.
 '''
 
+const DEFAULT_VOLUME = 0.5
+
 @onready var menus = {
 		"main": $Main,
 		"song_select": $SongSelect,
@@ -18,11 +20,16 @@ var cur_menu: Control
 @onready var song_list = $SongSelect/VBoxContainer/HBoxContainer/ScrollContainer/SongList
 @onready var song_list_item = preload("res://Scenes/SongListItem.tscn")
 @onready var song_details_display = $SongSelect/VBoxContainer/HBoxContainer/SongDetails/SongDetailsDisplay
+@onready var volume_slider = $Options/VBoxContainer/Volume/VBoxContainer/HBoxContainer/VolumeSlider
+
+@onready var _audio_bus = AudioServer.get_bus_index("Master")
 
 func _ready():
+	for menu in menus:
+		menus[menu].hide()
 	switch_menu(menus.main)
-	#switch_menu(menus.song_select)
-	#self.hide()
+	_on_reset_volume_button_down()
+	
 	# Set up SongSelect menu
 	MusicLoader.load_custom_songs()
 	display_song_details(false)
@@ -74,6 +81,13 @@ func song_complete(score):
 	switch_menu(menus.game_over)
 	self.show()
 	
+
+'''
+BUTTON SIGNALS
+
+Be very concise when modifying the below functions; know exactly which buttons they are tied to
+'''	
+
 # Located in Pause menu
 func _on_continue_button_down() -> void:
 	toggle_pause()
@@ -108,3 +122,32 @@ func _on_back_button_button_down() -> void:
 # Located in Main menu
 func _on_play_button_down() -> void:
 	switch_menu(menus.song_select)
+
+# Located in Main menu
+func _on_quit_button_down() -> void:
+	get_tree().quit()
+
+# Located in Options menu
+func _on_reset_volume_button_down() -> void:
+	volume_slider.value = DEFAULT_VOLUME
+	_on_volume_slider_value_changed(DEFAULT_VOLUME)
+
+# Located in Options menu	
+func _on_volume_slider_value_changed(value: float) -> void:
+	AudioServer.set_bus_volume_db(_audio_bus, linear_to_db(volume_slider.value))
+
+# Located in Main menu
+func _on_options_button_down() -> void:
+	options_previous_menu = menus.main
+	switch_menu(menus.options)
+
+# Use to return to correct menu (pause or main)
+@onready var options_previous_menu: MarginContainer = menus.main
+# Located in Options menu
+func _on_options_back_button_button_down() -> void:
+	switch_menu(options_previous_menu)
+
+# Located in Pause menu
+func _on_pause_options_button_down() -> void:
+	options_previous_menu = menus.pause
+	switch_menu(menus.options)
