@@ -154,7 +154,6 @@ func game_over():
 
 func set_color_palette(palette):
 	$WorldEnvironment.environment.background_color = palette["sky_color"]
-	
 
 # This function will trigger when the audio track is finished playing; use this to transition to
 # 	score screen.

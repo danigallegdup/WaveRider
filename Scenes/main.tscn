@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://b5plxv2mui2ar"]
+[gd_scene load_steps=19 format=3 uid="uid://b5plxv2mui2ar"]
 
 [ext_resource type="Script" uid="uid://bec08vlrdfn0d" path="res://Scripts/main.gd" id="1_8gbba"]
 [ext_resource type="PackedScene" uid="uid://dt0dm6yt6brlf" path="res://Scenes/terrain.tscn" id="3_21xkr"]
@@ -31,6 +31,8 @@ albedo_texture = ExtResource("6_6bp64")
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_kry3j"]
 material = SubResource("StandardMaterial3D_kry3j")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ynf5e"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6bp64"]
 render_priority = 0
@@ -67,9 +69,16 @@ shadow_enabled = true
 
 [node name="Ground" type="Node3D" parent="."]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Ground"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ground/StaticBody3D"]
 transform = Transform3D(100, 0, 0, 0, 1, 0, 0, 0, 5, 0, -0.03, 0)
 mesh = SubResource("PlaneMesh_kry3j")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/StaticBody3D"]
+transform = Transform3D(200, 0, 0, 0, 1, 0, 0, 0, 10, 0, -0.5, 0)
+shape = SubResource("BoxShape3D_ynf5e")
 
 [node name="Terrain" parent="." instance=ExtResource("3_21xkr")]
 transform = Transform3D(3, 0, 0, 0, 0.1, 0, 0, 0, 1, 0, -0.06, 0)
