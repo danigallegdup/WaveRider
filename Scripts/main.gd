@@ -79,6 +79,8 @@ var timings = {
 
 @onready var BlurShader = $Player/Camera3D/BlurShader
 
+@onready var leader_score := preload("res://Scenes/leader_score.tscn")
+
 var game_running = false
 
 const POOL_SIZE = 100  # of segments to keep in the world
@@ -140,6 +142,7 @@ func start_game(new_song_data):
 	music_started = false
 	
 	# Translate song data
+	Music.volume_db = 0
 	print(new_song_data)
 	var song_stream = load(Util.locate_song(new_song_data))
 	BlurShader.hide()
@@ -280,6 +283,10 @@ func end_game():
 	UI.hide()
 	Menus.show()
 
+func fade_out_audio(audio_player: AudioStreamPlayer, duration: float = 1.0):
+	var tween = create_tween()
+	tween.tween_property(audio_player, "volume_db", -80.0, duration) # fade to silence in 2 seconds
+
 func quit_song():
 	print("Qutting the game...")
 	Menus.toggle_pause()
@@ -289,16 +296,14 @@ func quit_song():
 
 func game_over():
 	print("Game Over! Score: ", score)
-	Music.stop()
+	fade_out_audio(Music, 1.5)
 	end_game()
 	Menus.score_label.text = "Final Score: " + str(score)
 	Menus.switch_menu(Menus.menus.game_over)
 
-@onready var leader_score := preload("res://Scenes/leader_score.tscn")
-
 func game_won():
 	print("You won the game!", score)
-	Music.stop()
+	fade_out_audio(Music, 1.5)
 	end_game()
 	for child in Menus.leaderboard.get_children():
 		child.queue_free()
@@ -323,9 +328,3 @@ func game_won():
 
 func set_color_palette(palette):
 	$WorldEnvironment.environment.background_color = palette["sky_color"]
-
-# This function will trigger when the audio track is finished playing; use this to transition to
-# 	score screen.
-#func _on_audio_stream_player_finished() -> void:
-	#print("Song complete! Well done!")
-	#game_won()

@@ -103,11 +103,12 @@ Be very concise when modifying the below functions; know exactly which buttons t
 func _on_continue_button_down() -> void:
 	toggle_pause()
 
-var demo_play_id = 0
-
+var current_tween: Tween = null
 func fade_out_audio(audio_player: AudioStreamPlayer, duration: float = 1.0):
-	var tween = create_tween()
-	tween.tween_property(audio_player, "volume_db", -80.0, duration) # fade to silence in 2 seconds
+	if current_tween:
+		current_tween.kill()  # Stop the existing tween if it's still going
+	current_tween = create_tween()
+	current_tween.tween_property(audio_player, "volume_db", -80.0, duration) # fade to silence in 2 seconds
 
 # Located in SongSelect menu
 func _on_song_list_item_button_down(song_name):
@@ -120,9 +121,13 @@ func _on_song_list_item_button_down(song_name):
 	print("ERROR: Could not find song '" + song_name + "' in song library")
 
 # Located in SongSelect menu
+var demo_play_id = 0
 func _on_demo_button_button_down() -> void:
 	demo_play_id += 1
 	var current_id = demo_play_id
+	if current_tween:
+		current_tween.kill()  # Cancel fade out
+		current_tween = null
 	demo_audio_player.volume_db = 0
 	demo_audio_player.stream = demo_audio
 	demo_audio_player.play(DEMO_START_TIME)
@@ -131,7 +136,7 @@ func _on_demo_button_button_down() -> void:
 	# and each successive play gets cut short as well
 	await get_tree().create_timer(DEMO_DURATION).timeout
 	if current_id == demo_play_id:
-		demo_audio_player.stop()
+		await fade_out_audio(demo_audio_player, 1.5)
 
 
 # Located in SongSelect menu
