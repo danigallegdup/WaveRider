@@ -168,7 +168,7 @@ func start_game(new_song_data):
 	game_running = true
 
 var current_coin_lane = randi() % 3
-const lane_change_probabiility = 0.8
+const lane_change_probabiility = 0.7
 
 func _process(delta):
 	audio_visualizer_viewport.position.z = bicycle.position.z - 125
@@ -195,7 +195,7 @@ func _process(delta):
 		Menus.toggle_pause()
 	
 	# Coins
-	if game_time - timings[COINS_KEY]["current_timing"] > 0:
+	if not timings[COINS_KEY]["empty"] and game_time - timings[COINS_KEY]["current_timing"] > 0:
 		print("SPAWN " + COINS_KEY + " AT " + str(game_time))
 		var obj = next_objs[COINS_KEY]
 		obj.position = Vector3(LANES[current_coin_lane], 0.5, bicycle.position.z - SPAWN_OFFSET)
@@ -214,7 +214,7 @@ func _process(delta):
 		call_deferred("reload_obj", COINS_KEY)
 	
 	# Obstacles
-	if game_time - timings[OBSTACLES_KEY]["current_timing"] - 0.2 > 0:
+	if not timings[OBSTACLES_KEY]["empty"] and game_time - timings[OBSTACLES_KEY]["current_timing"] - 0.2 > 0:
 		print("SPAWN " + OBSTACLES_KEY + " AT " + str(game_time))
 		var obj = next_objs[OBSTACLES_KEY]
 		var options = [0, 1, 2]
