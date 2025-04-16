@@ -19,11 +19,11 @@ var fake_song_data = {
 }
 
 var fake_scores = {
-	"Satchmo": 50,
-	"Ziggy": 48,
-	"Kurt": 37,
-	"Noodle": 22,
-	"Purple Piper": 10
+	"Satchmo": 5000,
+	"Ziggy": 4800,
+	"Kurt": 3700,
+	"Noodle": 2200,
+	"Purple Piper": 500
 }
 
 var song_data = fake_song_data
@@ -167,6 +167,9 @@ func start_game(new_song_data):
 	update_timings(TEMPO_BEATS)
 	game_running = true
 
+var current_coin_lane = randi() % 3
+const lane_change_probabiility = 0.8
+
 func _process(delta):
 	audio_visualizer_viewport.position.z = bicycle.position.z - 125
 	
@@ -191,20 +194,38 @@ func _process(delta):
 	if Input.is_action_just_pressed("pause"):
 		Menus.toggle_pause()
 	
-	# Check if new spawns to do
-	for o in [OBSTACLES_KEY, COINS_KEY]:
-		# Ignore key if no more spawns
-		if timings[o]["empty"]: continue
-		# If the next timing has been passed, turn on pre-loaded spawn
-		if game_time - timings[o]["current_timing"] > 0:
-			print("SPAWN " + o + " AT " + str(game_time))
-			var obj = next_objs[o]
-			obj.position = Vector3(LANES[randi() % 3], 0.5, bicycle.position.z - SPAWN_OFFSET)
-			obj.set_meta("spawn_time", game_time)
-			spawned_objects.add_child(obj)  # Add to SpawnedObjects node
-			# Identify the next spawn and pre-load an instance
-			call_deferred("update_timings", o)
-			call_deferred("reload_obj", o)
+	# Coins
+	if game_time - timings[COINS_KEY]["current_timing"] > 0:
+		print("SPAWN " + COINS_KEY + " AT " + str(game_time))
+		var obj = next_objs[COINS_KEY]
+		obj.position = Vector3(LANES[current_coin_lane], 0.5, bicycle.position.z - SPAWN_OFFSET)
+		if randf() < lane_change_probabiility:
+			if current_coin_lane == 0 or current_coin_lane == 2:
+				current_coin_lane = 1
+			else:
+				if randf() < 0.5:
+					current_coin_lane = 0
+				else:
+					current_coin_lane = 2
+		obj.set_meta("spawn_time", game_time)
+		spawned_objects.add_child(obj)  # Add to SpawnedObjects node
+		# Identify the next spawn and pre-load an instance
+		call_deferred("update_timings", COINS_KEY)
+		call_deferred("reload_obj", COINS_KEY)
+	
+	# Obstacles
+	if game_time - timings[OBSTACLES_KEY]["current_timing"] - 0.2 > 0:
+		print("SPAWN " + OBSTACLES_KEY + " AT " + str(game_time))
+		var obj = next_objs[OBSTACLES_KEY]
+		var options = [0, 1, 2]
+		options.erase(current_coin_lane)
+		var chosen_lane = options[randi() % options.size()]
+		obj.position = Vector3(LANES[chosen_lane], 0.5, bicycle.position.z - SPAWN_OFFSET)
+		obj.set_meta("spawn_time", game_time)
+		spawned_objects.add_child(obj)  # Add to SpawnedObjects node
+		# Identify the next spawn and pre-load an instance
+		call_deferred("update_timings", OBSTACLES_KEY)
+		call_deferred("reload_obj", OBSTACLES_KEY)
 	
 	# If the next timing has been passed, turn on pre-loaded spawn
 	if not timings[TEMPO_BEATS]["empty"] and game_time - timings[TEMPO_BEATS]["current_timing"] > 0:

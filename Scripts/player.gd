@@ -22,7 +22,6 @@ const sprites = [
 ]
 
 func sprite_progress():
-	print("Switching sprite")
 	sprite_3d.texture = sprites[current_sprite % len(sprites)]
 	current_sprite += 1
 
