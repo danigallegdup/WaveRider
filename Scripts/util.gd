@@ -10,6 +10,7 @@ place.
 '''
 const DEFAULT_FILE_NAME = "<default>"
 const DEFAULT_FILE_CHECKSUM = "000000"
+@onready var fade_tween: Node = $FadeTween
 
 # Remember to change this when doing desktop export
 const IS_WEB_EXPORT = true
