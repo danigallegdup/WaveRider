@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://3jdddah7qhmv" path="res://Scenes/ground.tscn" id="4_ynf5e"]
 [ext_resource type="PackedScene" uid="uid://blxo5bub2eamn" path="res://Scenes/AudioVisualizer.tscn" id="6_ynf5e"]
 [ext_resource type="AudioStream" uid="uid://c557gaas4kvgw" path="res://Resources/DefaultMusic/Electro_Cabello.wav" id="7_6bp64"]
-[ext_resource type="Shader" path="res://Shaders/blur.gdshader" id="7_ynf5e"]
+[ext_resource type="Shader" uid="uid://3wlfd5dxijp1" path="res://Shaders/blur.gdshader" id="7_ynf5e"]
 [ext_resource type="PackedScene" uid="uid://bf1nsmy1w52yl" path="res://Scenes/menus.tscn" id="8_344ge"]
 
 [sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_21xkr"]

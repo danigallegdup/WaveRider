@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://b22h1pre2g0du"
-path="res://.godot/imported/piano-waltz-elegant-and-graceful-instrumental-music-285601.wav-17466c733ad537a83bd1af5d17f99004.sample"
+path="res://.godot/imported/piano-waltz-elegant-and-graceful-instrumental-music-285601.wav-e98569e48c2f846a6a326d0af4570ef0.sample"
 
 [deps]
 
-source_file="res://MIR/Samples/piano-waltz-elegant-and-graceful-instrumental-music-285601.wav"
-dest_files=["res://.godot/imported/piano-waltz-elegant-and-graceful-instrumental-music-285601.wav-17466c733ad537a83bd1af5d17f99004.sample"]
+source_file="res://MIR/samples/piano-waltz-elegant-and-graceful-instrumental-music-285601.wav"
+dest_files=["res://.godot/imported/piano-waltz-elegant-and-graceful-instrumental-music-285601.wav-e98569e48c2f846a6a326d0af4570ef0.sample"]
 
 [params]
 

@@ -3,12 +3,12 @@
 importer="mp3"
 type="AudioStreamMP3"
 uid="uid://dd1cfv2w5b6c4"
-path="res://.godot/imported/tango-bleu-piano-accordeon-basse-304649.mp3-076ee3de5de273bdf6944a81a8db5c47.mp3str"
+path="res://.godot/imported/tango-bleu-piano-accordeon-basse-304649.mp3-db9de741577f26cb27c693595ba5e58e.mp3str"
 
 [deps]
 
-source_file="res://MIR/Samples/tango-bleu-piano-accordeon-basse-304649.mp3"
-dest_files=["res://.godot/imported/tango-bleu-piano-accordeon-basse-304649.mp3-076ee3de5de273bdf6944a81a8db5c47.mp3str"]
+source_file="res://MIR/samples/tango-bleu-piano-accordeon-basse-304649.mp3"
+dest_files=["res://.godot/imported/tango-bleu-piano-accordeon-basse-304649.mp3-db9de741577f26cb27c693595ba5e58e.mp3str"]
 
 [params]
 

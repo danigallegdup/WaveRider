@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://bf120h3h41g05"
-path="res://.godot/imported/catchy-uplifting-inspiring-indie-pop-182349.wav-22558032dc892d11e3dfa51da6f030ad.sample"
+path="res://.godot/imported/catchy-uplifting-inspiring-indie-pop-182349.wav-9b76fdf2c57659dcf39ea5b92824a35b.sample"
 
 [deps]
 
-source_file="res://MIR/Samples/catchy-uplifting-inspiring-indie-pop-182349.wav"
-dest_files=["res://.godot/imported/catchy-uplifting-inspiring-indie-pop-182349.wav-22558032dc892d11e3dfa51da6f030ad.sample"]
+source_file="res://MIR/samples/catchy-uplifting-inspiring-indie-pop-182349.wav"
+dest_files=["res://.godot/imported/catchy-uplifting-inspiring-indie-pop-182349.wav-9b76fdf2c57659dcf39ea5b92824a35b.sample"]
 
 [params]
 
