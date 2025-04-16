@@ -40,7 +40,7 @@ const DEFAULT_SONGS = [
 		}
 	},
 	{
-		"name": "Indie Pop Catchy, Uplifting, Inspiring Indie Pop",
+		"name": "Catchy, Uplifting, Inspiring",
 		"artist": "MagpieMusic",
 		"genre": "Indie Pop",
 		"data": {
@@ -70,7 +70,7 @@ const DEFAULT_SONGS = [
 		}
 	},
 	{
-		"name": "Indie Pop Catchy, Uplifting, Inspiring Indie Pop",
+		"name": "Uplifting and Energetic",
 		"artist": "MagpieMusic",
 		"genre": "Indie Pop",
 		"data": {

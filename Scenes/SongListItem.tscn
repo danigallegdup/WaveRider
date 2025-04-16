@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://ittjjf44l7aj"]
+[gd_scene load_steps=5 format=3 uid="uid://ittjjf44l7aj"]
 
 [ext_resource type="Texture2D" uid="uid://865kotieobyc" path="res://sprites/menu_assets/song_list_item_frame.png" id="1_p656v"]
 [ext_resource type="LabelSettings" uid="uid://dy6i685tlkbnn" path="res://Resources/UI_Label_Settings_small.tres" id="2_8f26q"]
+[ext_resource type="Texture2D" uid="uid://8c5jue6eul3k" path="res://sprites/menu_assets/song_list_item_frame_9patch.png" id="2_m7w20"]
 [ext_resource type="LabelSettings" uid="uid://v7ib6rv1vev0" path="res://Resources/UI_Label_Settings_tiny.tres" id="2_p656v"]
 
 [node name="SongListItem" type="TextureRect"]
@@ -10,6 +11,28 @@ offset_bottom = 64.0
 size_flags_horizontal = 3
 size_flags_vertical = 6
 texture = ExtResource("1_p656v")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.2115, 0.258892, 0.47, 0.811765)
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_m7w20")
+patch_margin_left = 8
+patch_margin_top = 4
+patch_margin_right = 8
+patch_margin_bottom = 4
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 2
