@@ -43,6 +43,8 @@ func _ready():
 	switch_menu(menus.main)
 	_on_reset_volume_button_down()
 	
+	if Util.IS_WEB_EXPORT: $Main/VBoxContainer/MarginContainer/VBoxContainer2/VBoxContainer/Quit.hide()
+	
 	# Set up SongSelect menu
 	MusicLoader.load_custom_songs()
 	display_song_details(false)
