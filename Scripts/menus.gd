@@ -113,6 +113,9 @@ func _on_song_list_item_button_down(song_name):
 func _on_demo_button_button_down() -> void:
 	demo_audio_player.stream = demo_audio
 	demo_audio_player.play(DEMO_START_TIME)
+	# TODO Expose this timer and kill it manually when needed;
+	# Problem when play demo > switch song> play demo = second demo is cut short
+	# and each successive play gets cut short as well
 	await get_tree().create_timer(DEMO_DURATION).timeout
 	demo_audio_player.stop()
 
