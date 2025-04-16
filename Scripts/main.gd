@@ -98,6 +98,8 @@ func start_game(new_song_data):
 	if game_running:
 		return
 	# Translate song data
+	var song_stream = load(Util.locate_song(new_song_data))
+	Music.stream = song_stream
 	song_data = {
 		"lead-in": 3, # How many seconds before the first note collision?
 		"travel-duration": 2, # How many seconds between spawn time and collision?
