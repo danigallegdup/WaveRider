@@ -4,8 +4,8 @@ import json
 from pathlib import Path
 
 # === Configuration ===
-DEFAULT_MUSIC_DIR = Path("../Resources/DefaultMusic")
-OUTPUT_DIR = Path("./GeneratedSongData")
+DEFAULT_MUSIC_DIR = Path("../../Resources/DefaultMusic")
+OUTPUT_DIR = Path("../GeneratedSongData")
 FRAME_LENGTH = 2048
 HOP_LENGTH = 512
 ONSET_THRESHOLD = 0.1
@@ -59,7 +59,7 @@ def extract_spectral(file_path):
     return avg_mel_db.tolist(), mel_db.shape
 
 # Main processing loop
-print("=== MERGED SONG DATA EXTRACTION ===")
+print("=== started song data extraction ===")
 for wav_file in DEFAULT_MUSIC_DIR.glob("*.wav"):
     if wav_file.name.endswith(".import"):
         continue
@@ -83,7 +83,7 @@ for wav_file in DEFAULT_MUSIC_DIR.glob("*.wav"):
         avg_mel_db, mel_spec_shape = extract_spectral(wav_file)
 
         # Consolidate data
-        merged_data = {
+        data = {
             "filename": wav_file.name,
             "duration_sec": round(duration, 3),
             "chroma_harmonic": {
@@ -104,12 +104,12 @@ for wav_file in DEFAULT_MUSIC_DIR.glob("*.wav"):
             }
         }
 
-        # Write merged data to JSON
+        # Write  data to JSON
         out_path = OUTPUT_DIR / (wav_file.stem + "_song_data.json")
         with open(out_path, "w") as f:
-            json.dump(merged_data, f, indent=2)
+            json.dump(data, f, indent=2)
 
-        print(f"✅ Merged report saved to: {out_path}")
+        print(f"✅ report saved to: {out_path}")
 
     except Exception as e:
         print(f"❌ Error processing {wav_file.name}: {str(e)}")
