@@ -63,6 +63,8 @@ var timings = {
 @onready var Music = $AudioStreamPlayer
 @onready var Menus = $Menus
 
+@onready var BlurShader = $Player/Camera3D/BlurShader
+
 var game_running = false
 
 const POOL_SIZE = 100  # of segments to keep in the world
@@ -74,6 +76,7 @@ func _ready():
 	TimescaleUtil.audio_player = Music
 	MusicLoader.main_link = self
 	Menus.quit_song_func = Callable(self, "quit_song")
+	Menus.BlurShader = BlurShader
 	
 	# tell the player how many segments we have
 	bicycle.segment_count = POOL_SIZE
@@ -118,6 +121,7 @@ func start_game(new_song_data):
 	
 	# Translate song data
 	var song_stream = load(Util.locate_song(new_song_data))
+	BlurShader.hide()
 	Music.stream = song_stream
 	song_data = {
 		"lead-in": 3, # How many seconds before the first note collision?
@@ -219,6 +223,7 @@ func end_game():
 	# Clear all spawned objects
 	for child in spawned_objects.get_children():
 		child.queue_free()
+	BlurShader.show()
 	game_running = false
 	music_started = false
 	bicycle.speed = DEFAULT_BIKE_SPEED

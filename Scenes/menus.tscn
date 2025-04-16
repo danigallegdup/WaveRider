@@ -123,7 +123,6 @@ label_settings = ExtResource("4_0yfu1")
 horizontal_alignment = 1
 
 [node name="SongSelect" type="MarginContainer" parent="."]
-visible = false
 layout_mode = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="SongSelect"]
@@ -159,6 +158,10 @@ alignment = 1
 custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 size_flags_horizontal = 4
+
+[node name="ColorRect" type="ColorRect" parent="SongSelect/VBoxContainer/HBoxContainer/SongDetails"]
+layout_mode = 2
+color = Color(0.2115, 0.258892, 0.47, 0.811765)
 
 [node name="NinePatchRect" type="NinePatchRect" parent="SongSelect/VBoxContainer/HBoxContainer/SongDetails"]
 layout_mode = 2
@@ -203,6 +206,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="Genre" type="Label" parent="SongSelect/VBoxContainer/HBoxContainer/SongDetails/SongDetailsDisplay/VBoxContainer/HBoxContainer2"]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
@@ -240,6 +244,13 @@ layout_mode = 2
 text = "999 BPM"
 label_settings = ExtResource("3_yciej")
 
+[node name="Genre" type="Label" parent="SongSelect/VBoxContainer/HBoxContainer/SongDetails/SongDetailsDisplay/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+text = "Genre"
+label_settings = ExtResource("3_yciej")
+
 [node name="Spacer" type="Control" parent="SongSelect/VBoxContainer/HBoxContainer/SongDetails/SongDetailsDisplay/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
@@ -258,7 +269,6 @@ theme = ExtResource("3_0yfu1")
 text = "BACK"
 
 [node name="Options" type="MarginContainer" parent="."]
-visible = false
 layout_mode = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Options"]
@@ -283,6 +293,7 @@ layout_mode = 2
 theme_override_constants/separation = 40
 
 [node name="ResetVolume" type="Button" parent="Options/VBoxContainer/Volume/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 theme = ExtResource("3_0yfu1")
 text = "Reset"

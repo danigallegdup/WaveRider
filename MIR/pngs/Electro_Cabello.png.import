@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://csjixsbo2liri"
-path="res://.godot/imported/uplifting-and-energetic-indie-pop-305512.png-854d1076b6553cec915976567dbf6fad.ctex"
+uid="uid://bb7qpy2fxovq2"
+path="res://.godot/imported/Electro_Cabello.png-2417ff09c26a1f214f58fb31d3590ec1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://MIR/uplifting-and-energetic-indie-pop-305512.png"
-dest_files=["res://.godot/imported/uplifting-and-energetic-indie-pop-305512.png-854d1076b6553cec915976567dbf6fad.ctex"]
+source_file="res://MIR/pngs/Electro_Cabello.png"
+dest_files=["res://.godot/imported/Electro_Cabello.png-2417ff09c26a1f214f58fb31d3590ec1.ctex"]
 
 [params]
 

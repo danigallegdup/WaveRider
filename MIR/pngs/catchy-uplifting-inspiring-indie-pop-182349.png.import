@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://be3kvrds1hvec"
-path="res://.godot/imported/catchy-uplifting-inspiring-indie-pop-182349.png-b6078385d5dcf83240fbbd78820cc703.ctex"
+uid="uid://bstoop6kxt7au"
+path="res://.godot/imported/catchy-uplifting-inspiring-indie-pop-182349.png-137924fa9d1fc5e870122fe342cafecc.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://MIR/catchy-uplifting-inspiring-indie-pop-182349.png"
-dest_files=["res://.godot/imported/catchy-uplifting-inspiring-indie-pop-182349.png-b6078385d5dcf83240fbbd78820cc703.ctex"]
+source_file="res://MIR/pngs/catchy-uplifting-inspiring-indie-pop-182349.png"
+dest_files=["res://.godot/imported/catchy-uplifting-inspiring-indie-pop-182349.png-137924fa9d1fc5e870122fe342cafecc.ctex"]
 
 [params]
 

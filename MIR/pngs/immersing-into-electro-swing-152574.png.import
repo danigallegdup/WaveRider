@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c01k5k2b600gq"
-path="res://.godot/imported/Electro_Cabello.png-3a5c0278a29a69393d6e30534b5e7364.ctex"
+uid="uid://crft1jk4pa5sf"
+path="res://.godot/imported/immersing-into-electro-swing-152574.png-797259f13459940cb80923702df41bc2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://MIR/Electro_Cabello.png"
-dest_files=["res://.godot/imported/Electro_Cabello.png-3a5c0278a29a69393d6e30534b5e7364.ctex"]
+source_file="res://MIR/pngs/immersing-into-electro-swing-152574.png"
+dest_files=["res://.godot/imported/immersing-into-electro-swing-152574.png-797259f13459940cb80923702df41bc2.ctex"]
 
 [params]
 

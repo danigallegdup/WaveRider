@@ -1,7 +1,19 @@
-[gd_resource type="Theme" load_steps=2 format=3 uid="uid://dgm6ykjvw7b75"]
+[gd_resource type="Theme" load_steps=5 format=3 uid="uid://dgm6ykjvw7b75"]
 
 [ext_resource type="FontFile" uid="uid://bgiqhtjhqs3hh" path="res://Resources/Tektur/static/Tektur-Bold.ttf" id="1_rmxje"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rmxje"]
+bg_color = Color(0.441592, 0.231895, 0.121235, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_huqmi"]
+bg_color = Color(0.592725, 0.322507, 0.180642, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qs32r"]
+bg_color = Color(0.328939, 0.166153, 0.0800921, 1)
 
 [resource]
 default_font = ExtResource("1_rmxje")
 default_font_size = 18
+Button/styles/hover = SubResource("StyleBoxFlat_rmxje")
+Button/styles/normal = SubResource("StyleBoxFlat_huqmi")
+Button/styles/pressed = SubResource("StyleBoxFlat_qs32r")
