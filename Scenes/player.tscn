@@ -1,7 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://cmp4gi548ck1n"]
+[gd_scene load_steps=3 format=3 uid="uid://cmp4gi548ck1n"]
 
 [ext_resource type="Script" uid="uid://cleworn1e8ekc" path="res://Scripts/player.gd" id="1_6t5aa"]
-[ext_resource type="Texture2D" uid="uid://cu8tlt67gojsb" path="res://sprites/player/player_animated.tres" id="2_cvnsp"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_cvnsp"]
 size = Vector3(2, 3.36627, 0.4)
@@ -16,6 +15,5 @@ shape = SubResource("BoxShape3D_cvnsp")
 [node name="Sprite3D" type="Sprite3D" parent="."]
 transform = Transform3D(0.8, 0, 0, 0, 0.748261, 0.283028, 0, -0.283028, 0.748261, 0, 0.559894, 0.184307)
 offset = Vector2(0, 5)
-modulate = Color(0.84, 0.78358, 0.7308, 1)
+modulate = Color(0.956863, 0.603922, 0.407843, 1)
 texture_filter = 0
-texture = ExtResource("2_cvnsp")

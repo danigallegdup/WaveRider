@@ -1,17 +1,30 @@
 extends CharacterBody3D
 
 @export var segment_count: int = 10
+@onready var sprite_3d: Sprite3D = $Sprite3D
 
 var speed = 5.0
 
-var transition_speed = 5.0
+var transition_speed = 8.0
 var lanes = [-1.0, 0.0, 1.0]  # X positions of lanes
 var current_lane = 1  # Start in center lane
 
 var lean_speed = 10.0
 var lean_angle = 0.0
-var max_lean = 25.0
+var max_lean = 10.0
 
+var current_sprite = 0
+const sprites = [
+	preload("res://Sprites/player/biker2_left.png"),
+	preload("res://Sprites/player/biker2_middle.png"),
+	preload("res://Sprites/player/biker2_right.png"),
+	preload("res://Sprites/player/biker2_middle.png"),
+]
+
+func sprite_progress():
+	print("Switching sprite")
+	sprite_3d.texture = sprites[current_sprite % len(sprites)]
+	current_sprite += 1
 
 func _physics_process(delta):
 	# Move forward

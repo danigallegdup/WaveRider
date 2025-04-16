@@ -1,14 +1,14 @@
 [gd_scene load_steps=11 format=3 uid="uid://bf1nsmy1w52yl"]
 
-[ext_resource type="Texture2D" uid="uid://hn6htxhyi1qo" path="res://sprites/menu_assets/title_white_bg.png" id="1_goel8"]
+[ext_resource type="Texture2D" uid="uid://hn6htxhyi1qo" path="res://Sprites/menu_assets/title_white_bg.png" id="1_goel8"]
 [ext_resource type="Script" uid="uid://cg3k4c7fcq4aw" path="res://Scripts/menus.gd" id="1_sqhkm"]
 [ext_resource type="Theme" uid="uid://dgm6ykjvw7b75" path="res://Resources/Menu_Theme.tres" id="3_0yfu1"]
 [ext_resource type="LabelSettings" uid="uid://v7ib6rv1vev0" path="res://Resources/UI_Label_Settings_tiny.tres" id="3_yciej"]
 [ext_resource type="LabelSettings" uid="uid://dy6i685tlkbnn" path="res://Resources/UI_Label_Settings_small.tres" id="4_0yfu1"]
-[ext_resource type="Texture2D" uid="uid://8c5jue6eul3k" path="res://sprites/menu_assets/song_list_item_frame_9patch.png" id="6_8ovod"]
+[ext_resource type="Texture2D" uid="uid://8c5jue6eul3k" path="res://Sprites/menu_assets/song_list_item_frame_9patch.png" id="6_8ovod"]
 [ext_resource type="LabelSettings" uid="uid://ddb37lrg7l5bk" path="res://Resources/UI_Label_Settings.tres" id="6_qdaxd"]
-[ext_resource type="Texture2D" uid="uid://c1ef7fxphum2g" path="res://sprites/menu_assets/play_circle_60dp_E3E3E3_FILL0_wght400_GRAD0_opsz48.png" id="8_ewi2v"]
-[ext_resource type="Texture2D" uid="uid://bklc2mf03yhwt" path="res://sprites/menu_assets/play_circle_60dp_666666_FILL0_wght400_GRAD0_opsz48.png" id="9_2b31k"]
+[ext_resource type="Texture2D" uid="uid://c1ef7fxphum2g" path="res://Sprites/menu_assets/play_circle_60dp_E3E3E3_FILL0_wght400_GRAD0_opsz48.png" id="8_ewi2v"]
+[ext_resource type="Texture2D" uid="uid://bklc2mf03yhwt" path="res://Sprites/menu_assets/play_circle_60dp_666666_FILL0_wght400_GRAD0_opsz48.png" id="9_2b31k"]
 [ext_resource type="LabelSettings" uid="uid://c41y0afiq0yhh" path="res://Resources/UI_Label_Settings_large.tres" id="10_2b31k"]
 
 [node name="Menus" type="CenterContainer"]
