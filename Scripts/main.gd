@@ -78,6 +78,7 @@ var timings = {
 @onready var Menus = $Menus
 
 @onready var BlurShader = $Player/Camera3D/BlurShader
+@onready var BlurActual = $Player/Camera3D/BlurShaderMain
 
 var game_running = false
 
@@ -90,6 +91,10 @@ func _ready():
 	TimescaleUtil.audio_player = Music
 	MusicLoader.main_link = self
 	Menus.quit_song_func = Callable(self, "quit_song")
+	if not Util.IS_WEB_EXPORT:
+		BlurShader.hide()
+		BlurShader = BlurActual
+		BlurShader.show()
 	Menus.BlurShader = BlurShader
 	
 	# tell the player how many segments we have

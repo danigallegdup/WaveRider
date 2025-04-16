@@ -50,6 +50,9 @@ var _modified_materials := {}
 
 ## Remove the parent node and add shards to the shard container.
 func destroy(explosion_power := 1.0) -> void:
+	if Util.IS_WEB_EXPORT:
+		get_parent().queue_free()  # TODO improve web export graphic
+		return
 	for shard in _get_shards():
 		_add_shard(shard, explosion_power)
 	get_parent().queue_free()
