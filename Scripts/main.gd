@@ -142,7 +142,6 @@ func start_game(new_song_data):
 	# Translate song data
 	print(new_song_data)
 	var song_stream = load(Util.locate_song(new_song_data))
-	#var song_stream = new_song_data.data.default_resource_location
 	BlurShader.hide()
 	Music.stream = song_stream
 	song_data = {

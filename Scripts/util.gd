@@ -10,6 +10,7 @@ place.
 '''
 const DEFAULT_FILE_NAME = "<default>"
 const DEFAULT_FILE_CHECKSUM = "000000"
+@onready var fade_tween: Node = $FadeTween
 
 # The default 'round(...)' function only rounds to the nearest decimal - this function allows you to
 #	choose precision.

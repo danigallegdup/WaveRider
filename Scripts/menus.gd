@@ -103,8 +103,15 @@ Be very concise when modifying the below functions; know exactly which buttons t
 func _on_continue_button_down() -> void:
 	toggle_pause()
 
+var demo_play_id = 0
+
+func fade_out_audio(audio_player: AudioStreamPlayer, duration: float = 1.0):
+	var tween = create_tween()
+	tween.tween_property(audio_player, "volume_db", -80.0, duration) # fade to silence in 2 seconds
+
 # Located in SongSelect menu
 func _on_song_list_item_button_down(song_name):
+	await fade_out_audio(demo_audio_player, 1.5)
 	for song in MusicLoader.song_library:
 		if song.name == song_name:
 			display_song_details(song)
@@ -114,13 +121,17 @@ func _on_song_list_item_button_down(song_name):
 
 # Located in SongSelect menu
 func _on_demo_button_button_down() -> void:
+	demo_play_id += 1
+	var current_id = demo_play_id
+	demo_audio_player.volume_db = 0
 	demo_audio_player.stream = demo_audio
 	demo_audio_player.play(DEMO_START_TIME)
 	# TODO Expose this timer and kill it manually when needed;
 	# Problem when play demo > switch song> play demo = second demo is cut short
 	# and each successive play gets cut short as well
 	await get_tree().create_timer(DEMO_DURATION).timeout
-	demo_audio_player.stop()
+	if current_id == demo_play_id:
+		demo_audio_player.stop()
 
 
 # Located in SongSelect menu
