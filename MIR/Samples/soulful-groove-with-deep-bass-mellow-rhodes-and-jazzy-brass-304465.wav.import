@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://c1cprt4vsl81e"
-path="res://.godot/imported/soulful-groove-with-deep-bass-mellow-rhodes-and-jazzy-brass-304465.wav-87c071a67ead35ef9c86068441011ef2.sample"
+path="res://.godot/imported/soulful-groove-with-deep-bass-mellow-rhodes-and-jazzy-brass-304465.wav-71b09a7b67092ebbc29b5fc478020fdb.sample"
 
 [deps]
 
-source_file="res://MIR/samples/soulful-groove-with-deep-bass-mellow-rhodes-and-jazzy-brass-304465.wav"
-dest_files=["res://.godot/imported/soulful-groove-with-deep-bass-mellow-rhodes-and-jazzy-brass-304465.wav-87c071a67ead35ef9c86068441011ef2.sample"]
+source_file="res://MIR/Samples/soulful-groove-with-deep-bass-mellow-rhodes-and-jazzy-brass-304465.wav"
+dest_files=["res://.godot/imported/soulful-groove-with-deep-bass-mellow-rhodes-and-jazzy-brass-304465.wav-71b09a7b67092ebbc29b5fc478020fdb.sample"]
 
 [params]
 

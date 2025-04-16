@@ -3,12 +3,12 @@
 importer="mp3"
 type="AudioStreamMP3"
 uid="uid://cecllkn84qbnw"
-path="res://.godot/imported/flamenco-2-302761.mp3-9f78ca2e225873ee9cc3d691a4730b78.mp3str"
+path="res://.godot/imported/flamenco-2-302761.mp3-4e38263d1c28041111bc42a5c8030629.mp3str"
 
 [deps]
 
-source_file="res://MIR/samples/flamenco-2-302761.mp3"
-dest_files=["res://.godot/imported/flamenco-2-302761.mp3-9f78ca2e225873ee9cc3d691a4730b78.mp3str"]
+source_file="res://MIR/Samples/flamenco-2-302761.mp3"
+dest_files=["res://.godot/imported/flamenco-2-302761.mp3-4e38263d1c28041111bc42a5c8030629.mp3str"]
 
 [params]
 

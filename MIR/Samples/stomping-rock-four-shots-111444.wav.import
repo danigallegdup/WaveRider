@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://cbdl1145364a1"
-path="res://.godot/imported/stomping-rock-four-shots-111444.wav-7f2d2cb126d1987939b514dca6761ae0.sample"
+path="res://.godot/imported/stomping-rock-four-shots-111444.wav-ef8a794ab489305beda86d6f1946a683.sample"
 
 [deps]
 
-source_file="res://MIR/samples/stomping-rock-four-shots-111444.wav"
-dest_files=["res://.godot/imported/stomping-rock-four-shots-111444.wav-7f2d2cb126d1987939b514dca6761ae0.sample"]
+source_file="res://MIR/Samples/stomping-rock-four-shots-111444.wav"
+dest_files=["res://.godot/imported/stomping-rock-four-shots-111444.wav-ef8a794ab489305beda86d6f1946a683.sample"]
 
 [params]
 

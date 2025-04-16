@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://ct6ce3gvd2css"
-path="res://.godot/imported/immersing-into-electro-swing-152574.wav-91cfe5a84a0c369803be87d222fdd8aa.sample"
+path="res://.godot/imported/immersing-into-electro-swing-152574.wav-7cd21e9f9ceed890ee34ed3fa4e6ab64.sample"
 
 [deps]
 
-source_file="res://MIR/samples/immersing-into-electro-swing-152574.wav"
-dest_files=["res://.godot/imported/immersing-into-electro-swing-152574.wav-91cfe5a84a0c369803be87d222fdd8aa.sample"]
+source_file="res://MIR/Samples/immersing-into-electro-swing-152574.wav"
+dest_files=["res://.godot/imported/immersing-into-electro-swing-152574.wav-7cd21e9f9ceed890ee34ed3fa4e6ab64.sample"]
 
 [params]
 
