@@ -9,7 +9,7 @@ DEFAULT_MUSIC_DIR = Path("../Resources/DefaultMusic")
 FRAME_LENGTH = 2048
 HOP_LENGTH = 512
 
-def process_wav_file(file_path):
+def process_wav_file_spectral(file_path):
     """
     Process a WAV file to extract spectral energy features.
     
@@ -43,7 +43,7 @@ for wav_file in DEFAULT_MUSIC_DIR.glob("*.wav"):
 
     try:
         print(f"Processing: {wav_file.name}")
-        avg_mel_db, mel_db = process_wav_file(wav_file)
+        avg_mel_db, mel_db = process_wav_file_spectral(wav_file)
         duration = librosa.get_duration(path=wav_file)
         
         # Prepare output data for the report
