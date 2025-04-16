@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://c11hnhxpqwc0"
-path.s3tc="res://.godot/imported/biker_chopped_small_right.png-ce128f8c3f54e693a699ebc11d7f97f1.s3tc.ctex"
+path.s3tc="res://.godot/imported/biker_chopped_small_right.png-91952d0f4bd6c83efbac86cba40c6025.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://sprites/player/biker_chopped_small_right.png"
-dest_files=["res://.godot/imported/biker_chopped_small_right.png-ce128f8c3f54e693a699ebc11d7f97f1.s3tc.ctex"]
+source_file="res://Sprites/player/biker_chopped_small_right.png"
+dest_files=["res://.godot/imported/biker_chopped_small_right.png-91952d0f4bd6c83efbac86cba40c6025.s3tc.ctex"]
 
 [params]
 
