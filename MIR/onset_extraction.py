@@ -11,7 +11,7 @@ HOP_LENGTH = 512
 # You may adjust these thresholds as needed for your audio material:
 ONSET_THRESHOLD = 0.1  # Can be tuned for sensitivity of the onset detection
 
-def process_wav_file(file_path):
+def process_wav_file_onset(file_path):
     """
     Process a WAV file to extract onset timings using Librosa's onset detection.
     
@@ -47,7 +47,7 @@ for wav_file in DEFAULT_MUSIC_DIR.glob("*.wav"):
 
     try:
         print(f"Processing: {wav_file.name}")
-        onsets = process_wav_file(wav_file)
+        onsets = process_wav_file_onset(wav_file)
         duration = librosa.get_duration(path=wav_file)
 
         # Prepare output data with onset detection details

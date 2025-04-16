@@ -9,7 +9,7 @@ DEFAULT_MUSIC_DIR = Path("../Resources/DefaultMusic")
 FRAME_LENGTH = 2048
 HOP_LENGTH = 512
 
-def process_wav_file(file_path):
+def process_wav_file_harmonic(file_path):
     """
     Process a WAV file to extract chroma features using harmonic-percussive source separation.
     
@@ -46,7 +46,7 @@ for wav_file in DEFAULT_MUSIC_DIR.glob("*.wav"):
 
     try:
         print(f"Processing: {wav_file.name}")
-        avg_chroma, chroma = process_wav_file(wav_file)
+        avg_chroma, chroma = process_wav_file_harmonic(wav_file)
         duration = librosa.get_duration(path=wav_file)
         
         # Prepare output data

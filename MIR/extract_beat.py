@@ -11,7 +11,7 @@ HOP_LENGTH = 512
 ONSET_THRESHOLD = 0.1
 ONSET_SPACING = 0.1
 
-def process_wav_file(file_path):
+def process_wav_file_beats(file_path):
     y, sr = librosa.load(file_path, sr=None)
 
     rms_envelope = librosa.feature.rms(y=y, frame_length=FRAME_LENGTH, hop_length=HOP_LENGTH)[0]
@@ -42,7 +42,7 @@ for wav_file in DEFAULT_MUSIC_DIR.glob("*.wav"):
 
     try:
         print(f"Processing: {wav_file.name}")
-        onsets = process_wav_file(wav_file)
+        onsets = process_wav_file_beats(wav_file)
         duration = librosa.get_duration(path=wav_file)
 
         output_data = {
