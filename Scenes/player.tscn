@@ -4,15 +4,18 @@
 [ext_resource type="Texture2D" uid="uid://cu8tlt67gojsb" path="res://sprites/player/player_animated.tres" id="2_cvnsp"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_cvnsp"]
-size = Vector3(2, 2, 0.4)
+size = Vector3(2, 3.36627, 0.4)
 
 [node name="Player" type="CharacterBody3D"]
 script = ExtResource("1_6t5aa")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(-1.31134e-08, 0, 0.3, 0, 0.3, 0, -0.3, 0, -1.31134e-08, 0, 0.3, 0.3)
+transform = Transform3D(-1.31134e-08, 0, 0.3, 0, 0.3, 0, -0.3, 0, -1.31134e-08, 0, 0.504941, 0.3)
 shape = SubResource("BoxShape3D_cvnsp")
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.559894, 0)
+transform = Transform3D(0.8, 0, 0, 0, 0.748261, 0.283028, 0, -0.283028, 0.748261, 0, 0.559894, 0.184307)
+offset = Vector2(0, 5)
+modulate = Color(0.84, 0.78358, 0.7308, 1)
+texture_filter = 0
 texture = ExtResource("2_cvnsp")
