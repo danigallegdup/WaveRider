@@ -62,24 +62,37 @@ var timings = {
 @onready var Music = $AudioStreamPlayer
 @onready var Menus = $Menus
 
-var world_length = 0
 var game_running = false
+
+const POOL_SIZE = 100  # of segments to keep in the world
+const SEGMENT_LENGTH = 10.0  # distance between segments
+@onready var terrain_scene := preload("res://Scenes/Terrain.tscn")
+@onready var ground_scene  := preload("res://Scenes/Ground.tscn")
 
 func _ready():
 	TimescaleUtil.audio_player = Music
 	MusicLoader.main_link = self
 	Menus.quit_song_func = Callable(self, "quit_song")
 	
-	# Set up the terrain
-	bicycle.speed = DEFAULT_BIKE_SPEED
-	world_length = bicycle.speed * song_data["song-duration"]
-	terrain.scale.z = world_length*100
-	terrain.position.z = -world_length / 2
-	ground.scale.z = world_length
-	ground.position.z = -world_length / 2
-	var scale_factor = world_length / 3
-	audio_visualizer_viewport.scale *= scale_factor
-	audio_visualizer_viewport.position.y = 1.20 * scale_factor
+	# tell the player how many segments we have
+	bicycle.segment_count = POOL_SIZE
+
+	# spawn terrain pool
+	for i in POOL_SIZE:
+		var t = terrain_scene.instantiate()
+		t.position = Vector3(0, 0, -(i * SEGMENT_LENGTH))
+		# configure recycling parameters
+		t.segment_length = SEGMENT_LENGTH
+		t.recycle_distance = SEGMENT_LENGTH * 2  # or whatever looks good
+		add_child(t)
+		
+	# spawn ground pool
+	for i in POOL_SIZE:
+		var g = ground_scene.instantiate()
+		g.position = Vector3(0, 0, -(i * SEGMENT_LENGTH))
+		g.segment_length = SEGMENT_LENGTH
+		g.recycle_distance = SEGMENT_LENGTH * 2
+		add_child(g)
 	
 func start_game(new_song_data):
 	if game_running:
@@ -121,7 +134,7 @@ func end_game(quit=false):
 		Menus.song_complete(score)
 
 func _process(delta):
-	audio_visualizer_viewport.position.z = bicycle.position.z - world_length
+	audio_visualizer_viewport.position.z = bicycle.position.z - 125
 	
 	# Below are all game-process requirements
 	if not game_running:
@@ -208,7 +221,6 @@ func game_over():
 
 func set_color_palette(palette):
 	$WorldEnvironment.environment.background_color = palette["sky_color"]
-	
 
 # This function will trigger when the audio track is finished playing; use this to transition to
 # 	score screen.

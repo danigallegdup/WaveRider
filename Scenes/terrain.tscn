@@ -1,10 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://dt0dm6yt6brlf"]
+[gd_scene load_steps=6 format=3 uid="uid://dt0dm6yt6brlf"]
 
+[ext_resource type="Script" path="res://Scripts/segment.gd" id="1_62tj5"]
 [ext_resource type="Texture2D" uid="uid://ceqngdjhvkqn3" path="res://Textures/TwoLaneSolidLineRoadPatches01_2K_BaseColor.png" id="1_g24sy"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_62tj5"]
 albedo_texture = ExtResource("1_g24sy")
-uv1_scale = Vector3(10, 1.35, 1)
+uv1_scale = Vector3(4, 1.34, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_mqean"]
 lightmap_size_hint = Vector2i(14, 21)
@@ -13,12 +14,15 @@ material = SubResource("StandardMaterial3D_62tj5")
 [sub_resource type="BoxShape3D" id="BoxShape3D_g24sy"]
 
 [node name="Terrain" type="Node3D"]
+script = ExtResource("1_62tj5")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
+collision_layer = 3
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
+transform = Transform3D(-4.37114e-07, 0, 3, 0, 0.1, 0, -10, 0, -1.31134e-07, 0, 0, 0)
 mesh = SubResource("BoxMesh_mqean")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(3, 0, 0, 0, 0.1, 0, 0, 0, 10, 0, 0, 0)
 shape = SubResource("BoxShape3D_g24sy")

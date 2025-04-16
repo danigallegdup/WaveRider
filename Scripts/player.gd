@@ -1,5 +1,7 @@
 extends CharacterBody3D
 
+@export var segment_count: int = 10
+
 var speed = 5.0
 
 var transition_speed = 5.0
