@@ -81,7 +81,7 @@ func display_song_details(song_data):
 		song_details_display.show()
 		$SongSelect/VBoxContainer/HBoxContainer/SongDetails/SongDetailsDisplay/VBoxContainer/SongName.text = song_data.name
 		$SongSelect/VBoxContainer/HBoxContainer/SongDetails/SongDetailsDisplay/VBoxContainer/HBoxContainer2/Artist.text = song_data.artist
-		$SongSelect/VBoxContainer/HBoxContainer/SongDetails/SongDetailsDisplay/VBoxContainer/HBoxContainer2/Genre.text = song_data.genre
+		$SongSelect/VBoxContainer/HBoxContainer/SongDetails/SongDetailsDisplay/VBoxContainer/Genre.text = song_data.genre
 		$SongSelect/VBoxContainer/HBoxContainer/SongDetails/SongDetailsDisplay/VBoxContainer/HBoxContainer/Duration.text = Util.sec_to_minutes(song_data.data.duration)
 		#$SongSelect/HBoxContainer/SongDetails/SongDetailsDisplay/VBoxContainer/HBoxContainer/BPM.text = song_data.bpm  # Currently not saving BPM as data
 		# We can display additional information here

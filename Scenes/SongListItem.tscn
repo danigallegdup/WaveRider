@@ -68,20 +68,9 @@ text = "Artist"
 label_settings = ExtResource("2_p656v")
 
 [node name="Genre" type="Label" parent="MarginContainer/VBoxContainer/ExtraDetails"]
-layout_mode = 2
-text = "Song Name"
-label_settings = ExtResource("2_p656v")
-
-[node name="Extra2" type="Label" parent="MarginContainer/VBoxContainer/ExtraDetails"]
 visible = false
 layout_mode = 2
-text = "Artist"
-label_settings = ExtResource("2_p656v")
-
-[node name="Extra3" type="Label" parent="MarginContainer/VBoxContainer/ExtraDetails"]
-visible = false
-layout_mode = 2
-text = "Duration"
+text = "Genre"
 label_settings = ExtResource("2_p656v")
 
 [node name="Duration" type="Label" parent="MarginContainer/VBoxContainer/ExtraDetails"]
