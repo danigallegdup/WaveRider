@@ -3,6 +3,7 @@ extends Node3D
 # These keys are used to avoid mis-spellings
 const OBSTACLES_KEY = "obstacles"
 const COINS_KEY = "coins"
+const TEMPO_BEATS = "tempo_beats"
 
 const COIN_POINTS = 10
 
@@ -44,6 +45,11 @@ var timings = {
 		"empty": false
 	},
 	COINS_KEY: {
+		"next_idx": 0,
+		"current_timing": 0.0,
+		"empty": false
+	},
+	TEMPO_BEATS: {
 		"next_idx": 0,
 		"current_timing": 0.0,
 		"empty": false
@@ -105,7 +111,7 @@ func _ready():
 		g.segment_length = SEGMENT_LENGTH
 		g.recycle_distance = SEGMENT_LENGTH * 2
 		add_child(g)
-	
+
 func start_game(new_song_data):
 	if game_running:
 		return
@@ -124,6 +130,11 @@ func start_game(new_song_data):
 			"next_idx": 0,
 			"current_timing": 0.0,
 			"empty": false
+		},
+		TEMPO_BEATS: {
+			"next_idx": 0,
+			"current_timing": 0.0,
+			"empty": false
 		}
 	}
 	music_started = false
@@ -137,7 +148,8 @@ func start_game(new_song_data):
 		"travel-duration": 2, # How many seconds between spawn time and collision?
 		"song-duration": new_song_data.data.duration,
 		OBSTACLES_KEY: new_song_data.data.obstacles,
-		COINS_KEY: new_song_data.data.coins
+		COINS_KEY: new_song_data.data.coins,
+		TEMPO_BEATS: new_song_data.data.tempo_beats
 	}
 	# TODO Give tempo beats to the player sprite animator
 	
@@ -152,6 +164,7 @@ func start_game(new_song_data):
 	#Initialize object spawn timings
 	update_timings(COINS_KEY)
 	update_timings(OBSTACLES_KEY)
+	update_timings(TEMPO_BEATS)
 	game_running = true
 
 func _process(delta):
@@ -192,6 +205,12 @@ func _process(delta):
 			# Identify the next spawn and pre-load an instance
 			call_deferred("update_timings", o)
 			call_deferred("reload_obj", o)
+	
+	# If the next timing has been passed, turn on pre-loaded spawn
+	if not timings[TEMPO_BEATS]["empty"] and game_time - timings[TEMPO_BEATS]["current_timing"] > 0:
+		bicycle.sprite_progress()
+		# Identify the next spawn and pre-load an instance
+		call_deferred("update_timings", TEMPO_BEATS)
 
 # This is used to pre-emptively instantiate a new object.
 func reload_obj(obj_type):
