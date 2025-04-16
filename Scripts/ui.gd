@@ -5,8 +5,6 @@ const HEALTH_PREFIX = "Health: "
 const TIME_PREFIX = "Time: "
 const TIMESCALE_PREFIX = "TS: " # TODO: Hide this label before full game
 
-var score = 0
-
 var music_initialized: bool = false
 
 @onready var health_label = $MarginContainer/HBoxContainer2/HBoxContainer/HealthLabel
@@ -31,11 +29,8 @@ func set_health(new_health):
 func set_time(new_time):
 	time_label.text = TIME_PREFIX + str(new_time)
 
-func set_score(new_score=score):
+func set_score(score):
 	score_label.text = SCORE_PREFIX + str(score)
-func add_score(new_score):
-	score += new_score
-	set_score()
 
 func set_timescale(new_time):
 	timescale_label.text = TIMESCALE_PREFIX + str(new_time)

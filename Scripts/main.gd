@@ -17,6 +17,14 @@ var fake_song_data = {
 	COINS_KEY: [0.5, 1.5, 2.0, 3.5]
 }
 
+var fake_scores = {
+	"Satchmo": 50,
+	"Ziggy": 48,
+	"Kurt": 37,
+	"Noodle": 22,
+	"Purple Piper": 10
+}
+
 var song_data = fake_song_data
 
 const SPAWN_OFFSET = 40 # z position of new spawns (relative to player)
@@ -105,6 +113,7 @@ func start_game(new_song_data):
 	# Reset game state
 	health = 5
 	score = 0
+	
 	timings = {
 		OBSTACLES_KEY: {
 			"next_idx": 0,
@@ -209,7 +218,7 @@ func collision(obj):
 	# Switch down branch based on object type
 	if obj.OBJ_TYPE == "coin":
 		score += COIN_POINTS
-		UI.add_score(score)
+		UI.set_score(score)
 	elif obj.OBJ_TYPE == "obstacle":
 		health -= 1
 		UI.set_health(health)
@@ -244,10 +253,31 @@ func game_over():
 	Menus.score_label.text = "Final Score: " + str(score)
 	Menus.switch_menu(Menus.menus.game_over)
 
+@onready var leader_score := preload("res://Scenes/leader_score.tscn")
+
 func game_won():
 	print("You won the game!", score)
 	Music.stop()
 	end_game()
+	for child in Menus.leaderboard.get_children():
+		child.queue_free()
+	var player_printed = false
+	for l_name in fake_scores:
+		if not player_printed and score > fake_scores[l_name]:
+			var leader_score = leader_score.instantiate()
+			leader_score.get_node("Name").text = "Player"
+			leader_score.get_node("Score").text = str(score)
+			Menus.leaderboard.add_child(leader_score)
+			player_printed = true
+		var leader_score = leader_score.instantiate()
+		leader_score.get_node("Name").text = l_name
+		leader_score.get_node("Score").text = str(fake_scores[l_name])
+		Menus.leaderboard.add_child(leader_score)
+	if not player_printed:
+		var leader_score = leader_score.instantiate()
+		leader_score.get_node("Name").text = "Player"
+		leader_score.get_node("Score").text = str(score)
+		Menus.leaderboard.add_child(leader_score)
 	Menus.switch_menu(Menus.menus.game_won)
 
 func set_color_palette(palette):

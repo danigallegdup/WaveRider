@@ -21,6 +21,7 @@ const DEMO_DURATION = 5
 var cur_menu: Control
 
 @onready var score_label: Label = $GameOver/VBoxContainer/MarginContainer4/Label
+@onready var leaderboard: VBoxContainer = $GameWon/VBoxContainer/MarginContainer/Leaderboard
 
 @onready var song_list = $SongSelect/VBoxContainer/HBoxContainer/ScrollContainer/SongList
 @onready var song_list_item = preload("res://Scenes/SongListItem.tscn")
