@@ -1,7 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://c23frlevpquk6"]
+[gd_scene load_steps=6 format=3 uid="uid://3jdddah7qhmv"]
 
 [ext_resource type="Texture2D" uid="uid://p2qsnkrj24yr" path="res://Textures/rocky_terrain_02_diff_2k.jpg" id="1_688p1"]
-[ext_resource type="Script" uid="uid://ts6huedgym8k" path="res://Scripts/segment.gd" id="1_oltiy"]
+[ext_resource type="Script" path="res://Scripts/segment.gd" id="1_oltiy"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kry3j"]
 albedo_color = Color(0.152941, 0, 1, 1)

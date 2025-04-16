@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://dt0dm6yt6brlf"]
 
-[ext_resource type="Script" uid="uid://ts6huedgym8k" path="res://Scripts/segment.gd" id="1_62tj5"]
+[ext_resource type="Script" path="res://Scripts/segment.gd" id="1_62tj5"]
 [ext_resource type="Texture2D" uid="uid://ceqngdjhvkqn3" path="res://Textures/TwoLaneSolidLineRoadPatches01_2K_BaseColor.png" id="1_g24sy"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_62tj5"]
