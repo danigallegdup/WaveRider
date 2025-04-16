@@ -3,12 +3,12 @@
 importer="mp3"
 type="AudioStreamMP3"
 uid="uid://b7pf73wh2bccg"
-path="res://.godot/imported/disco-pop-304671.mp3-74afac0b4e4c0d5b1f3695746ebe65be.mp3str"
+path="res://.godot/imported/disco-pop-304671.mp3-ca2cbee304ebb1bf06e5b37195ac2148.mp3str"
 
 [deps]
 
-source_file="res://MIR/Samples/disco-pop-304671.mp3"
-dest_files=["res://.godot/imported/disco-pop-304671.mp3-74afac0b4e4c0d5b1f3695746ebe65be.mp3str"]
+source_file="res://MIR/samples/disco-pop-304671.mp3"
+dest_files=["res://.godot/imported/disco-pop-304671.mp3-ca2cbee304ebb1bf06e5b37195ac2148.mp3str"]
 
 [params]
 

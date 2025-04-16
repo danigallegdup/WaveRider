@@ -3,12 +3,12 @@
 importer="mp3"
 type="AudioStreamMP3"
 uid="uid://c2s8nv71fxyfh"
-path="res://.godot/imported/short-salsa-141682.mp3-335efb0c04651b09bcc27b449ed54a0c.mp3str"
+path="res://.godot/imported/short-salsa-141682.mp3-ceb58b4c1105d60345ffdd10ca702fb5.mp3str"
 
 [deps]
 
-source_file="res://MIR/Samples/short-salsa-141682.mp3"
-dest_files=["res://.godot/imported/short-salsa-141682.mp3-335efb0c04651b09bcc27b449ed54a0c.mp3str"]
+source_file="res://MIR/samples/short-salsa-141682.mp3"
+dest_files=["res://.godot/imported/short-salsa-141682.mp3-ceb58b4c1105d60345ffdd10ca702fb5.mp3str"]
 
 [params]
 

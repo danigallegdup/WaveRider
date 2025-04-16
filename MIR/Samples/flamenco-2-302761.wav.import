@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://ch5mj1gxi1rs3"
-path="res://.godot/imported/flamenco-2-302761.wav-d1d18a646720184097189ea7dbc9ade2.sample"
+path="res://.godot/imported/flamenco-2-302761.wav-18a316c9de3cf5af2b1e0df94757cdf8.sample"
 
 [deps]
 
-source_file="res://MIR/Samples/flamenco-2-302761.wav"
-dest_files=["res://.godot/imported/flamenco-2-302761.wav-d1d18a646720184097189ea7dbc9ade2.sample"]
+source_file="res://MIR/samples/flamenco-2-302761.wav"
+dest_files=["res://.godot/imported/flamenco-2-302761.wav-18a316c9de3cf5af2b1e0df94757cdf8.sample"]
 
 [params]
 
