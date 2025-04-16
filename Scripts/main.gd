@@ -148,7 +148,6 @@ func start_game(new_song_data):
 	print(new_song_data)
 	var song_stream = load(Util.locate_song(new_song_data))
 	#var song_stream = new_song_data.data.default_resource_location
-	BlurShader.hide()
 	Music.stream = song_stream
 	song_data = {
 		"lead-in": 3, # How many seconds before the first note collision?
@@ -172,6 +171,7 @@ func start_game(new_song_data):
 	update_timings(COINS_KEY)
 	update_timings(OBSTACLES_KEY)
 	update_timings(TEMPO_BEATS)
+	BlurShader.hide()
 	game_running = true
 
 var current_coin_lane = randi() % 3

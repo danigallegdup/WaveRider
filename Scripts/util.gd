@@ -12,7 +12,7 @@ const DEFAULT_FILE_NAME = "<default>"
 const DEFAULT_FILE_CHECKSUM = "000000"
 
 # Remember to change this when doing desktop export
-const IS_WEB_EXPORT = false
+const IS_WEB_EXPORT = true
 
 # The default 'round(...)' function only rounds to the nearest decimal - this function allows you to
 #	choose precision.
@@ -27,12 +27,3 @@ func locate_song(song_data):
 	if song_data.data.file_name == DEFAULT_FILE_NAME:
 		return song_data.data.default_resource_location
 	return song_data.data.file_name
-	
-func get_res(res_path):
-	if ".remap" in res_path:
-		res_path = res_path.replace(".tscn", "")
-		res_path = res_path.replace(".png", "")
-	return res_path
-	
-	
-	
