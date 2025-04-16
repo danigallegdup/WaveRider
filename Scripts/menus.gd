@@ -31,6 +31,8 @@ var demo_audio: AudioStream
 
 var quit_song_func:Callable
 
+var BlurShader:MeshInstance3D
+
 func _ready():
 	for menu in menus:
 		menus[menu].hide()
@@ -56,10 +58,12 @@ func toggle_pause():
 	switch_menu(menus.pause)
 	if self.visible:
 		# Do unpause
+		BlurShader.hide()
 		self.hide()
 		TimescaleUtil.toggle_pause()
 	else:
 		# Do pause
+		BlurShader.show()
 		self.show()
 		TimescaleUtil.toggle_pause()
 
@@ -77,7 +81,7 @@ func display_song_details(song_data):
 		song_details_display.show()
 		$SongSelect/VBoxContainer/HBoxContainer/SongDetails/SongDetailsDisplay/VBoxContainer/SongName.text = song_data.name
 		$SongSelect/VBoxContainer/HBoxContainer/SongDetails/SongDetailsDisplay/VBoxContainer/HBoxContainer2/Artist.text = song_data.artist
-		$SongSelect/VBoxContainer/HBoxContainer/SongDetails/SongDetailsDisplay/VBoxContainer/HBoxContainer2/Genre.text = song_data.genre
+		$SongSelect/VBoxContainer/HBoxContainer/SongDetails/SongDetailsDisplay/VBoxContainer/Genre.text = song_data.genre
 		$SongSelect/VBoxContainer/HBoxContainer/SongDetails/SongDetailsDisplay/VBoxContainer/HBoxContainer/Duration.text = Util.sec_to_minutes(song_data.data.duration)
 		#$SongSelect/HBoxContainer/SongDetails/SongDetailsDisplay/VBoxContainer/HBoxContainer/BPM.text = song_data.bpm  # Currently not saving BPM as data
 		# We can display additional information here
