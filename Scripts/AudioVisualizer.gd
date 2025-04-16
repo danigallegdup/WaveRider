@@ -13,6 +13,7 @@ var spectrum
 var min_values = []
 var max_values = []
 
+@onready var audio_stream_player: AudioStreamPlayer = $"../../../AudioStreamPlayer"
 
 func _draw():
 	var w = WIDTH / VU_COUNT
@@ -35,6 +36,14 @@ func _draw():
 		
 
 func _process(_delta):
+	if not audio_stream_player.playing:
+		# Smoothly decay values to zero when paused
+		for i in range(VU_COUNT):
+			min_values[i] = lerp(min_values[i], 0.0, ANIMATION_SPEED)
+			max_values[i] = lerp(max_values[i], 0.0, ANIMATION_SPEED)
+		queue_redraw()
+		return
+	
 	var data = []
 	var prev_hz = 0
 
