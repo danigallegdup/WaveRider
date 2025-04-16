@@ -2,26 +2,27 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://hn6htxhyi1qo"
-path="res://.godot/imported/title_white_bg.png-031b9c8949d7191b7e09d3dc8b951b31.ctex"
+uid="uid://4qb83w1p7xc1"
+path.s3tc="res://.godot/imported/biker2_right.png-cfb79318fc3cd55cbb9649ca6d674ae3.s3tc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
-source_file="res://sprites/menu_assets/title_white_bg.png"
-dest_files=["res://.godot/imported/title_white_bg.png-031b9c8949d7191b7e09d3dc8b951b31.ctex"]
+source_file="res://sprites/player/biker2_right.png"
+dest_files=["res://.godot/imported/biker2_right.png-cfb79318fc3cd55cbb9649ca6d674ae3.s3tc.ctex"]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0
 compress/channel_pack=0
-mipmaps/generate=false
+mipmaps/generate=true
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""
@@ -31,4 +32,4 @@ process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
-detect_3d/compress_to=1
+detect_3d/compress_to=0
