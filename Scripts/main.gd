@@ -17,6 +17,14 @@ var fake_song_data = {
 	COINS_KEY: [0.5, 1.5, 2.0, 3.5]
 }
 
+var fake_scores = {
+	"Satchmo": 50,
+	"Ziggy": 48,
+	"Kurt": 37,
+	"Noodle": 22,
+	"Purple Piper": 10
+}
+
 var song_data = fake_song_data
 
 const SPAWN_OFFSET = 40 # z position of new spawns (relative to player)
@@ -105,6 +113,7 @@ func start_game(new_song_data):
 	# Reset game state
 	health = 5
 	score = 0
+	
 	timings = {
 		OBSTACLES_KEY: {
 			"next_idx": 0,
@@ -145,20 +154,6 @@ func start_game(new_song_data):
 	update_timings(OBSTACLES_KEY)
 	game_running = true
 
-func end_game(quit=false):
-	# Clear all spawned objects
-	for child in spawned_objects.get_children():
-		child.queue_free()
-	BlurShader.show()
-	game_running = false
-	music_started = false
-	bicycle.speed = DEFAULT_BIKE_SPEED
-	UI.hide()
-	if quit:
-		Menus.switch_menu(Menus.menus.song_select)
-	else:
-		Menus.song_complete(score)
-
 func _process(delta):
 	audio_visualizer_viewport.position.z = bicycle.position.z - 125
 	
@@ -177,7 +172,7 @@ func _process(delta):
 	
 	# If end of song
 	if game_time > song_data["song-duration"] + END_OF_SONG_OFFSET:
-		end_game()
+		game_won()
 		return  # Do not execute the rest of the frame process
 	
 	if Input.is_action_just_pressed("pause"):
@@ -223,7 +218,7 @@ func collision(obj):
 	# Switch down branch based on object type
 	if obj.OBJ_TYPE == "coin":
 		score += COIN_POINTS
-		UI.add_score(score)
+		UI.set_score(score)
 	elif obj.OBJ_TYPE == "obstacle":
 		health -= 1
 		UI.set_health(health)
@@ -233,22 +228,63 @@ func collision(obj):
 			game_over()
 	else: print("ERROR: Unconfigured collision branch: " + obj.OBJ_TYPE)
 
-func quit_song():
-	Menus.toggle_pause()
+func end_game():
+	# Clear all spawned objects
+	for child in spawned_objects.get_children():
+		child.queue_free()
+	BlurShader.show()
+	game_running = false
+	music_started = false
+	bicycle.speed = DEFAULT_BIKE_SPEED
+	UI.hide()
 	Menus.show()
+
+func quit_song():
+	print("Qutting the game...")
+	Menus.toggle_pause()
 	Music.stop()
-	end_game(true)
+	end_game()
+	Menus.switch_menu(Menus.menus.song_select)
 
 func game_over():
 	print("Game Over! Score: ", score)
-	if true: return # TODO remove this for real game
-	get_tree().quit()  # Placeholder
+	Music.stop()
+	end_game()
+	Menus.score_label.text = "Final Score: " + str(score)
+	Menus.switch_menu(Menus.menus.game_over)
+
+@onready var leader_score := preload("res://Scenes/leader_score.tscn")
+
+func game_won():
+	print("You won the game!", score)
+	Music.stop()
+	end_game()
+	for child in Menus.leaderboard.get_children():
+		child.queue_free()
+	var player_printed = false
+	for l_name in fake_scores:
+		if not player_printed and score > fake_scores[l_name]:
+			var leader_score = leader_score.instantiate()
+			leader_score.get_node("Name").text = "Player"
+			leader_score.get_node("Score").text = str(score)
+			Menus.leaderboard.add_child(leader_score)
+			player_printed = true
+		var leader_score = leader_score.instantiate()
+		leader_score.get_node("Name").text = l_name
+		leader_score.get_node("Score").text = str(fake_scores[l_name])
+		Menus.leaderboard.add_child(leader_score)
+	if not player_printed:
+		var leader_score = leader_score.instantiate()
+		leader_score.get_node("Name").text = "Player"
+		leader_score.get_node("Score").text = str(score)
+		Menus.leaderboard.add_child(leader_score)
+	Menus.switch_menu(Menus.menus.game_won)
 
 func set_color_palette(palette):
 	$WorldEnvironment.environment.background_color = palette["sky_color"]
 
 # This function will trigger when the audio track is finished playing; use this to transition to
 # 	score screen.
-func _on_audio_stream_player_finished() -> void:
-	print("Song complete! Well done!")
-	game_over()
+#func _on_audio_stream_player_finished() -> void:
+	#print("Song complete! Well done!")
+	#game_won()

@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://celvn43a7xgcb"
-path="res://.godot/imported/obstacleShards.glb-3d992619bd9ea7a185d4f9471431732f.scn"
+path="res://.godot/imported/obstacleShards.glb-4909ebdb2f486689666e9c19cc45cc0a.scn"
 
 [deps]
 
-source_file="res://sprites/obstacleShards.glb"
-dest_files=["res://.godot/imported/obstacleShards.glb-3d992619bd9ea7a185d4f9471431732f.scn"]
+source_file="res://Sprites/obstacleShards.glb"
+dest_files=["res://.godot/imported/obstacleShards.glb-4909ebdb2f486689666e9c19cc45cc0a.scn"]
 
 [params]
 
