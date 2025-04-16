@@ -83,8 +83,8 @@ var game_running = false
 
 const POOL_SIZE = 100  # of segments to keep in the world
 const SEGMENT_LENGTH = 10.0  # distance between segments
-@onready var terrain_scene := preload("res://Scenes/Terrain.tscn")
-@onready var ground_scene  := preload("res://Scenes/Ground.tscn")
+@onready var terrain_scene = preload("res://Scenes/terrain.tscn")
+@onready var ground_scene = preload("res://Scenes/ground.tscn")
 
 func _ready():
 	TimescaleUtil.audio_player = Music

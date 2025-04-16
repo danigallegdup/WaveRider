@@ -1,10 +1,11 @@
 [gd_scene load_steps=6 format=3 uid="uid://h64w7n4g7s6a"]
 
 [ext_resource type="Script" uid="uid://c4equai46atcw" path="res://Scripts/obstacle.gd" id="1_15o2q"]
-[ext_resource type="PackedScene" uid="uid://hdlhcavu8ngf" path="res://Sprites/obstacle.glb" id="2_rvx1i"]
-[ext_resource type="PackedScene" uid="uid://celvn43a7xgcb" path="res://Sprites/obstacleShards.glb" id="3_rvx1i"]
+[ext_resource type="PackedScene" uid="uid://hdlhcavu8ngf" path="res://sprites/obstacle.glb" id="2_rvx1i"]
+[ext_resource type="PackedScene" uid="uid://celvn43a7xgcb" path="res://sprites/obstacleShards.glb" id="3_rvx1i"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_a6yce"]
+size = Vector3(0.688477, 1, 0.746094)
 
 [sub_resource type="GDScript" id="GDScript_a6yce"]
 script/source = "# SPDX-FileCopyrightText: 2023 Jummit
@@ -132,6 +133,7 @@ script = ExtResource("1_15o2q")
 [node name="obstacle" parent="." instance=ExtResource("2_rvx1i")]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00732422, 0, -0.00195313)
 shape = SubResource("BoxShape3D_a6yce")
 
 [node name="Destruction" type="Node" parent="."]

@@ -3,12 +3,12 @@
 importer="mp3"
 type="AudioStreamMP3"
 uid="uid://imq2dbpivm25"
-path="res://.godot/imported/immersing-into-electro-swing-152574.mp3-9fbc839c32a0cb3327ce0af9d2819c3f.mp3str"
+path="res://.godot/imported/immersing-into-electro-swing-152574.mp3-7f295d34da10f4a6b3b23118e7ed5a5b.mp3str"
 
 [deps]
 
-source_file="res://MIR/samples/immersing-into-electro-swing-152574.mp3"
-dest_files=["res://.godot/imported/immersing-into-electro-swing-152574.mp3-9fbc839c32a0cb3327ce0af9d2819c3f.mp3str"]
+source_file="res://MIR/Samples/immersing-into-electro-swing-152574.mp3"
+dest_files=["res://.godot/imported/immersing-into-electro-swing-152574.mp3-7f295d34da10f4a6b3b23118e7ed5a5b.mp3str"]
 
 [params]
 

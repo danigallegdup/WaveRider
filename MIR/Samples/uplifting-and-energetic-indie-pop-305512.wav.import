@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://mxot8nnjq3cx"
-path="res://.godot/imported/uplifting-and-energetic-indie-pop-305512.wav-93f67940eed0da0ff4b5b9f15fed6e0f.sample"
+path="res://.godot/imported/uplifting-and-energetic-indie-pop-305512.wav-41a2dca96d7da95572ddb27d26bc8393.sample"
 
 [deps]
 
-source_file="res://MIR/samples/uplifting-and-energetic-indie-pop-305512.wav"
-dest_files=["res://.godot/imported/uplifting-and-energetic-indie-pop-305512.wav-93f67940eed0da0ff4b5b9f15fed6e0f.sample"]
+source_file="res://MIR/Samples/uplifting-and-energetic-indie-pop-305512.wav"
+dest_files=["res://.godot/imported/uplifting-and-energetic-indie-pop-305512.wav-41a2dca96d7da95572ddb27d26bc8393.sample"]
 
 [params]
 

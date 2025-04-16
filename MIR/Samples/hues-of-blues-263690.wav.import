@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://wmch332klqns"
-path="res://.godot/imported/hues-of-blues-263690.wav-21debfca8ee5b8e09be41bead96f6f00.sample"
+path="res://.godot/imported/hues-of-blues-263690.wav-95a86647dac041617cd9c522a67bc5ea.sample"
 
 [deps]
 
-source_file="res://MIR/samples/hues-of-blues-263690.wav"
-dest_files=["res://.godot/imported/hues-of-blues-263690.wav-21debfca8ee5b8e09be41bead96f6f00.sample"]
+source_file="res://MIR/Samples/hues-of-blues-263690.wav"
+dest_files=["res://.godot/imported/hues-of-blues-263690.wav-95a86647dac041617cd9c522a67bc5ea.sample"]
 
 [params]
 
