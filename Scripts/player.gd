@@ -12,6 +12,7 @@ var lean_speed = 10.0
 var lean_angle = 0.0
 var max_lean = 25.0
 
+
 func _physics_process(delta):
 	# Move forward
 	velocity.z = -speed  # Negative Z is forward
