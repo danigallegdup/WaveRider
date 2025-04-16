@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://hdlhcavu8ngf"
-path="res://.godot/imported/obstacle.glb-84718592a1057da774c0d2195a78a722.scn"
+path="res://.godot/imported/obstacle.glb-7c62c2774ec9c9a414fc3312b93b2843.scn"
 
 [deps]
 
-source_file="res://sprites/obstacle.glb"
-dest_files=["res://.godot/imported/obstacle.glb-84718592a1057da774c0d2195a78a722.scn"]
+source_file="res://Sprites/obstacle.glb"
+dest_files=["res://.godot/imported/obstacle.glb-7c62c2774ec9c9a414fc3312b93b2843.scn"]
 
 [params]
 
