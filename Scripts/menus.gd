@@ -31,6 +31,8 @@ var demo_audio: AudioStream
 
 var quit_song_func:Callable
 
+var BlurShader:MeshInstance3D
+
 func _ready():
 	for menu in menus:
 		menus[menu].hide()
@@ -56,10 +58,12 @@ func toggle_pause():
 	switch_menu(menus.pause)
 	if self.visible:
 		# Do unpause
+		BlurShader.hide()
 		self.hide()
 		TimescaleUtil.toggle_pause()
 	else:
 		# Do pause
+		BlurShader.show()
 		self.show()
 		TimescaleUtil.toggle_pause()
 

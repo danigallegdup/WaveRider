@@ -4,10 +4,10 @@
 [ext_resource type="PackedScene" uid="uid://dt0dm6yt6brlf" path="res://Scenes/terrain.tscn" id="3_21xkr"]
 [ext_resource type="PackedScene" uid="uid://cypespwkot0ak" path="res://Scenes/ui.tscn" id="4_jjvhh"]
 [ext_resource type="PackedScene" uid="uid://cmp4gi548ck1n" path="res://Scenes/player.tscn" id="4_kry3j"]
-[ext_resource type="PackedScene" uid="uid://3jdddah7qhmv" path="res://Scenes/ground.tscn" id="4_ynf5e"]
-[ext_resource type="Shader" uid="uid://dy3n41dgv6ig7" path="res://Shaders/pixelize.gdshader" id="6_21xkr"]
-[ext_resource type="PackedScene" uid="uid://blxo5bub2eamn" path="res://Scenes/AudioVisualizer.tscn" id="6_ynf5e"]
+[ext_resource type="PackedScene" path="res://Scenes/ground.tscn" id="4_ynf5e"]
+[ext_resource type="PackedScene" path="res://Scenes/AudioVisualizer.tscn" id="6_ynf5e"]
 [ext_resource type="AudioStream" uid="uid://c557gaas4kvgw" path="res://Resources/DefaultMusic/Electro_Cabello.wav" id="7_6bp64"]
+[ext_resource type="Shader" uid="uid://3wlfd5dxijp1" path="res://Shaders/blur.gdshader" id="7_ynf5e"]
 [ext_resource type="PackedScene" uid="uid://bf1nsmy1w52yl" path="res://Scenes/menus.tscn" id="8_344ge"]
 
 [sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_21xkr"]
@@ -25,12 +25,17 @@ sky = SubResource("Sky_6bp64")
 [sub_resource type="ViewportTexture" id="ViewportTexture_hptm8"]
 viewport_path = NodePath("AudioVisualizerViewport/SubViewport")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_6bp64"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ynf5e"]
 render_priority = 0
-shader = ExtResource("6_21xkr")
+shader = ExtResource("7_ynf5e")
+shader_parameter/lod_level = 2
+shader_parameter/brightness = 0.5
+shader_parameter/distortion_intensity = 0.0
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_344ge"]
-material = SubResource("ShaderMaterial_6bp64")
+material = SubResource("ShaderMaterial_ynf5e")
+subdivide_width = 32
+subdivide_depth = 32
 
 [node name="Main" type="Node3D"]
 script = ExtResource("1_8gbba")
@@ -73,6 +78,10 @@ current = true
 [node name="PixelShader" type="MeshInstance3D" parent="Player/Camera3D"]
 transform = Transform3D(2, 0, 0, 0, 0.0034557, -2, 0, 2, 0.0034557, 0, 0.171015, -0.956479)
 visible = false
+mesh = SubResource("PlaneMesh_344ge")
+
+[node name="BlurShader" type="MeshInstance3D" parent="Player/Camera3D"]
+transform = Transform3D(2, 0, 0, 0, 0.0034557, -2, 0, 2, 0.0034557, 0, 0.171015, -0.956479)
 mesh = SubResource("PlaneMesh_344ge")
 
 [node name="UI" parent="." instance=ExtResource("4_jjvhh")]
