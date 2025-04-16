@@ -15,9 +15,12 @@ const DEMO_DURATION = 5
 		"song_select": $SongSelect,
 		"options": $Options,
 		"pause": $Pause,
-		"game_over": $GameOver,
+		"game_won": $GameWon,
+		"game_over": $GameOver
 	}
 var cur_menu: Control
+
+@onready var score_label: Label = $GameOver/VBoxContainer/MarginContainer4/Label
 
 @onready var song_list = $SongSelect/VBoxContainer/HBoxContainer/ScrollContainer/SongList
 @onready var song_list_item = preload("res://Scenes/SongListItem.tscn")
@@ -29,7 +32,7 @@ var cur_menu: Control
 @onready var demo_audio_player = $DemoStreamPlayer
 var demo_audio: AudioStream
 
-var quit_song_func:Callable
+var quit_song_func: Callable
 
 func _ready():
 	for menu in menus:
@@ -83,13 +86,8 @@ func display_song_details(song_data):
 		# We can display additional information here
 	else:
 		song_details_display.hide()
-	
-
-func song_complete(score):
-	switch_menu(menus.game_over)
-	self.show()
-	
-
+		
+		
 '''
 BUTTON SIGNALS
 

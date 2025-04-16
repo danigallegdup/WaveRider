@@ -74,7 +74,8 @@ func slowdown(target_scale=SLOW_SCALE):
 # This private method directly modifies the game elements that require scaling
 func _update_scale(target_scale):
 	Engine.time_scale = target_scale
-	if audio_player: audio_player.pitch_scale = target_scale
+	if audio_player and target_scale > 0:
+		audio_player.pitch_scale = target_scale
 
 # This private method initializes the lerp, setting the target and rate, and beginning the lerp.
 #	Note that incorrect configurations are handled in the lerp break logic of _process() (for

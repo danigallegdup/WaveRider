@@ -1,14 +1,14 @@
 [gd_scene load_steps=11 format=3 uid="uid://bf1nsmy1w52yl"]
 
-[ext_resource type="Texture2D" uid="uid://hn6htxhyi1qo" path="res://sprites/menu_assets/title_white_bg.png" id="1_goel8"]
+[ext_resource type="Texture2D" uid="uid://hn6htxhyi1qo" path="res://Sprites/menu_assets/title_white_bg.png" id="1_goel8"]
 [ext_resource type="Script" uid="uid://cg3k4c7fcq4aw" path="res://Scripts/menus.gd" id="1_sqhkm"]
 [ext_resource type="Theme" uid="uid://dgm6ykjvw7b75" path="res://Resources/Menu_Theme.tres" id="3_0yfu1"]
 [ext_resource type="LabelSettings" uid="uid://v7ib6rv1vev0" path="res://Resources/UI_Label_Settings_tiny.tres" id="3_yciej"]
 [ext_resource type="LabelSettings" uid="uid://dy6i685tlkbnn" path="res://Resources/UI_Label_Settings_small.tres" id="4_0yfu1"]
-[ext_resource type="Texture2D" uid="uid://8c5jue6eul3k" path="res://sprites/menu_assets/song_list_item_frame_9patch.png" id="6_8ovod"]
+[ext_resource type="Texture2D" uid="uid://8c5jue6eul3k" path="res://Sprites/menu_assets/song_list_item_frame_9patch.png" id="6_8ovod"]
 [ext_resource type="LabelSettings" uid="uid://ddb37lrg7l5bk" path="res://Resources/UI_Label_Settings.tres" id="6_qdaxd"]
-[ext_resource type="Texture2D" uid="uid://c1ef7fxphum2g" path="res://sprites/menu_assets/play_circle_60dp_E3E3E3_FILL0_wght400_GRAD0_opsz48.png" id="8_ewi2v"]
-[ext_resource type="Texture2D" uid="uid://bklc2mf03yhwt" path="res://sprites/menu_assets/play_circle_60dp_666666_FILL0_wght400_GRAD0_opsz48.png" id="9_2b31k"]
+[ext_resource type="Texture2D" uid="uid://c1ef7fxphum2g" path="res://Sprites/menu_assets/play_circle_60dp_E3E3E3_FILL0_wght400_GRAD0_opsz48.png" id="8_ewi2v"]
+[ext_resource type="Texture2D" uid="uid://bklc2mf03yhwt" path="res://Sprites/menu_assets/play_circle_60dp_666666_FILL0_wght400_GRAD0_opsz48.png" id="9_2b31k"]
 [ext_resource type="LabelSettings" uid="uid://c41y0afiq0yhh" path="res://Resources/UI_Label_Settings_large.tres" id="10_2b31k"]
 
 [node name="Menus" type="CenterContainer"]
@@ -303,6 +303,7 @@ theme = ExtResource("3_0yfu1")
 text = "Back"
 
 [node name="Pause" type="MarginContainer" parent="."]
+visible = false
 layout_mode = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Pause"]
@@ -341,8 +342,161 @@ theme = ExtResource("3_0yfu1")
 theme_override_font_sizes/font_size = 32
 text = "Quit"
 
-[node name="GameOver" type="MarginContainer" parent="."]
+[node name="GameWon" type="MarginContainer" parent="."]
 visible = false
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GameWon"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="GameWon/VBoxContainer"]
+layout_mode = 2
+text = "Song Complete!"
+label_settings = ExtResource("10_2b31k")
+horizontal_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="GameWon/VBoxContainer"]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+theme_override_constants/margin_top = 40
+
+[node name="Leaderboard" type="VBoxContainer" parent="GameWon/VBoxContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="LeaderScore" type="HBoxContainer" parent="GameWon/VBoxContainer/MarginContainer/Leaderboard"]
+layout_mode = 2
+alignment = 1
+
+[node name="Name" type="Label" parent="GameWon/VBoxContainer/MarginContainer/Leaderboard/LeaderScore"]
+layout_mode = 2
+text = "Satchmo"
+label_settings = ExtResource("4_0yfu1")
+
+[node name="Spacer" type="Control" parent="GameWon/VBoxContainer/MarginContainer/Leaderboard/LeaderScore"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.8
+
+[node name="Score" type="Label" parent="GameWon/VBoxContainer/MarginContainer/Leaderboard/LeaderScore"]
+layout_mode = 2
+size_flags_vertical = 8
+text = "100000"
+label_settings = ExtResource("3_yciej")
+
+[node name="LeaderScore2" type="HBoxContainer" parent="GameWon/VBoxContainer/MarginContainer/Leaderboard"]
+layout_mode = 2
+alignment = 1
+
+[node name="Name" type="Label" parent="GameWon/VBoxContainer/MarginContainer/Leaderboard/LeaderScore2"]
+layout_mode = 2
+text = "Ziggy"
+label_settings = ExtResource("4_0yfu1")
+
+[node name="Spacer" type="Control" parent="GameWon/VBoxContainer/MarginContainer/Leaderboard/LeaderScore2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.8
+
+[node name="Score" type="Label" parent="GameWon/VBoxContainer/MarginContainer/Leaderboard/LeaderScore2"]
+layout_mode = 2
+size_flags_vertical = 8
+text = "80000"
+label_settings = ExtResource("3_yciej")
+
+[node name="LeaderScore3" type="HBoxContainer" parent="GameWon/VBoxContainer/MarginContainer/Leaderboard"]
+layout_mode = 2
+alignment = 1
+
+[node name="Name" type="Label" parent="GameWon/VBoxContainer/MarginContainer/Leaderboard/LeaderScore3"]
+layout_mode = 2
+text = "Kurt"
+label_settings = ExtResource("4_0yfu1")
+
+[node name="Spacer" type="Control" parent="GameWon/VBoxContainer/MarginContainer/Leaderboard/LeaderScore3"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.8
+
+[node name="Score" type="Label" parent="GameWon/VBoxContainer/MarginContainer/Leaderboard/LeaderScore3"]
+layout_mode = 2
+size_flags_vertical = 8
+text = "60000"
+label_settings = ExtResource("3_yciej")
+
+[node name="LeaderScore4" type="HBoxContainer" parent="GameWon/VBoxContainer/MarginContainer/Leaderboard"]
+layout_mode = 2
+alignment = 1
+
+[node name="Name" type="Label" parent="GameWon/VBoxContainer/MarginContainer/Leaderboard/LeaderScore4"]
+layout_mode = 2
+text = "Noodle"
+label_settings = ExtResource("4_0yfu1")
+
+[node name="Spacer" type="Control" parent="GameWon/VBoxContainer/MarginContainer/Leaderboard/LeaderScore4"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.8
+
+[node name="Score" type="Label" parent="GameWon/VBoxContainer/MarginContainer/Leaderboard/LeaderScore4"]
+layout_mode = 2
+size_flags_vertical = 8
+text = "40000"
+label_settings = ExtResource("3_yciej")
+
+[node name="LeaderScore5" type="HBoxContainer" parent="GameWon/VBoxContainer/MarginContainer/Leaderboard"]
+layout_mode = 2
+alignment = 1
+
+[node name="Name" type="Label" parent="GameWon/VBoxContainer/MarginContainer/Leaderboard/LeaderScore5"]
+layout_mode = 2
+text = "Purple Piper"
+label_settings = ExtResource("4_0yfu1")
+
+[node name="Spacer" type="Control" parent="GameWon/VBoxContainer/MarginContainer/Leaderboard/LeaderScore5"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.8
+
+[node name="Score" type="Label" parent="GameWon/VBoxContainer/MarginContainer/Leaderboard/LeaderScore5"]
+layout_mode = 2
+size_flags_vertical = 8
+text = "20000"
+label_settings = ExtResource("3_yciej")
+
+[node name="PlayerScoreTemplate" type="HBoxContainer" parent="GameWon/VBoxContainer/MarginContainer/Leaderboard"]
+layout_mode = 2
+alignment = 1
+
+[node name="Name" type="Label" parent="GameWon/VBoxContainer/MarginContainer/Leaderboard/PlayerScoreTemplate"]
+layout_mode = 2
+text = "Player"
+label_settings = ExtResource("4_0yfu1")
+
+[node name="Spacer" type="Control" parent="GameWon/VBoxContainer/MarginContainer/Leaderboard/PlayerScoreTemplate"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.8
+
+[node name="Score" type="Label" parent="GameWon/VBoxContainer/MarginContainer/Leaderboard/PlayerScoreTemplate"]
+layout_mode = 2
+size_flags_vertical = 8
+text = "0"
+label_settings = ExtResource("3_yciej")
+
+[node name="MarginContainer2" type="MarginContainer" parent="GameWon/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 200
+
+[node name="ReturnToSongList" type="Button" parent="GameWon/VBoxContainer/MarginContainer2"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("3_0yfu1")
+text = "Exit Song"
+
+[node name="GameOver" type="MarginContainer" parent="."]
 layout_mode = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="GameOver"]
@@ -351,149 +505,41 @@ alignment = 1
 
 [node name="Label" type="Label" parent="GameOver/VBoxContainer"]
 layout_mode = 2
-text = "Song Complete!"
+text = "Game Over :("
 label_settings = ExtResource("10_2b31k")
 horizontal_alignment = 1
 
-[node name="MarginContainer" type="MarginContainer" parent="GameOver/VBoxContainer"]
-custom_minimum_size = Vector2(400, 0)
+[node name="MarginContainer4" type="MarginContainer" parent="GameOver/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 10
+
+[node name="Label" type="Label" parent="GameOver/VBoxContainer/MarginContainer4"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Final Score:"
+horizontal_alignment = 1
+
+[node name="MarginContainer3" type="MarginContainer" parent="GameOver/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/margin_top = 40
 
-[node name="Leaderboard" type="VBoxContainer" parent="GameOver/VBoxContainer/MarginContainer"]
+[node name="ReturnToSongList" type="Button" parent="GameOver/VBoxContainer/MarginContainer3"]
+custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
-theme_override_constants/separation = 10
-
-[node name="LeaderScore" type="HBoxContainer" parent="GameOver/VBoxContainer/MarginContainer/Leaderboard"]
-layout_mode = 2
-alignment = 1
-
-[node name="Name" type="Label" parent="GameOver/VBoxContainer/MarginContainer/Leaderboard/LeaderScore"]
-layout_mode = 2
-text = "Satchmo"
-label_settings = ExtResource("4_0yfu1")
-
-[node name="Spacer" type="Control" parent="GameOver/VBoxContainer/MarginContainer/Leaderboard/LeaderScore"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.8
-
-[node name="Score" type="Label" parent="GameOver/VBoxContainer/MarginContainer/Leaderboard/LeaderScore"]
-layout_mode = 2
-size_flags_vertical = 8
-text = "100000"
-label_settings = ExtResource("3_yciej")
-
-[node name="LeaderScore2" type="HBoxContainer" parent="GameOver/VBoxContainer/MarginContainer/Leaderboard"]
-layout_mode = 2
-alignment = 1
-
-[node name="Name" type="Label" parent="GameOver/VBoxContainer/MarginContainer/Leaderboard/LeaderScore2"]
-layout_mode = 2
-text = "Ziggy"
-label_settings = ExtResource("4_0yfu1")
-
-[node name="Spacer" type="Control" parent="GameOver/VBoxContainer/MarginContainer/Leaderboard/LeaderScore2"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.8
-
-[node name="Score" type="Label" parent="GameOver/VBoxContainer/MarginContainer/Leaderboard/LeaderScore2"]
-layout_mode = 2
-size_flags_vertical = 8
-text = "80000"
-label_settings = ExtResource("3_yciej")
-
-[node name="LeaderScore3" type="HBoxContainer" parent="GameOver/VBoxContainer/MarginContainer/Leaderboard"]
-layout_mode = 2
-alignment = 1
-
-[node name="Name" type="Label" parent="GameOver/VBoxContainer/MarginContainer/Leaderboard/LeaderScore3"]
-layout_mode = 2
-text = "Kurt"
-label_settings = ExtResource("4_0yfu1")
-
-[node name="Spacer" type="Control" parent="GameOver/VBoxContainer/MarginContainer/Leaderboard/LeaderScore3"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.8
-
-[node name="Score" type="Label" parent="GameOver/VBoxContainer/MarginContainer/Leaderboard/LeaderScore3"]
-layout_mode = 2
-size_flags_vertical = 8
-text = "60000"
-label_settings = ExtResource("3_yciej")
-
-[node name="LeaderScore4" type="HBoxContainer" parent="GameOver/VBoxContainer/MarginContainer/Leaderboard"]
-layout_mode = 2
-alignment = 1
-
-[node name="Name" type="Label" parent="GameOver/VBoxContainer/MarginContainer/Leaderboard/LeaderScore4"]
-layout_mode = 2
-text = "Noodle"
-label_settings = ExtResource("4_0yfu1")
-
-[node name="Spacer" type="Control" parent="GameOver/VBoxContainer/MarginContainer/Leaderboard/LeaderScore4"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.8
-
-[node name="Score" type="Label" parent="GameOver/VBoxContainer/MarginContainer/Leaderboard/LeaderScore4"]
-layout_mode = 2
-size_flags_vertical = 8
-text = "40000"
-label_settings = ExtResource("3_yciej")
-
-[node name="LeaderScore5" type="HBoxContainer" parent="GameOver/VBoxContainer/MarginContainer/Leaderboard"]
-layout_mode = 2
-alignment = 1
-
-[node name="Name" type="Label" parent="GameOver/VBoxContainer/MarginContainer/Leaderboard/LeaderScore5"]
-layout_mode = 2
-text = "Purple Piper"
-label_settings = ExtResource("4_0yfu1")
-
-[node name="Spacer" type="Control" parent="GameOver/VBoxContainer/MarginContainer/Leaderboard/LeaderScore5"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.8
-
-[node name="Score" type="Label" parent="GameOver/VBoxContainer/MarginContainer/Leaderboard/LeaderScore5"]
-layout_mode = 2
-size_flags_vertical = 8
-text = "20000"
-label_settings = ExtResource("3_yciej")
-
-[node name="PlayerScoreTemplate" type="HBoxContainer" parent="GameOver/VBoxContainer/MarginContainer/Leaderboard"]
-layout_mode = 2
-alignment = 1
-
-[node name="Name" type="Label" parent="GameOver/VBoxContainer/MarginContainer/Leaderboard/PlayerScoreTemplate"]
-layout_mode = 2
-text = "Player"
-label_settings = ExtResource("4_0yfu1")
-
-[node name="Spacer" type="Control" parent="GameOver/VBoxContainer/MarginContainer/Leaderboard/PlayerScoreTemplate"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.8
-
-[node name="Score" type="Label" parent="GameOver/VBoxContainer/MarginContainer/Leaderboard/PlayerScoreTemplate"]
-layout_mode = 2
-size_flags_vertical = 8
-text = "0"
-label_settings = ExtResource("3_yciej")
+size_flags_horizontal = 4
+theme = ExtResource("3_0yfu1")
+text = "Restart"
 
 [node name="MarginContainer2" type="MarginContainer" parent="GameOver/VBoxContainer"]
 layout_mode = 2
-theme_override_constants/margin_top = 200
+theme_override_constants/margin_top = 20
 
 [node name="ReturnToSongList" type="Button" parent="GameOver/VBoxContainer/MarginContainer2"]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 theme = ExtResource("3_0yfu1")
-text = "Exit Song"
+text = "Quit"
 
 [node name="DemoStreamPlayer" type="AudioStreamPlayer" parent="."]
 
@@ -509,4 +555,6 @@ text = "Exit Song"
 [connection signal="button_down" from="Pause/VBoxContainer/HBoxContainer/Continue" to="." method="_on_continue_button_down"]
 [connection signal="button_down" from="Pause/VBoxContainer/HBoxContainer/Options" to="." method="_on_pause_options_button_down"]
 [connection signal="button_down" from="Pause/VBoxContainer/HBoxContainer/Quit" to="." method="_on_pause_quit_button_down"]
+[connection signal="button_down" from="GameWon/VBoxContainer/MarginContainer2/ReturnToSongList" to="." method="_on_play_button_down"]
+[connection signal="button_down" from="GameOver/VBoxContainer/MarginContainer3/ReturnToSongList" to="." method="_on_play_song_button_down"]
 [connection signal="button_down" from="GameOver/VBoxContainer/MarginContainer2/ReturnToSongList" to="." method="_on_play_button_down"]

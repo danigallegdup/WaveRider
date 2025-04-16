@@ -141,20 +141,6 @@ func start_game(new_song_data):
 	update_timings(OBSTACLES_KEY)
 	game_running = true
 
-func end_game(quit=false):
-	# Clear all spawned objects
-	for child in spawned_objects.get_children():
-		child.queue_free()
-	
-	game_running = false
-	music_started = false
-	bicycle.speed = DEFAULT_BIKE_SPEED
-	UI.hide()
-	if quit:
-		Menus.switch_menu(Menus.menus.song_select)
-	else:
-		Menus.song_complete(score)
-
 func _process(delta):
 	audio_visualizer_viewport.position.z = bicycle.position.z - 125
 	
@@ -173,7 +159,7 @@ func _process(delta):
 	
 	# If end of song
 	if game_time > song_data["song-duration"] + END_OF_SONG_OFFSET:
-		end_game()
+		game_won()
 		return  # Do not execute the rest of the frame process
 	
 	if Input.is_action_just_pressed("pause"):
@@ -229,22 +215,41 @@ func collision(obj):
 			game_over()
 	else: print("ERROR: Unconfigured collision branch: " + obj.OBJ_TYPE)
 
-func quit_song():
-	Menus.toggle_pause()
+func end_game():
+	# Clear all spawned objects
+	for child in spawned_objects.get_children():
+		child.queue_free()
+	game_running = false
+	music_started = false
+	bicycle.speed = DEFAULT_BIKE_SPEED
+	UI.hide()
 	Menus.show()
+
+func quit_song():
+	print("Qutting the game...")
+	Menus.toggle_pause()
 	Music.stop()
-	end_game(true)
+	end_game()
+	Menus.switch_menu(Menus.menus.song_select)
 
 func game_over():
 	print("Game Over! Score: ", score)
-	if true: return # TODO remove this for real game
-	get_tree().quit()  # Placeholder
+	Music.stop()
+	end_game()
+	Menus.score_label.text = "Final Score: " + str(score)
+	Menus.switch_menu(Menus.menus.game_over)
+
+func game_won():
+	print("You won the game!", score)
+	Music.stop()
+	end_game()
+	Menus.switch_menu(Menus.menus.game_won)
 
 func set_color_palette(palette):
 	$WorldEnvironment.environment.background_color = palette["sky_color"]
 
 # This function will trigger when the audio track is finished playing; use this to transition to
 # 	score screen.
-func _on_audio_stream_player_finished() -> void:
-	print("Song complete! Well done!")
-	game_over()
+#func _on_audio_stream_player_finished() -> void:
+	#print("Song complete! Well done!")
+	#game_won()
