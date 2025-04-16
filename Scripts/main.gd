@@ -58,6 +58,7 @@ var timings = {
 @onready var terrain: Node3D = $Terrain
 @onready var ground: Node3D = $Ground
 @onready var audio_visualizer_viewport: Sprite3D = $AudioVisualizerViewport
+@onready var spawned_objects: Node3D = $SpawnedObjects
 
 @onready var Music = $AudioStreamPlayer
 @onready var Menus = $Menus
@@ -97,6 +98,24 @@ func _ready():
 func start_game(new_song_data):
 	if game_running:
 		return
+	
+	# Reset game state
+	health = 5
+	score = 0
+	timings = {
+		OBSTACLES_KEY: {
+			"next_idx": 0,
+			"current_timing": 0.0,
+			"empty": false
+		},
+		COINS_KEY: {
+			"next_idx": 0,
+			"current_timing": 0.0,
+			"empty": false
+		}
+	}
+	music_started = false
+	
 	# Translate song data
 	var song_stream = load(Util.locate_song(new_song_data))
 	Music.stream = song_stream
@@ -123,7 +142,10 @@ func start_game(new_song_data):
 	game_running = true
 
 func end_game(quit=false):
-	# TODO Figure out why new object spawns aren't appearing on second run
+	# Clear all spawned objects
+	for child in spawned_objects.get_children():
+		child.queue_free()
+	
 	game_running = false
 	music_started = false
 	bicycle.speed = DEFAULT_BIKE_SPEED
@@ -165,10 +187,9 @@ func _process(delta):
 		if game_time - timings[o]["current_timing"] > 0:
 			print("SPAWN " + o + " AT " + str(game_time))
 			var obj = next_objs[o]
-			#obj.position = Vector3(LANES[1], 0.5, bicycle.position.z - SPAWN_OFFSET)
 			obj.position = Vector3(LANES[randi() % 3], 0.5, bicycle.position.z - SPAWN_OFFSET)
 			obj.set_meta("spawn_time", game_time)
-			add_child(obj)
+			spawned_objects.add_child(obj)  # Add to SpawnedObjects node
 			# Identify the next spawn and pre-load an instance
 			call_deferred("update_timings", o)
 			call_deferred("reload_obj", o)

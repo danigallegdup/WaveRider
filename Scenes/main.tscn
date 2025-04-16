@@ -62,6 +62,8 @@ shadow_enabled = true
 
 [node name="Terrain" parent="." instance=ExtResource("3_21xkr")]
 
+[node name="SpawnedObjects" type="Node3D" parent="."]
+
 [node name="Player" parent="." instance=ExtResource("4_kry3j")]
 
 [node name="Camera3D" type="Camera3D" parent="Player"]
