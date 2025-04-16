@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=4 uid="uid://h64w7n4g7s6a"]
 
 [ext_resource type="Script" uid="uid://c4equai46atcw" path="res://Scripts/obstacle.gd" id="1_15o2q"]
-[ext_resource type="PackedScene" uid="uid://celvn43a7xgcb" path="res://Sprites/obstacleShards.glb" id="3_rvx1i"]
+[ext_resource type="PackedScene" uid="uid://celvn43a7xgcb" path="res://sprites/obstacleShards.glb" id="3_rvx1i"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_glvc8"]
 resource_name = "Material"
@@ -43,6 +43,7 @@ blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_ttv1s")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_a6yce"]
+size = Vector3(0.688477, 1, 0.746094)
 
 [sub_resource type="GDScript" id="GDScript_a6yce"]
 script/source = "# SPDX-FileCopyrightText: 2023 Jummit
@@ -87,6 +88,9 @@ var _modified_materials := {}
 
 ## Remove the parent node and add shards to the shard container.
 func destroy(explosion_power := 1.0) -> void:
+	if Util.IS_WEB_EXPORT:
+		get_parent().queue_free()  # TODO improve web export graphic
+		return
 	for shard in _get_shards():
 		_add_shard(shard, explosion_power)
 	get_parent().queue_free()

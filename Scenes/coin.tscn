@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://p2dhyqr8oenj" path="res://Scripts/coin.gd" id="1_2qo34"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_jgi06"]
-radius = 0.3
+radius = 0.429779
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2qo34"]
 albedo_color = Color(1, 0.929412, 0.0352941, 1)

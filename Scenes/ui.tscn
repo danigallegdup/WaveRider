@@ -39,6 +39,7 @@ label_settings = ExtResource("2_qdvrb")
 metadata/_edit_use_anchors_ = true
 
 [node name="TimeLabel" type="Label" parent="MarginContainer/HBoxContainer2/HBoxContainer"]
+visible = false
 custom_minimum_size = Vector2(140, 0)
 layout_mode = 2
 text = "Time: 0"
