@@ -8,60 +8,33 @@ import librosa.display
 # === Configuration ===
 song_base = "uplifting-and-energetic-indie-pop-305512"  # Change to match your file naming
 report_dir = Path(__file__).parent
+song_data_file = report_dir / f"./GeneratedSongData/{song_base}_song_data.json"
 
-# Construct file paths for reports
-onset_report_file    = report_dir / f"{song_base}_onset_extraction_report.json"
-chroma_report_file   = report_dir / f"{song_base}_chroma_report.json"
-spectral_report_file = report_dir / f"{song_base}_spectral_report.json"
-beat_report_file     = report_dir / f"{song_base}_beat_extraction_report.json"
-
-# Load the JSON data for each report
+# Load the merged song data JSON
 try:
-    with open(onset_report_file, "r") as f:
-        onset_data = json.load(f)
+    with open(song_data_file, "r") as f:
+        song_data = json.load(f)
 except Exception as e:
-    print(f"Error loading onset data: {e}")
-    onset_data = {}
-
-try:
-    with open(chroma_report_file, "r") as f:
-        chroma_data = json.load(f)
-except Exception as e:
-    print(f"Error loading chroma data: {e}")
-    chroma_data = {}
-
-try:
-    with open(spectral_report_file, "r") as f:
-        spectral_data = json.load(f)
-except Exception as e:
-    print(f"Error loading spectral data: {e}")
-    spectral_data = {}
-
-try:
-    with open(beat_report_file, "r") as f:
-        beat_data = json.load(f)
-except Exception as e:
-    print(f"Error loading beat data: {e}")
-    beat_data = {}
+    print(f"Error loading song data: {e}")
+    song_data = {}
 
 # === Extract Data from Reports ===
-onsets = onset_data.get("onsets", [])
-duration = onset_data.get("duration_sec", 0)
+onsets = song_data.get("onset_extraction", {}).get("onsets", [])
+duration = song_data.get("duration_sec", 0)
 
-avg_chroma = chroma_data.get("avg_chroma", [])
+avg_chroma = song_data.get("chroma_harmonic", {}).get("avg_chroma", [])
 pitch_classes = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B']
 
-avg_mel_db = spectral_data.get("avg_mel_db", [])
+avg_mel_db = song_data.get("spectral_analysis", {}).get("avg_mel_db", [])
 mel_band_indices = np.arange(len(avg_mel_db))
 
 # Beat times (in seconds)
-beats = beat_data.get("beats", [])
-print("Onsets (from onset_data):", onsets)
-print("Beats (from beat_data):", beats)
-
+beats = song_data.get("beat_extraction", {}).get("beats", [])
+print("Onsets:", onsets)
+print("Beats:", beats)
 
 # === Load the Audio for Waveform Analysis ===
-audio_path = Path(__file__).parent / "../Resources/DefaultMusic" / f"{song_base}.wav"
+audio_path = report_dir / f"../Resources/DefaultMusic/{song_base}.wav"
 try:
     y, sr = librosa.load(audio_path, sr=None)
     audio_duration = librosa.get_duration(y=y, sr=sr)
@@ -96,28 +69,24 @@ if onsets:
     plt.plot(onsets, np.ones_like(onsets), 'o', markersize=5,
              label="Detected Onsets")
 plt.xlim(0, duration)
-plt.yticks([])  # Remove y-axis ticks for clarity
+plt.yticks([])
 plt.legend()
 plt.grid(True)
 
-# Subplot 3: Beat Extraction Timeline (Modified Visualization)
+# Subplot 3: Beat Extraction Timeline
 plt.subplot(5, 1, 3)
 plt.title("Beat Extraction Timeline")
 plt.xlabel("Time (s)")
 if beats and duration > 0:
-    # Calculate BPM from beat count and duration
     bpm = len(beats) / duration * 60
-    # Plot beats as scatter markers along y=1
     plt.scatter(beats, np.full_like(beats, 1), color='green', s=100,
                 label="Beat")
-    # Add a dashed horizontal baseline for clarity
     plt.hlines(1, 0, duration, colors='grey', linestyles='--', linewidth=1)
-    # Annotate BPM on the plot
     plt.text(duration * 0.65, 1.15, f"BPM: {bpm:.1f}",
              fontsize=12, color='red', weight='bold')
 plt.xlim(0, duration)
 plt.ylim(0.8, 1.3)
-plt.yticks([])  # Clean up y-axis
+plt.yticks([])
 if beats:
     plt.legend()
 plt.grid(True)
