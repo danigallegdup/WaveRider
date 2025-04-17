@@ -11,7 +11,6 @@ import numpy as np
 # Parse command line arguments
 def parse_arguments():
     parser = argparse.ArgumentParser(description="Extract audio features from music files")
-    parser.add_argument("--music-dir", type=str, default="./", help="Directory containing music files (default: ./)")
     parser.add_argument(
         "--frame-length", type=int, default=2048, help="Frame length for audio processing (default: 2048)"
     )
@@ -23,7 +22,7 @@ def parse_arguments():
         "--onset-spacing", type=float, default=0.1, help="Minimum spacing between onsets in seconds (default: 0.1)"
     )
     parser.add_argument(
-        "--file-pattern", type=str, default="*.mp3", help="Pattern for music files to process (default: *.mp3})"
+        "--file-name", type=str, help="Input audio file", required=True
     )
     parser.add_argument("--name", type=str, help="Name of the song", required=True)
     parser.add_argument("--genre", type=str, help="Genre of the song", required=True)
@@ -35,7 +34,6 @@ def parse_arguments():
 args = parse_arguments()
 
 # === Configuration ===
-DEFAULT_MUSIC_DIR = Path(args.music_dir)
 # Always use %appdata%/Wave Rider as output directory
 APP_DATA_DIR = Path(os.path.expandvars("%appdata%")) / "Wave Rider"
 OUTPUT_DIR = APP_DATA_DIR
@@ -43,7 +41,7 @@ FRAME_LENGTH = args.frame_length
 HOP_LENGTH = args.hop_length
 ONSET_THRESHOLD = args.onset_threshold
 ONSET_SPACING = args.onset_spacing
-FILE_PATTERN = args.file_pattern
+FILE_NAME = args.file_name
 SONG_NAME = args.name
 SONG_GENRE = args.genre
 SONG_ARTIST = args.artist
@@ -138,13 +136,12 @@ def ensure_file_in_appdata(file_path):
 # Main processing function
 def main():
     print("=== started song data extraction ===")
-    print(f"Music directory: {DEFAULT_MUSIC_DIR}")
     print(f"Output directory: {OUTPUT_DIR}")
     print(f"Frame length: {FRAME_LENGTH}")
     print(f"Hop length: {HOP_LENGTH}")
     print(f"Onset threshold: {ONSET_THRESHOLD}")
     print(f"Onset spacing: {ONSET_SPACING}")
-    print(f"File pattern: {FILE_PATTERN}")
+    print(f"File pattern: {FILE_NAME}")
     if SONG_NAME:
         print(f"Song name: {SONG_NAME}")
     if SONG_GENRE:
@@ -152,70 +149,66 @@ def main():
     if SONG_ARTIST:
         print(f"Song artist: {SONG_ARTIST}")
 
-    for wav_file in DEFAULT_MUSIC_DIR.glob(FILE_PATTERN):
-        if wav_file.name.endswith(".import"):
-            continue
+    print(f"Processing: {FILE_NAME}")
 
-        print(f"Processing: {wav_file.name}")
+    try:
+        # Ensure the file is in the appdata directory
+        appdata_file_path = ensure_file_in_appdata(FILE_NAME)
 
-        try:
-            # Ensure the file is in the appdata directory
-            appdata_file_path = ensure_file_in_appdata(wav_file)
+        # Duration
+        duration = librosa.get_duration(path=appdata_file_path)
 
-            # Duration
-            duration = librosa.get_duration(path=appdata_file_path)
+        # Chroma harmonic
+        avg_chroma, chroma_shape = extract_chroma_harmonic(appdata_file_path)
 
-            # Chroma harmonic
-            avg_chroma, chroma_shape = extract_chroma_harmonic(appdata_file_path)
+        # Beat extraction
+        beats = extract_beats(appdata_file_path)
 
-            # Beat extraction
-            beats = extract_beats(appdata_file_path)
+        # Onset extraction
+        onsets = extract_onsets(appdata_file_path)
 
-            # Onset extraction
-            onsets = extract_onsets(appdata_file_path)
+        # Spectral analysis
+        avg_mel_db, mel_spec_shape = extract_spectral(appdata_file_path)
 
-            # Spectral analysis
-            avg_mel_db, mel_spec_shape = extract_spectral(appdata_file_path)
+        # Consolidate data with new metadata fields
+        data = {
+            "filename": appdata_file_path.name,
+            "duration_sec": round(duration, 3),
+        }
 
-            # Consolidate data with new metadata fields
-            data = {
-                "filename": appdata_file_path.name,
-                "duration_sec": round(duration, 3),
+        # Add metadata if provided
+        if SONG_NAME:
+            data["name"] = SONG_NAME
+        if SONG_GENRE:
+            data["genre"] = SONG_GENRE
+        if SONG_ARTIST:
+            data["artist"] = SONG_ARTIST
+
+        # Add audio analysis data
+        data.update(
+            {
+                "chroma_harmonic": {
+                    "avg_chroma": [round(val, 3) for val in avg_chroma],
+                    "chroma_shape": chroma_shape,
+                },
+                "beat_extraction": {"num_beats": len(beats), "beats": [round(t, 3) for t in beats]},
+                "onset_extraction": {"num_onsets": len(onsets), "onsets": [round(t, 3) for t in onsets]},
+                "spectral_analysis": {
+                    "avg_mel_db": [round(val, 3) for val in avg_mel_db],
+                    "mel_spectrogram_shape": mel_spec_shape,
+                },
             }
+        )
 
-            # Add metadata if provided
-            if SONG_NAME:
-                data["name"] = SONG_NAME
-            if SONG_GENRE:
-                data["genre"] = SONG_GENRE
-            if SONG_ARTIST:
-                data["artist"] = SONG_ARTIST
+        # Write data to JSON
+        out_path = OUTPUT_DIR / (appdata_file_path.stem + "_song_data.json")
+        with open(out_path, "w") as f:
+            json.dump(data, f, indent=2)
 
-            # Add audio analysis data
-            data.update(
-                {
-                    "chroma_harmonic": {
-                        "avg_chroma": [round(val, 3) for val in avg_chroma],
-                        "chroma_shape": chroma_shape,
-                    },
-                    "beat_extraction": {"num_beats": len(beats), "beats": [round(t, 3) for t in beats]},
-                    "onset_extraction": {"num_onsets": len(onsets), "onsets": [round(t, 3) for t in onsets]},
-                    "spectral_analysis": {
-                        "avg_mel_db": [round(val, 3) for val in avg_mel_db],
-                        "mel_spectrogram_shape": mel_spec_shape,
-                    },
-                }
-            )
+        print(f"✅ report saved to: {out_path}")
 
-            # Write data to JSON
-            out_path = OUTPUT_DIR / (appdata_file_path.stem + "_song_data.json")
-            with open(out_path, "w") as f:
-                json.dump(data, f, indent=2)
-
-            print(f"✅ report saved to: {out_path}")
-
-        except Exception as e:
-            print(f"❌ Error processing {wav_file.name}: {str(e)}")
+    except Exception as e:
+        print(f"❌ Error processing {FILE_NAME}: {str(e)}")
 
 
 # Run the main function if script is executed directly

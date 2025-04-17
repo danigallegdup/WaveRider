@@ -32,9 +32,9 @@ var song_data = fake_song_data
 
 @export var current_song_data = null
 
-const SPAWN_OFFSET = 40 # z position of new spawns (relative to player)
+const SPAWN_OFFSET: float = 40.0 # z position of new spawns (relative to player)
 const LANES = [-1.0, 0.0, 1.0] # x position of lanes
-const DEFAULT_BIKE_SPEED = 5.0
+const DEFAULT_BIKE_SPEED: float = 5.0
 
 var game_time = 0.0
 var health = 1000
@@ -88,7 +88,7 @@ var timings = {
 
 var game_running = false
 
-const POOL_SIZE = 100  # of segments to keep in the world
+const POOL_SIZE: int = 100  # of segments to keep in the world
 const SEGMENT_LENGTH = 10.0  # distance between segments
 @onready var terrain_scene = preload("res://Scenes/terrain.tscn")
 @onready var ground_scene = preload("res://Scenes/ground.tscn")
