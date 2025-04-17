@@ -3,7 +3,7 @@ extends CharacterBody3D
 @export var segment_count: int = 10
 @onready var sprite_3d: Sprite3D = $Sprite3D
 
-var speed = 5.0
+var speed: float = 5.0
 
 var transition_speed = 8.0
 var lanes = [-1.0, 0.0, 1.0]  # X positions of lanes
