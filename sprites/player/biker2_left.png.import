@@ -3,16 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://d2odye2s3mje1"
-path="res://.godot/imported/biker2_left.png-69f540073fcf04c3f51e32b473e643e0.ctex"
+path="res://.godot/imported/biker2_left.png-e29f166a6e01b1f1093e80a62c6c7ce1.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/player/biker2_left.png"
-dest_files=["res://.godot/imported/biker2_left.png-69f540073fcf04c3f51e32b473e643e0.ctex"]
+source_file="res://Sprites/player/biker2_left.png"
+dest_files=["res://.godot/imported/biker2_left.png-e29f166a6e01b1f1093e80a62c6c7ce1.ctex"]
 
 [params]
 
