@@ -12,7 +12,7 @@ const DEFAULT_FILE_NAME = "<default>"
 const DEFAULT_FILE_CHECKSUM = "000000"
 
 # Remember to change this when doing desktop export
-const IS_WEB_EXPORT = true
+const IS_WEB_EXPORT = false
 
 # The default 'round(...)' function only rounds to the nearest decimal - this function allows you to
 #	choose precision.
