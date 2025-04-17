@@ -52,6 +52,8 @@ The latest version of Wave Rider can be played directly in your browser by visit
 >
 > Then open your browser and navigate to `http://localhost:8000`
 
+> **Important:** Due to limitations with Godot's audio implementation in web exports, the audio visualizer may not function properly in browser versions. Web exports use audio samples instead of streams, which do not support the spectrum analyzer effect (see [Godot's documentation](https://docs.godotengine.org/en/latest/tutorials/export/exporting_for_web.html#audio) for more info). For the full audio-visual experience, we recommend using the Windows executable.
+
 The itch.io version can be played directly without any additional setup.
 
 ### Windows Executable
