@@ -189,6 +189,7 @@ func start_game(new_song_data):
 	update_timings(COINS_KEY)
 	update_timings(OBSTACLES_KEY)
 	update_timings(TEMPO_BEATS)
+	bicycle.go_to_default_sprite()
 	BlurShader.hide()
 	game_running = true
 
