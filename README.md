@@ -56,7 +56,7 @@ The itch.io version can be played directly without any additional setup.
 
 ### Windows Executable
 
-1. Download the latest `.exe` release from our [GitHub Releases page](https://github.com/danigallegdup/WaveRider)
+1. Download the latest `.exe` release from our [GitHub Releases page](https://github.com/danigallegdup/WaveRider/releases)
 2. Run the executable - no installation required!
 
 ## 🎵 Adding Custom Songs
