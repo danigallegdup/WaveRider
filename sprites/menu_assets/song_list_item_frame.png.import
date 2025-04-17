@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://865kotieobyc"
-path="res://.godot/imported/song_list_item_frame.png-0786c45d3950ff294b00d6048f0a11cc.ctex"
+path="res://.godot/imported/song_list_item_frame.png-10d90d08077e6666b85be3e909668c1b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/menu_assets/song_list_item_frame.png"
-dest_files=["res://.godot/imported/song_list_item_frame.png-0786c45d3950ff294b00d6048f0a11cc.ctex"]
+source_file="res://sprites/menu_assets/song_list_item_frame.png"
+dest_files=["res://.godot/imported/song_list_item_frame.png-10d90d08077e6666b85be3e909668c1b.ctex"]
 
 [params]
 

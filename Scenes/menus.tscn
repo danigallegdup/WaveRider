@@ -49,6 +49,16 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
+[node name="MarginContainer2" type="MarginContainer" parent="Main/VBoxContainer/MarginContainer/VBoxContainer2"]
+layout_mode = 2
+theme_override_constants/margin_bottom = 15
+
+[node name="DesktopAdvertisement" type="Label" parent="Main/VBoxContainer/MarginContainer/VBoxContainer2/MarginContainer2"]
+layout_mode = 2
+size_flags_stretch_ratio = 0.0
+text = "Try the enhanced Desktop edition!"
+label_settings = ExtResource("6_qdaxd")
+
 [node name="VBoxContainer" type="VBoxContainer" parent="Main/VBoxContainer/MarginContainer/VBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 4
