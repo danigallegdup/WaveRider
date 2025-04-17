@@ -44,7 +44,6 @@ func _ready():
 	_on_reset_volume_button_down()
 	
 	# Set up SongSelect menu
-	MusicLoader.load_custom_songs()
 	display_song_details(false)
 	for s in MusicLoader.song_library:
 		create_list_item(s)

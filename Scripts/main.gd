@@ -9,6 +9,8 @@ const COIN_POINTS = 10
 
 const END_OF_SONG_OFFSET = 2
 
+var current_tween: Tween = null
+
 var fake_song_data = {
 	"lead-in": 3, # How many seconds before the first note collision?
 	"travel-duration": 2, # How many seconds between spawn time and collision?
@@ -28,12 +30,14 @@ var fake_scores = {
 
 var song_data = fake_song_data
 
+@export var current_song_data = null
+
 const SPAWN_OFFSET = 40 # z position of new spawns (relative to player)
 const LANES = [-1.0, 0.0, 1.0] # x position of lanes
 const DEFAULT_BIKE_SPEED = 5.0
 
 var game_time = 0.0
-var health = 5
+var health = 1000
 var score = 0
 var music_started: bool = false
 
@@ -142,10 +146,21 @@ func start_game(new_song_data):
 	music_started = false
 	
 	# Translate song data
-	Music.volume_db = 0
-	print(new_song_data)
+	current_song_data = new_song_data
 	var song_stream = load(Util.locate_song(new_song_data))
+	if new_song_data["type"] == "user":
+		var file = FileAccess.open(Util.locate_song(new_song_data), FileAccess.READ)
+		var mp3_data = file.get_buffer(file.get_length())
+		file.close()
+		song_stream = AudioStreamMP3.new()
+		song_stream.data = mp3_data
+	
+	# print(song_stream)
 	BlurShader.hide()
+	if current_tween:
+		current_tween.kill()  # Cancel fade out
+		current_tween = null
+	Music.volume_db = 0
 	Music.stream = song_stream
 	song_data = {
 		"lead-in": 3, # How many seconds before the first note collision?
@@ -284,8 +299,10 @@ func end_game():
 	Menus.show()
 
 func fade_out_audio(audio_player: AudioStreamPlayer, duration: float = 1.0):
-	var tween = create_tween()
-	tween.tween_property(audio_player, "volume_db", -80.0, duration) # fade to silence in 2 seconds
+	if current_tween:
+		current_tween.kill()  # Stop the existing tween if it's still going
+	current_tween = create_tween()
+	current_tween.tween_property(audio_player, "volume_db", -80.0, duration) # fade to silence in 2 seconds
 
 func quit_song():
 	print("Qutting the game...")

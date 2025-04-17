@@ -10,7 +10,6 @@ place.
 '''
 const DEFAULT_FILE_NAME = "<default>"
 const DEFAULT_FILE_CHECKSUM = "000000"
-@onready var fade_tween: Node = $FadeTween
 
 # The default 'round(...)' function only rounds to the nearest decimal - this function allows you to
 #	choose precision.
@@ -22,6 +21,4 @@ func sec_to_minutes(seconds: float):
 
 # This will return the file location of the song whose data has been passed in
 func locate_song(song_data):
-	if song_data.data.file_name == DEFAULT_FILE_NAME:
-		return song_data.data.default_resource_location
-	return song_data.data.file_name
+	return song_data.data.default_resource_location
