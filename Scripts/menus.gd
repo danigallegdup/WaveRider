@@ -46,7 +46,6 @@ func _ready():
 	if Util.IS_WEB_EXPORT: $Main/VBoxContainer/MarginContainer/VBoxContainer2/VBoxContainer/Quit.hide()
 	
 	# Set up SongSelect menu
-	MusicLoader.load_custom_songs()
 	display_song_details(false)
 	for s in MusicLoader.song_library:
 		create_list_item(s)
