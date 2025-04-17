@@ -44,6 +44,7 @@ func _ready():
 	_on_reset_volume_button_down()
 	
 	if Util.IS_WEB_EXPORT: $Main/VBoxContainer/MarginContainer/VBoxContainer2/VBoxContainer/Quit.hide()
+	else: $Main/VBoxContainer/MarginContainer/VBoxContainer2/MarginContainer2.hide()
 	
 	# Set up SongSelect menu
 	display_song_details(false)
@@ -117,6 +118,14 @@ func _on_song_list_item_button_down(song_name):
 	for song in MusicLoader.song_library:
 		if song.name == song_name:
 			display_song_details(song)
+			if Util.IS_WEB_EXPORT:
+				# Check if compressed version of the song exists; switch
+				var small_song = Util.locate_song(song).rstrip(".wav").rstrip(".mp3") + "_small.mp3"
+				if ResourceLoader.exists(small_song):
+					# Change resource path to compressed song
+					print("Found smaller version of song! Switching...")
+					demo_audio = load(small_song)
+					return
 			demo_audio = load(Util.locate_song(song))
 			return
 	print("ERROR: Could not find song '" + song_name + "' in song library")

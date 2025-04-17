@@ -258,6 +258,9 @@ func _process(delta):
 		bicycle.sprite_progress()
 		# Identify the next spawn and pre-load an instance
 		call_deferred("update_timings", TEMPO_BEATS)
+	
+	if timings[TEMPO_BEATS]["empty"]:
+		bicycle.go_to_default_sprite()
 
 # This is used to pre-emptively instantiate a new object.
 func reload_obj(obj_type):
