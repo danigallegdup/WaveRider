@@ -158,6 +158,13 @@ func load_custom_songs():
 	print("=== Song data extraction completed ===")
 	
 func play_song(song_data):
+	if Util.IS_WEB_EXPORT:
+		# Check if compressed version of the song exists; switch
+		var small_song = Util.locate_song(song_data).rstrip(".wav").rstrip(".mp3") + "_small.mp3"
+		if ResourceLoader.exists(small_song):
+			# Change resource path to compressed song
+			print("Found smaller version of song! Switching...")
+			song_data.data.default_resource_location = small_song
 	if not main_link:
 		print("ERROR: Main link was not initialized")
 		return

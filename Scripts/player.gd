@@ -14,11 +14,11 @@ var lean_angle = 0.0
 var max_lean = 10.0
 
 var current_sprite = 0
-const sprites = [
-	preload("res://Sprites/player/biker2_left.png"),
-	preload("res://Sprites/player/biker2_middle.png"),
-	preload("res://Sprites/player/biker2_right.png"),
-	preload("res://Sprites/player/biker2_middle.png"),
+@onready var sprites = [
+	preload("res://sprites/player/biker2_left.png"),
+	preload("res://sprites/player/biker2_middle.png"),
+	preload("res://sprites/player/biker2_right.png"),
+	preload("res://sprites/player/biker2_middle.png"),
 ]
 
 func sprite_progress():

@@ -82,6 +82,7 @@ var timings = {
 @onready var Menus = $Menus
 
 @onready var BlurShader = $Player/Camera3D/BlurShader
+@onready var BlurActual = $Player/Camera3D/BlurShaderMain
 
 @onready var leader_score := preload("res://Scenes/leader_score.tscn")
 
@@ -89,13 +90,17 @@ var game_running = false
 
 const POOL_SIZE = 100  # of segments to keep in the world
 const SEGMENT_LENGTH = 10.0  # distance between segments
-@onready var terrain_scene := preload("res://Scenes/Terrain.tscn")
-@onready var ground_scene  := preload("res://Scenes/Ground.tscn")
+@onready var terrain_scene = preload("res://Scenes/terrain.tscn")
+@onready var ground_scene = preload("res://Scenes/ground.tscn")
 
 func _ready():
 	TimescaleUtil.audio_player = Music
 	MusicLoader.main_link = self
 	Menus.quit_song_func = Callable(self, "quit_song")
+	if not Util.IS_WEB_EXPORT:
+		BlurShader.hide()
+		BlurShader = BlurActual
+		BlurShader.show()
 	Menus.BlurShader = BlurShader
 	
 	# tell the player how many segments we have
@@ -184,6 +189,7 @@ func start_game(new_song_data):
 	update_timings(COINS_KEY)
 	update_timings(OBSTACLES_KEY)
 	update_timings(TEMPO_BEATS)
+	BlurShader.hide()
 	game_running = true
 
 var current_coin_lane = randi() % 3
