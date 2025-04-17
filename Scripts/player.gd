@@ -20,10 +20,14 @@ var current_sprite = 0
 	preload("res://sprites/player/biker2_right.png"),
 	preload("res://sprites/player/biker2_middle.png"),
 ]
+@onready var default_sprite = preload("res://sprites/player/player_animated.tres")
 
 func sprite_progress():
 	sprite_3d.texture = sprites[current_sprite % len(sprites)]
 	current_sprite += 1
+	
+func go_to_default_sprite():
+	sprite_3d.texture = default_sprite
 
 func _physics_process(delta):
 	# Move forward
