@@ -1,6 +1,6 @@
 # 🎵 Wave Rider 🎵
 
-![Wave Rider Title](Sprites/menu_assets/title_transparent_bg_big.png)
+![Wave Rider Title](sprites/menu_assets/title_transparent_bg_big.png)
 
 ## 🚀 Introduction
 
